@@ -1,0 +1,39 @@
+delimiter = "| - -  -    |"
+spaces = "        "
+
+players = []
+
+
+with open('Untitled.rtf', 'r', encoding="utf-8") as c:
+    for line in c:
+        rest = line.split("|")
+        if len(rest) < 5: continue
+        rest = rest[2:]
+        if rest[0].strip() == 'Inf': continue
+        name = rest[1]
+        position = rest[14].strip(" ")
+        team = rest[15].strip(" ")
+        age = rest[20]
+        wage = rest[21]
+        value = rest[22]
+
+        try: values = [int(value.strip(" ")) for value in rest[2:14]]
+        except:
+            continue
+        for i, j in enumerate(values):
+            if i in (0, 1):
+                values[i] *= 3
+            elif i in (2, 3):
+                values[i] *= 2
+            elif i == 5:
+                values[i] *= 1.5
+            elif i < 10:
+                values[i] *= 1.1
+
+        mean = sum(values) / len(values)
+        players += [(name, mean, position, team, age, wage, value)]
+
+print(len(players))
+players.sort(key=lambda x: -x[1])
+for player in players[:500]:
+    print(player)
