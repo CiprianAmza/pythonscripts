@@ -1,0 +1,78 @@
+delimiter = "| - -  -    |"
+spaces = "        "
+
+players = []
+
+teams = dict()
+
+
+with open('Untitled.rtf', 'r', encoding="utf-8") as c:
+    for line in c:
+        rest = line.split("|")
+        if len(rest) < 5: continue
+        rest = rest[2:]
+        if rest[0].strip() == 'Inf': continue
+        name = rest[1]
+        position = rest[17].strip(" ")
+        team = rest[18].strip(" ")
+        age = rest[23]
+        wage = rest[24]
+        value = rest[21]
+        contract = rest[22]
+        clause = rest[23]
+        try:
+            values = [int(value.strip(" ")) for value in rest[2:16]]
+        except:
+            continue
+        for i, j in enumerate(values):
+            if i == 0:
+                values[i] *= 449
+            elif i == 1:
+                values[i] *= 418
+            elif i == 2:
+                values[i] *= 409
+            elif i in (3, 4, 5):
+                values[i] *= 395
+            elif i == 6:
+                values[i] *= 392
+            elif i == 7:
+                values[i] *= 391
+            elif i == 8:
+                values[i] *= 384
+            elif i == 9:
+                values[i] *= 377
+            elif i == 10:
+                values[i] *= 374
+            elif i == 11:
+                values[i] *= 371
+            elif i == 12:
+                values[i] *= 365
+            elif i == 13:
+                values[i] *= 359
+            elif i == 14:
+                values[i] *= 275
+
+        mean = sum(values) / len(values)
+        players += [(name, mean, position, team, age, wage, value, contract, clause)]
+        if team in teams:
+            teams[team] += [(name, mean, position, team, age, wage, value, contract, clause)]
+        else:
+            teams[team] = [(name, mean, position, team, age, wage, value, contract, clause)]
+        teams[team] = sorted(teams[team], key=lambda x: -x[1])
+
+print(len(players))
+players.sort(key=lambda x: -x[1])
+for player in players:
+    print(player)
+
+calc_teams = [(sum([t[1] for t in teams[team][:15]]) / 15, teams[team]) for team in teams.keys()]
+
+calc_teams.sort(key=lambda x: -x[0])
+# for team in calc_teams:
+#     print(team[1][0][3])
+#     for t in team[1]:
+#
+#         print(t)
+
+# for team in calc_teams:
+#     print(team)
