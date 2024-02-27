@@ -1,10 +1,7 @@
 delimiter = "| - -  -    |"
 spaces = "        "
-
 players = []
-
 teams = dict()
-
 
 with open('Untitled.rtf', 'r', encoding="utf-8") as c:
     for line in c:
