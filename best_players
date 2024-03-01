@@ -40,7 +40,6 @@ for player in players[:500]:
 
 
 """
-C:\Users\Cipanica\PycharmProjects\fmscript\.venv\Scripts\python.exe C:\Users\Cipanica\PycharmProjects\fmscript\script.py 
 74
 0 (' Fabián Aponzá       ', 24.008333333333336, 'D (RC), DM', 'Sporting CP', ' 21  ', ' €131,000 p/m ', ' €44M - €49M     ')
 1 (' Ugo Clavaud         ', 23.925, 'D (RC)', 'Sporting CP', ' 20  ', ' €260,000 p/m ', ' €36M - €41M     ')
