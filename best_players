@@ -16,7 +16,10 @@ with open('Untitled.rtf', 'r', encoding="utf-8") as c:
         age = rest[20]
         wage = rest[21]
         value = rest[22]
-
+        # Pac | Acc | Jum | Dri | Bal | Cnt | Ant | Det | Agi | Sta | Str | Fir
+        # values = [16, 14, 13, 9, 12, 10, 14, 11, 16, 14, 13, 10]
+        # values = [15, 15, 15, 17, 16, 14, 19, 14, 16, 15, 17, 19]
+        # values = [20, 20, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14]
         try: values = [int(value.strip(" ")) for value in rest[2:14]]
         except:
             continue
