@@ -1,0 +1,29 @@
+class Game():
+    
+    def __init__(self, board):
+        self.board = board
+
+    def play(self):
+        
+        groups = 0
+        visited = set()
+        
+        for i in range(len(self.board)):
+            for j in range(len(self.board)):
+                if self.board[i][j] and (i, j) not in visited:
+                    to_check = [(i, j)]
+                    while to_check:
+                        
+                        a, b = to_check[0]
+                        to_check = to_check[1:]
+                        
+                        for q, w in ((0, 1), (1, 0), (0, -1), (-1, 0)):
+                            x, y = q + a, w + b
+                            if x >= 0 and y >= 0 and x < len(self.board) and y < len(self.board) \
+                                    and (x, y) not in visited and self.board[x][y]:
+                                visited.add((x, y))
+                                to_check.append((x, y))
+                        
+                    groups += 1
+        
+        return groups
