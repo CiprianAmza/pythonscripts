@@ -1,0 +1,9 @@
+answers = []
+total = 0
+for n in range(1, 2500):
+    value = 9*10**__import__('math').floor((n-1)/2)
+    total += value
+    answers += [[value, total]]
+
+def count_pal(n):  
+    return answers[n-1]
