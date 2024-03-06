@@ -1,0 +1,4 @@
+from math import prod
+def box_capacity(*args):
+        
+    return prod([*map(lambda x: x*12 // 16, args)])
