@@ -1,0 +1,14 @@
+find = lambda x, arr: [line[0] + str(i) for line in arr for i, j in enumerate(line, start=1) if j == x]
+
+from itertools import zip_longest
+def hamster_me(q1, q2):
+    
+    k = sorted(q1)
+    arr = [[chr(el) for el in range(ord(k[i-1]), ord(k[i]))] for i in range(1, len(k))]
+    
+    a, b = k[0], k[-1]
+    arr += [[chr(i) for i in range(ord(b), ord('z') + 1)] + [chr(i) for i in range(ord('a'), ord(a))]]
+    
+    answer = [i+'1' if i == j else find(j, arr)[0] for i, j in zip_longest(q1[:len(q2)], q2, fillvalue="")]
+    
+    return "".join(answer)
