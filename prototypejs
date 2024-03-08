@@ -1,0 +1,8 @@
+String.prototype.capitalize = function() {
+  
+  const value = this.charCodeAt(0);
+  if (value < 97 || value > 122)
+    return new String(this).slice(0);
+    
+  return String.fromCharCode(this.charCodeAt(0) - 32) + this.slice(1);
+};
