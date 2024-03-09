@@ -1,0 +1,7 @@
+@countcalls
+def replicate(times, number, ans=[]):
+    
+    if len(ans) >= times:
+        return ans
+    else:
+        return replicate(times, number, ans + [number])
