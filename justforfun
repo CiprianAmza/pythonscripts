@@ -1,0 +1,43 @@
+WITH completed_tasks AS (
+  SELECT task_id, COUNT(*) AS nr
+  FROM task_status
+  WHERE task_status = 'Completed'
+  GROUP BY task_id
+),
+  all_tasks AS (
+  SELECT task_id, COUNT(*) AS nr
+  FROM task_status
+  GROUP BY task_id
+),
+  rest AS (
+  SELECT DISTINCT completed_tasks.task_id
+  FROM task_status
+  JOIN completed_tasks
+  ON completed_tasks.task_id = task_status.task_id
+  JOIN all_tasks
+  ON all_tasks.task_id = task_status.task_id
+  WHERE completed_tasks.nr = all_tasks.nr AND all_tasks.nr >= 1
+),
+  completed AS (
+  SELECT house_id, COUNT(*) AS nr
+  FROM house_tasks
+  JOIN rest ON house_tasks.task_id = rest.task_id
+  GROUP BY house_id
+),
+  answer AS (
+  SELECT 
+    house_tasks.house_id, 
+    COUNT(*) AS total_tasks,
+    COALESCE(completed.nr, 0) AS completed_tasks
+  FROM house_tasks
+  LEFT JOIN completed ON completed.house_id = house_tasks.house_id
+  GROUP BY house_tasks.house_id, completed_tasks
+  ORDER BY house_tasks.house_id DESC
+)
+
+SELECT 
+  house_id,
+  total_tasks,
+  completed_tasks,
+  total_tasks - completed_tasks AS incomplete_tasks
+FROM answer
