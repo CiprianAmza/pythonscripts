@@ -1,0 +1,30 @@
+CREATE TABLE restaurants2 (
+    id INT,
+    name VARCHAR(255),
+    stars INT
+);
+
+CREATE TABLE dishes (
+    restaurant_id INT,
+    dish VARCHAR(255)
+);
+
+INSERT INTO restaurants2 (id, name, stars)
+SELECT id, name, stars
+FROM restaurants;
+
+INSERT INTO dishes (restaurant_id, dish)
+SELECT id, dish
+FROM restaurants,
+     UNNEST(string_to_array(menu, ',')) AS dish;
+  
+DROP TABLE restaurants;
+CREATE TABLE restaurants (
+    id INT,
+    name VARCHAR(255),
+    stars INT
+);
+INSERT INTO restaurants (id, name, stars)
+SELECT id, name, stars
+FROM restaurants2;
+DROP TABLE restaurants2;
