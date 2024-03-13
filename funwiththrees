@@ -1,0 +1,15 @@
+from preloaded import Node
+
+def array_to_tree(arr):
+    
+    if not arr:
+        return
+    
+    nodes = [Node(j) for j in arr]
+    for i in range(1, len(arr)):
+        if 2*i < len(arr):
+            nodes[i-1].right = nodes[2*i]
+        if 2*i-1 < len(arr):
+            nodes[i-1].left = nodes[2*i-1]
+
+    return nodes[0]
