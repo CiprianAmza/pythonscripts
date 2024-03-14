@@ -1,0 +1,13 @@
+SELECT * FROM people;
+select * from people_opinions;
+
+select 
+  (SELECT name FROM people WHERE people.person_id = people_opinions.opinion_giver_id) AS opinion_giver,
+  (SELECT name FROM people WHERE people.person_id = people_opinions.person_id) AS opinion_receiver,
+  current_opinion,
+  previous_opinion
+from people_opinions
+WHERE (current_opinion IS NOT NULL AND previous_opinion IS NOT NULL AND current_opinion != previous_opinion) 
+  OR (current_opinion IS NULL AND previous_opinion IS NOT NULL)
+  OR (current_opinion IS NOT NULL AND previous_opinion IS NULL)
+ORDER BY opinion_giver ASC, opinion_receiver ASC;
