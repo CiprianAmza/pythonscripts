@@ -1,0 +1,11 @@
+def find_routes(routes):
+    
+    map = {_from: _to for _from, _to in routes}
+    start, stop = [(element, stop) for element, stop in routes if element not in map.values()][0]
+    answer = [start]
+    
+    while stop not in answer and stop in map:
+        answer += [stop]
+        stop = map[stop]
+    
+    return ", ".join(answer + [stop])
