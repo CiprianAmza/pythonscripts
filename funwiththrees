@@ -1,24 +1,42 @@
-class TreeNode {
+class TreeNode:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
 
-    TreeNode left;
-    TreeNode right;
-    int value;
-    
-    TreeNode(int value, TreeNode left, TreeNode right) {
-        this.value = value;
-        this.left = left;
-        this.right = right;
-    }
-    
-    TreeNode(int value) {
-        this(value, null, null);
-    }
-    
-    @Override
-    public boolean equals(Object other) {
-        ... // Already implemented for you and used in test cases 
-    }
-}
+    def __eq__(self, other):
+        if not isinstance(other, TreeNode):
+            return False
+        return self.value == other.value and self.left == other.left and self.right == other.right
+
+    def __repr__(self):
+        return f"TreeNode({self.value}, {self.left}, {self.right})"
+
+    def is_leaf(self):
+        return self.left is None and self.right is None
+
+    def depth(self):
+        if self.is_leaf():
+            return 1
+        left_depth = self.left.depth() if self.left else 0
+        right_depth = self.right.depth() if self.right else 0
+        return 1 + max(left_depth, right_depth)
+
+    def count_nodes(self):
+        if self is None:
+            return 0
+        return 1 + (self.left.count_nodes() if self.left else 0) + (self.right.count_nodes() if self.right else 0)
+
+# Example usage:
+# Constructing a binary tree
+#         1
+#       /   \
+#      2     3
+#     / \   / \
+#    4   5 6   7
+root = TreeNode(1)
+root.left = TreeNode(2, TreeNode(4), TreeNode(5))
+root.right = TreeNode(3, TreeNode(6), TreeNode(7))
 
 def array_to_tree(arr):
     
