@@ -1,0 +1,20 @@
+def find_the_key(messages, secrets):
+    
+    s = "GA-DE-RY-PO-LU-KI"
+    map = dict()
+    for x in s.split("-"):
+        a, b = x[0].lower(), x[1].lower()
+        map[b] = a
+    
+    ans = []
+    vis = set()
+    
+    for a, b in zip(messages, secrets):
+        for j, i in zip(a, b):
+            q = "".join(sorted([i, j]))
+            if i != j and (i not in map or map[i] != j or j not in map or map[j] != i):
+                if q not in vis:
+                    vis.add(q)
+                    ans += [q]
+    
+    return "".join(sorted(ans))
