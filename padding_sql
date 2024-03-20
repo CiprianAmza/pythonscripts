@@ -1,0 +1,13 @@
+SELECT 
+  CASE 
+    WHEN LENGTH(sha256) > LENGTH(md5) 
+    THEN CONCAT(md5, REPEAT('1', LENGTH(sha256) - LENGTH(md5))) 
+    ELSE md5 
+  END AS md5, 
+  CASE
+    WHEN LENGTH(sha256) > LENGTH(sha1)
+    THEN CONCAT(REPEAT('0', LENGTH(sha256) - LENGTH(sha1)), sha1)
+    ELSE sha1
+  END AS sha1,
+  sha256
+FROM encryption;
