@@ -1,0 +1,11 @@
+def longest_palindrome(s):
+    
+    s = s.lower()
+    counter = dict()
+    for char in s:
+        if not char.isalnum(): continue
+        counter[char] = counter.get(char, 0) + 1
+    
+    value = sum(length if length % 2 == 0 else length - 1 for length in counter.values() if length > 1)
+    
+    return value + [0, 1][len(s) != value]
