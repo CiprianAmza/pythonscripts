@@ -1,0 +1,6 @@
+SELECT POWER(number1, 0.5) AS root, LOG10(number2) AS log 
+FROM decimals
+
+-- same as
+SELECT |/ number1 AS root, LOG10(number2) AS log 
+FROM decimals
