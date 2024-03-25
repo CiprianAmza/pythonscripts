@@ -1,0 +1,12 @@
+select tbl.bucket, count(*) as count
+from (
+  select 
+    concat(
+      cast(length_seconds / 5 * 5 as VARCHAR(10)),
+      '-', 
+      cast(length_seconds / 5 * 5  + 4 as varchar(10))
+    ) as bucket,
+    length_seconds / 5 * 5 as order_key
+  from sessions) as tbl
+group by tbl.bucket, tbl.order_key
+order by tbl.order_key;
