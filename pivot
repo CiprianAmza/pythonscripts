@@ -1,0 +1,30 @@
+SELECT * FROM   
+(
+    SELECT 
+        CASE 
+            WHEN category_name = 'Children Bicycles' THEN 'Football'
+            WHEN category_name = 'Comfort Bicycles' THEN 'Basketball'
+            WHEN category_name = 'Cruisers Bicycles' THEN 'Soccer'
+            WHEN category_name = 'Cyclocross Bicycles' THEN 'Tennis'
+            WHEN category_name = 'Electric Bikes' THEN 'Golf'
+            WHEN category_name = 'Mountain Bikes' THEN 'Baseball'
+            WHEN category_name = 'Road Bikes' THEN 'Volleyball'
+            ELSE category_name
+        END AS sport_name,
+        product_id
+    FROM 
+        production.products p
+        INNER JOIN production.categories c 
+            ON c.category_id = p.category_id
+) t 
+PIVOT(
+    COUNT(product_id) 
+    FOR sport_name IN (
+        [Football], 
+        [Basketball], 
+        [Soccer], 
+        [Tennis], 
+        [Golf], 
+        [Baseball], 
+        [Volleyball])
+) AS pivot_table;
