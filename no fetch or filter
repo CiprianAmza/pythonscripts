@@ -1,0 +1,16 @@
+WITH a AS (
+    SELECT *
+    FROM employees
+    WHERE team = 'backend'
+    ORDER BY birth_date ASC
+    OFFSET 2
+),
+k as (
+    SELECT min(birth_date), team
+    from a
+    group by team
+)
+
+select employee_id, full_name, a.team, birth_date from a
+join k
+on a.birth_date = k.min
