@@ -1,0 +1,5 @@
+key = lambda x: x["norm_kill"] * 100 + x["assist"] * 50 + x["damage"] * 0.5 + x["healing"] + 2 ** x["streak"] + x["env_kill"] * 500
+
+def scoring(arr):
+    
+    return [el['name'] for el in sorted(arr, key=key, reverse=True)]
