@@ -1,0 +1,12 @@
+def esthetic(num):
+    
+    return [base for base in range(2, 11) if is_esthetic(num, base)]
+
+def is_esthetic(num, base):
+    
+    digits = []
+    while num > 0:
+        digits += [num % base]
+        num //= base
+    
+    return len(digits) >= 1 and all(abs(i-j) == 1 for i, j in zip(digits, digits[1:]))
