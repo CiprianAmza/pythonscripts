@@ -1,0 +1,4 @@
+import re
+
+def purify(s: str) -> str:
+    return ' '.join(re.sub(r"[\S]?[iI][^\siI]?", "", s).split())
