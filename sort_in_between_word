@@ -1,0 +1,33 @@
+def order(content):
+    
+    word = list(content)
+    positions = [i for i, j in enumerate(content) if j.isalpha()]
+    chars = iter(sorted([j for i, j in enumerate(content) if j.isalpha()]))
+    for i in positions:
+        word[i] = next(chars)
+    
+    return "".join(word)
+
+def parse(word):
+    
+    if len(word) <= 2:
+        return word
+    
+    prefix = suffix = ""
+    
+    if not word[0].isalpha():
+        prefix, word =  word[:2], word[2:]
+    else:
+        prefix, word = word[0], word[1:]
+        
+    if not word[-1].isalpha():
+        suffix, word = word[-2:], word[:-2]
+    else:
+        suffix, word = word[-1], word[:-1]
+        
+    return prefix + order(word) + suffix
+    
+
+def scramble_words(words):
+    
+    return " ".join(parse(word) for word in words.split())
