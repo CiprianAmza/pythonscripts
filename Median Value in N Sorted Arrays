@@ -1,0 +1,28 @@
+def get_sorted(arrs):
+    
+    lst = []
+    pointers = [0 for _ in arrs]
+    t = sum([len(el) for el in arrs])
+    
+    for _ in range(t//2+1):
+        
+        ind, cur = -1, float('inf')
+        
+        for i, p in enumerate(pointers):
+            if p < len(arrs[i]) and arrs[i][p] <= cur:
+                ind, cur = i, arrs[i][p]
+        
+        if _ >= t//2-1:
+            lst.append(cur)
+        pointers[ind] += 1
+    
+    return t, lst
+
+def median_from_n_arrays(arrays):
+    
+    t, k = get_sorted(arrays)
+    
+    if t % 2:
+        return k[len(k)//2]
+    else:
+        return (k[len(k)//2-1] + k[len(k)//2]) // 2
