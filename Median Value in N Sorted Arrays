@@ -1,28 +1,90 @@
-def get_sorted(arrs):
-    
-    lst = []
-    pointers = [0 for _ in arrs]
-    t = sum([len(el) for el in arrs])
-    
-    for _ in range(t//2+1):
+# version 1
+    def get_sorted(arrs):
         
-        ind, cur = -1, float('inf')
+        lst = []
+        pointers = [0 for _ in arrs]
+        t = sum([len(el) for el in arrs])
         
-        for i, p in enumerate(pointers):
-            if p < len(arrs[i]) and arrs[i][p] <= cur:
-                ind, cur = i, arrs[i][p]
+        for _ in range(t//2+1):
+            
+            ind, cur = -1, float('inf')
+            
+            for i, p in enumerate(pointers):
+                if p < len(arrs[i]) and arrs[i][p] <= cur:
+                    ind, cur = i, arrs[i][p]
+            
+            if _ >= t//2-1:
+                lst.append(cur)
+            pointers[ind] += 1
         
-        if _ >= t//2-1:
-            lst.append(cur)
-        pointers[ind] += 1
+        return t, lst
     
-    return t, lst
+    def median_from_n_arrays(arrays):
+        
+        t, k = get_sorted(arrays)
+        
+        if t % 2:
+            return k[len(k)//2]
+        else:
+            return (k[len(k)//2-1] + k[len(k)//2]) // 2
 
-def median_from_n_arrays(arrays):
+# version 2
+    import bisect
+
+def merge(a, b):
     
-    t, k = get_sorted(arrays)
+    i = j = 0
+    ans = []
+    total = len(a) + len(b)
+    while i+j != total:
+        x = y = float('inf')
+        if i < len(a):
+            x = a[i]
+        if j < len(b):
+            y = b[j]
+        if x < y:
+            i += 1
+        else:
+            j += 1
+        ans += [min(x, y)]
+    return ans
+
+def remove_from(lst, m, half):
     
-    if t % 2:
-        return k[len(k)//2]
+    if half > m:
+        return lst[m+1:], half - m - 1
     else:
-        return (k[len(k)//2-1] + k[len(k)//2]) // 2
+        return lst[half+1:], 0
+
+def median_from_n_arrays(arrs):
+    
+    length = sum([len(arr) for arr in arrs]) 
+    half = length // 2 - 2
+    FLAG = len(arrs) > 10
+    
+    while half > 0:
+        arrs = [arr for arr in arrs if arr]
+        if len(arrs) < 2:
+            break
+        arrs.sort(key=lambda x: (x[0], x[-1], -len(x)))
+        
+        i = 1
+        l1, l2 = arrs[i-1], arrs[i]
+        a, b, length1 = l1[0], l1[-1], len(l1)
+        x, y, length2 = l2[0], l2[-1], len(l2)
+
+        if b <= x:
+            lst, half = remove_from(l1, len(l1), half)
+        elif a == x:
+            arrs[1] = merge(l1, l2)
+            arrs[0] = []
+            continue
+        else:
+            ind = bisect.bisect_left(l1, x) - 1
+            lst, half = remove_from(l1, ind, half)
+        arrs[i-1] = lst[:]
+    
+    arrs = [arr[:3] for arr in arrs]
+    k = sorted([k for arr in arrs for k in arr])[:5]
+    print(k, half)
+    return [k[0], k[1], (k[0] + k[1]) // 2][-1]
