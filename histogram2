@@ -1,0 +1,6 @@
+def histogram(results):
+    
+    s = sum(results)
+    results = [el*100//s if s else 0 for el in results]
+    
+    return "\n".join(f"{6-i}|{(k//2)*'█'}{' ' + str(k)+'%' if k else ''}" for i, k in enumerate(results[::-1])) + '\n'
