@@ -1,0 +1,11 @@
+keys = ["C", "K", "F", "R", "De", "N", "Re", "Ro"]
+_to = [lambda x: x, lambda x: x - 273.15, lambda x: (x-32) * 5/9, lambda x: (x-491.67)*5/9, lambda x: (100-x*2/3), lambda x: x * 100/33, lambda x: x * 5/4, lambda x: (x - 7.5) * 40/21]
+_from = [lambda x: x, lambda x: x + 273.15, lambda x: x * 9/5 + 32, lambda x: (x+273.15) * 9/5, lambda x: (100-x)*3/2, lambda x: x * 33/100, lambda x: x * 4/5, lambda x: x*21/40+7.5]
+
+def convert_temp(temp, from_scale, to_scale):
+        
+    k1 = keys.index(from_scale)
+    k2 = keys.index(to_scale)
+    
+    return round(_from[k2](_to[k1](temp)))
+    
