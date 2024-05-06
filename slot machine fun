@@ -1,0 +1,12 @@
+from itertools import groupby
+
+def slot(st):
+    arr = [len(list(v)) for _, v in groupby(st)]
+    match arr:
+        case [_]                                                      : return 1000
+        case [4, _] | [_, 4]                                          : return 800
+        case [3, 2] | [2, 3]                                          : return 500
+        case [3, _, _] | [_, 3, _] | [_, _, 3]                        : return 300
+        case [2, 2, _] | [_, 2, 2] | [2, _, 2]                        : return 200
+        case [2, _, _, _] | [_, 2, _, _] | [_, _, 2, _] | [_, _, _, 2]: return 100
+        case _                                                        : return 0
