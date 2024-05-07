@@ -1,0 +1,9 @@
+def closed_bracket_word(st):
+    
+    alph = 'abcdefghijklmnopqrstuvwxyz'
+    
+    for i in range(len(st)//2):
+        if alph.index(st[i]) + alph.index(st[len(st)-i-1]) != 25:
+            return False
+
+    return len(st) % 2 == 0
