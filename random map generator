@@ -1,0 +1,29 @@
+from random import randint
+ans = []
+for i in range(1, 30):
+    el = f"<div class='row' id='row-{i}'"
+    val = randint(20, 45)
+    for _ in range(val):
+        k = randint(0, 10)
+        if k % 2 == 0:
+            el += '<i class="fa fa-circle red" aria-hidden="true"></i>'
+        else:
+            el += '<i class="fa fa-circle red" aria-hidden="true"></i>'
+    el += "</div>"
+    ans += [el]
+
+print("\n".join(ans))
+#
+# ans = []
+# starting = 800
+# for i in range(1, 30):
+#     el = f'.row:nth-child({i})\n'
+#     r = randint(0, 60)
+#     starting -= r
+#     el += '    ' + f'margin-left: {starting}px' + '\n'
+#     ans += [el]
+# print("\n".join(ans))
+"""
+<div class="row" id="row-1">
+      <i class="fa fa-circle" aria-hidden="true"></i>
+    </div>"""
