@@ -1,0 +1,30 @@
+def good(s, val, rest):
+    
+    for j in s:
+        j = max(0, j-rest)
+        if val > j:
+            rest = j
+        elif val == j:
+            rest = val = 0
+        else:
+            return False
+    
+    return True
+        
+def min_wind_strength(s):
+    
+    if not s:
+        return 0
+    
+    left = s[0] - 1
+    right = max(s) + 1
+    
+    while left + 1 < right:
+    
+        mid = (left + right) // 2
+        if good(s, mid, 0):
+            right = mid
+        else:
+            left = mid
+        
+    return right
