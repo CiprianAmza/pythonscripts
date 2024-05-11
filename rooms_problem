@@ -1,0 +1,26 @@
+def allocate_rooms(customers):
+    customers.sort()
+
+    ans = [1] + [0] * (len(customers) - 1)
+    rooms = [customers[0][1]]
+
+    for i in range(1, len(customers)):
+        a, b = customers[i]
+        m = min(rooms)
+        ind = rooms.index(m)
+        if m < a:
+            rooms[ind] = b
+            ans[i] = ind + 1
+        else:
+            ans[i] = len(rooms) + 1
+            rooms.append(b)
+
+    return ans
+x = int(input())
+arr = []
+for _ in range(x):
+    a, b = map(int, input().split())
+    arr += [[a, b]]
+ans = allocate_rooms(arr)
+print(max(ans))
+print(*ans)
