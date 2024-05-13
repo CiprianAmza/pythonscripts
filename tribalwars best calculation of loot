@@ -1,0 +1,193 @@
+class ScavengeScreen:
+    def __init__(self, data=''):
+        self.data = data
+
+screen = {
+    "1": {
+        "id": 1,
+        "name": "Curățare mică",
+        "loot_factor": 0.1,
+        "unlock_cost": {
+            "wood": 25,
+            "stone": 30,
+            "iron": 25
+        },
+        "unlock_duration_seconds": 30,
+        "duration_exponent": 0.45,
+        "duration_initial_seconds": 1800,
+        "duration_factor": 1,
+        "premium_cost_exponent": 0.44,
+        "prerequisite_option_ids": [],
+        "premium_boost": {
+            "feature": "ScavengingSquadLoot",
+            "enabled": True,
+            "loot_factor": 1.2,
+            "cost_exponent": 0.44
+        }
+    },
+    "2": {
+        "id": 2,
+        "name": "Curățare medie",
+        "loot_factor": 0.25,
+        "unlock_cost": {
+            "wood": 250,
+            "stone": 300,
+            "iron": 250
+        },
+        "unlock_duration_seconds": 3600,
+        "duration_exponent": 0.45,
+        "duration_initial_seconds": 1800,
+        "duration_factor": 1,
+        "premium_cost_exponent": 0.44,
+        "prerequisite_option_ids": [1],
+        "premium_boost": {
+            "feature": "ScavengingSquadLoot",
+            "enabled": True,
+            "loot_factor": 1.2,
+            "cost_exponent": 0.44
+        }
+    },
+    "3": {
+        "id": 3,
+        "name": "Curățare mare",
+        "loot_factor": 0.5,
+        "unlock_cost": {
+            "wood": 1000,
+            "stone": 1200,
+            "iron": 1000
+        },
+        "unlock_duration_seconds": 10800,
+        "duration_exponent": 0.45,
+        "duration_initial_seconds": 1800,
+        "duration_factor": 1,
+        "premium_cost_exponent": 0.44,
+        "prerequisite_option_ids": [2],
+        "premium_boost": {
+            "feature": "ScavengingSquadLoot",
+            "enabled": True,
+            "loot_factor": 1.2,
+            "cost_exponent": 0.44
+        }
+    },
+    "4": {
+        "id": 4,
+        "name": "Curățare extremă",
+        "loot_factor": 0.75,
+        "unlock_cost": {
+            "wood": 10000,
+            "stone": 12000,
+            "iron": 10000
+        },
+        "unlock_duration_seconds": 21600,
+        "duration_exponent": 0.45,
+        "duration_initial_seconds": 1800,
+        "duration_factor": 1,
+        "premium_cost_exponent": 0.44,
+        "prerequisite_option_ids": [3],
+        "premium_boost": {
+            "feature": "ScavengingSquadLoot",
+            "enabled": True,
+            "loot_factor": 1.2,
+            "cost_exponent": 0.44
+        }
+    }
+}
+
+# Example usage:
+screen_instance = ScavengeScreen(screen)
+print(screen_instance.data["1"]["name"])  # Output: Curățare mică
+
+import math
+
+def calculate_duration(self):
+    loot_percent = self.get_loot_percent()
+    base_loot_factor = self.base['loot_factor']
+    duration_exponent = self.base['duration_exponent']
+    duration_initial_seconds = self.base['duration_initial_seconds']
+    duration_factor = self.base['duration_factor']
+
+    duration = math.pow(t * loot_percent * t * base_loot_factor, duration_exponent) + duration_initial_seconds
+    duration *= duration_factor
+    return round(duration)
+
+# Assuming you have a method get_loot_percent() defined elsewhere in your code
+# and self.base is a dictionary containing the base attributes
+
+s = ScavengeScreen()
+print()
+# return Math.round((
+# Math.pow(
+# t * this.getLootPercent() * t * this.base.loot_factor, this.base.duration_exponent
+# )
+# + this.base.duration_initial_seconds)
+#
+# * this.base.duration_factor)
+
+def calc(q, t):
+
+    base_loot_factor = q["loot_factor"]
+    loot_percent = base_loot_factor * 100
+    duration_exponent = q['duration_exponent']
+    duration_initial_seconds = q['duration_initial_seconds']
+    duration_factor = q['duration_factor']
+
+
+    it = t * loot_percent * t * base_loot_factor
+    it2 = it ** duration_exponent
+    it2 += duration_initial_seconds
+
+    it3 = it2 * duration_factor
+    return it3 // 60
+
+qs = []
+for s in screen.items():
+    q = s[1]
+    qs += [q]
+
+
+for t in range(1):
+    t = 245*10 + 91*80 + 500*25 + 566*15
+    M = 0
+
+    for i in range(0, t, 10):
+        for j in range(0, t, 10):
+            for m in range(0, t, 10):
+                n = t-i-j-m
+                if i+j+m+n != t: continue
+                tot = 0
+                rr = [i, j, m, n]
+                if i <= 300 or j <= 300 or m <= 300 or n <= 300: continue
+                RES = 0
+                times = []
+                DAY = 60 * 24
+                for W, Q in zip(rr, qs):
+                    res = round(W * Q['loot_factor'] * Q['premium_boost']['loot_factor'])
+                    resources = res // 3 - (res//3//6)
+                    time = calc(Q, W)
+
+                    RES += resources * (DAY // time)
+                if RES > M:
+                    print(rr, RES)
+                    M = RES
+
+
+"""
+[5100, 7300, 7200, 11120] 25200.0
+[5100, 11800, 5900, 7920] 25266.0
+[5200, 11700, 5900, 7920] 25287.0
+[5300, 8500, 9000, 7920] 25518.0
+[5700, 9900, 7200, 7920] 25520.0
+[5800, 9800, 7200, 7920] 25536.0
+[6500, 7300, 9000, 7920] 25633.0
+[7100, 8500, 7200, 7920] 25767.0
+[9000, 8500, 7200, 6020] 25906.0"""
+
+"""
+[6330, 7360, 9080, 7950] 25671.0
+[7030, 8510, 7230, 7950] 25802.0
+[8800, 9960, 5910, 6050] 25804.0
+[8800, 9970, 5900, 6050] 25805.0
+[8930, 8510, 7230, 6050] 25953.0
+[8950, 8500, 7220, 6050] 25954.0
+[10080, 7360, 7230, 6050] 25975.0
+"""
