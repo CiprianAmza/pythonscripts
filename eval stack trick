@@ -1,0 +1,9 @@
+def eval_parentheses(s):
+    st = [0]
+    for c in s:
+        if c == '(':
+            st += [0]
+        else:
+            x = st.pop()
+            st[-1] += 2 * x or 1
+    return st.pop()
