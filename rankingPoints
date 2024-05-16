@@ -1,0 +1,59 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Ranking {
+
+    public static boolean isInputValid(String[] matches) {
+
+        if (matches == null || matches.length != 10)
+            return false;
+
+        for (String s : matches) {
+            if (s == null || !s.contains("-")) return false;
+
+            String[] match = s.split("-");
+            if (match.length != 2) return false;
+
+            for (String score : match) {
+                if (!score.chars().allMatch(Character::isDigit))
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean isReversingNeeded(int index, boolean isHomeMatch) {
+
+        return index % 2 == 1 && isHomeMatch || index % 2 == 0 && !isHomeMatch;
+    }
+
+    public static void reverseIfNeeded(int index, boolean isHomeMatch, List<Integer> scores) {
+
+        if (isReversingNeeded(index, isHomeMatch))
+            Collections.reverse(scores);
+    }
+
+    public static int getPoints(String[] matches, boolean isHomeMatch) {
+
+        if (!isInputValid(matches))
+            return -1;
+
+        int points = 0;
+        for (int index = 0; index < matches.length; index++) {
+
+            List<Integer> scores = Arrays.stream(matches[index].split("-")).map(Integer::parseInt).collect(Collectors.toList());
+            reverseIfNeeded(index, isHomeMatch, scores);
+
+            int homeScore = scores.get(0);
+            int awayScore = scores.get(1);
+
+            if (homeScore == awayScore)
+                points += 1;
+            else if (homeScore > awayScore)
+                points += 3;
+        }
+        
+        return points;
+    }
+}
