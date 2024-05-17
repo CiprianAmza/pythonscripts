@@ -1,0 +1,86 @@
+class Rational {
+  
+    constructor(numerator, denominator) {
+        this.numerator = numerator;
+        this.denominator = denominator || 1;
+        this.simplify();
+    }
+
+    toString() {
+        if ((this.numerator < 0 && this.denominator > 0) || (this.numerator > 0 && this.denominator < 0)) {
+          return "-" + Math.abs(this.numerator) + "/" + Math.abs(this.denominator);
+        }
+        return Math.abs(this.numerator) + "/" + Math.abs(this.denominator);
+    }
+
+    simplify() {
+      let sign = this.numerator / this.denominator < 0;
+      let changes = true;
+      while (changes) {
+        changes = false;
+        for (let i = 2; i <= Math.abs(this.numerator); i++) {
+          if (this.numerator % i === 0 && this.denominator % i === 0) {
+            this.numerator /= i;
+            this.denominator /= i;
+            changes = false;
+          }
+        }
+      }
+    }
+
+    equals(b) {
+        return this.numerator === b.numerator && this.denominator === b.denominator || this.numerator / this.denominator === b.numerator / b.denominator;
+    }
+
+    lessThan(b) {
+        return this.numerator / this.denominator < b.numerator / b.denominator;
+    }
+
+    greaterThan(b) {
+        return this.numerator / this.denominator > b.numerator / b.denominator;
+    }
+
+    lessThanOrEquals(b) {
+        return this.numerator / this.denominator <= b.numerator / b.denominator;
+    }
+
+    greaterThanOrEquals(b) {
+        return this.numerator / this.denominator >= b.numerator / b.denominator;
+    }
+
+    add(b) {
+        let num = this.numerator * b.denominator + b.numerator * this.denominator;
+        let den = this.denominator * b.denominator;
+        let rational = new Rational(num, den);
+        rational.simplify();
+      
+        return rational;
+    }
+
+    sub(b) {
+        let num = this.numerator * b.denominator - b.numerator * this.denominator;
+        let den = this.denominator * b.denominator;
+        let rational = new Rational(num, den);
+        rational.simplify();
+      
+        return rational;
+    }
+
+    mul(b) {
+        let num = this.numerator * b.numerator;
+        let den = this.denominator * b.denominator;
+        let rational = new Rational(num, den);
+        rational.simplify();
+      
+        return rational;
+    }
+
+    div(b) {
+        let num = this.numerator * b.denominator;
+        let den = this.denominator * b.numerator;
+        let rational = new Rational(num, den);
+        rational.simplify();
+      
+        return rational;
+    }
+}
