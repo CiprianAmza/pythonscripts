@@ -1,0 +1,43 @@
+from fractions import Fraction
+
+def fraction_to_base_repr(fraction, base):
+
+    numerator = fraction.numerator
+    denominator = fraction.denominator
+    digits = []
+
+    seen_remainders = {}
+    remainder = numerator % denominator
+
+    while remainder != 0 and remainder not in seen_remainders:
+        seen_remainders[remainder] = len(digits)
+        remainder *= base
+        digit = remainder // denominator
+        digits.append(digit)
+        remainder = remainder % denominator
+
+    if remainder in seen_remainders:
+        repeat_start = seen_remainders[remainder]
+        repeating = digits[repeat_start:]
+        return repeating
+    else:
+        return digits
+
+def find_parasitic_number_hex(n):
+    base = 16
+
+    fraction = Fraction(n, base * n - 1)
+
+    repeating = fraction_to_base_repr(fraction, base)
+
+    if repeating:
+        repeating_str = ''.join(format(d, 'X') for d in repeating)
+        return repeating_str
+    else:
+        return ''.join(format(d, 'X') for d in repeating)
+
+t = []
+for n in range(2, 32):
+    parasitic_number = find_parasitic_number_hex(n)
+    t += [parasitic_number]
+print(t)
