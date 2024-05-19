@@ -1,0 +1,25 @@
+def flip_pancakes(stack):
+
+    L = len(stack) - 1
+    answer = [stack[:]]
+    rest, ans = [], []
+    
+    while stack:
+        
+        ind = stack.index(max(stack))
+        if ind == len(stack) - 1:
+            rest = [stack.pop()] + rest[:]
+            continue
+        if ind:
+            ans += [ind]
+        ans += [L - len(rest)]
+        part = stack[:ind+1][::-1] + stack[ind+1:]
+
+        answer += [part[:] + rest[:]]
+        part = part[::-1]
+        answer += [part[:] + rest[:]]
+        if part:
+            rest = [part.pop()] + rest[:]
+        stack = part[:]
+        
+    return ans
