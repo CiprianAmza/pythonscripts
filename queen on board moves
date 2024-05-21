@@ -1,0 +1,26 @@
+const LETTERS = "ABCDEFGH";
+const DIRECTIONS = [ [0, 1], [1, 0], [0, -1], [-1, 0], [-1, -1], [1, 1], [1, -1], [-1, 1] ];
+
+const coordonatesToPosition = (x, y) => LETTERS[x-1] + y;
+const calculate = (x, y, q, w, k)  => [x + q * k, y + w * k];
+const isValid = (x, y) => x >= 1 && y >= 1 && x <= 8 && y <= 8;
+
+
+function availableMoves(position) {
+
+  if (typeof position !== "string") return [];
+  
+  let x = LETTERS.indexOf(position[0]) + 1, y = parseInt(position.slice(1)); 
+  if (y <= 0 || y > 8 || !LETTERS.includes(position[0])) return [];
+  
+  let answer = new Set();
+  for (let k = 1; k <= 8; k++) {
+    for (const [q, w] of DIRECTIONS) {
+      
+      let [u, v] = calculate(x, y, q, w, k);
+      if (isValid(u, v)) answer.add(coordonatesToPosition(u, v));
+    }
+  }
+  
+  return [...answer].sort();
+}
