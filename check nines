@@ -1,0 +1,14 @@
+MAX_TRIES = 3000
+
+def all_nines(x):
+    
+    if x % 2 == 0:
+        return -1
+    
+    n = ["9"]
+    for _ in range(MAX_TRIES):
+        a, b = divmod(int("".join(n)), x)
+        if not b: return a
+        n.append(n[-1])
+    
+    return -1
