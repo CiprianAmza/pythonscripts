@@ -1,0 +1,15 @@
+def conceal(msg, pixels):
+    
+    if len(pixels) != len(msg) * 3: return
+    
+    for i, char in enumerate(msg):
+        ind, s = 0, format(ord(char), '08b')
+        
+        for x in range(i*3, i*3+3):
+            for y, pixel in enumerate(pixels[x]):
+                if ind == 8:
+                    continue
+                
+                ind, pixels[x][y] = ind + 1, int(format(pixel, '08b')[:-1] + s[ind], 2)
+                
+    return pixels
