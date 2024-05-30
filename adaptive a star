@@ -1,0 +1,14 @@
+# https://www.researchgate.net/publication/221455192_Generalized_Adaptive_A
+
+"""
+a star has 3 functions
+
+g(s) = length of shortest path from start to current state s
+h(s) = heuristic estimation of distance between current state s and end point 
+f(s) = g(s) + h(s)
+
+Adaptive a star transforms it to:
+
+h(s) = g(end) - g(s)
+
+"""
