@@ -1,0 +1,13 @@
+def pollards_rho(n):
+    
+    if n % 2 == 0:
+        return 2
+    
+    x, y, d = 2, 2, 1
+    f = lambda x: (x * x + 1) % n
+    while d == 1:
+        x = f(x)
+        y = f(f(y))
+        d = gcd(abs(x - y), n)
+        
+    return d
