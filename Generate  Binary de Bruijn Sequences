@@ -1,0 +1,42 @@
+# inspired by Tommy Occhipinti's video on Binary de Bruijn Sequences
+# video with his explanation on youtube: https://www.youtube.com/watch?v=i4a_YDfKqIo
+
+from collections import defaultdict
+
+graph = defaultdict(lambda: set())
+k = 3 # choose whatever number you want
+
+def permutations(n):
+
+    ans = []
+    def solve(lst):
+        nonlocal ans
+
+        if len(lst) == n:
+            ans.append(lst.copy())
+            return
+
+        for i in (0, 1):
+            lst.append(i)
+            solve(lst)
+            lst.pop()
+
+    solve([])
+
+    return ans
+
+perms = permutations(k)
+
+for perm in perms:
+    perm = "".join(map(str, perm))
+
+    for i in "01":
+        option = i + perm[:-1]
+        graph[option].add(perm)
+
+    for i in "01":
+        option = perm[1:] + i
+        graph[perm].add(option)
+
+for i, j in graph.items():
+    print(i, j)
