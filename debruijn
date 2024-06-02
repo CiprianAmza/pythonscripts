@@ -1,0 +1,25 @@
+from collections import defaultdict
+
+genome = "AAABBBBA"
+
+perms = [genome[i-3:i] for i in range(3, len(genome)+1)]
+
+
+_from = defaultdict(lambda: list())
+_to = defaultdict(lambda: list())
+
+for perm in perms:
+
+    first = perm[:2]
+    last = perm[1:]
+
+    _from[first].append(last)
+
+reconstruct = []
+for i, j in _from.items():
+    print(i, j)
+    reconstruct += j
+
+print("".join(reconstruct))
+
+
