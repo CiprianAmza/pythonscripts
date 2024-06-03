@@ -1,0 +1,24 @@
+def get_divs(n):
+
+    divs = set()
+    for i in range(2, int(n **.5) + 1):
+        if n % i == 0 and is_prime(i):
+            divs.add(i)
+        rest = n // i
+        if n % rest == 0 and is_prime(rest):
+            divs.add(n//i)
+
+    return divs
+
+
+def f(m):
+
+    divs = get_divs(m)
+    p = 1
+    for d in divs:
+        p *= d
+
+    while p ** p <= m:
+        p <<= 1
+
+    return p
