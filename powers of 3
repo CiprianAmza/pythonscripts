@@ -1,0 +1,32 @@
+powers = [3**i for i in range(20)]
+
+def as_sum_of_powers_of_3(n):
+    
+    print(n, flush=1)
+    values, answer = [], []
+    operations = {"0": 0, "-": -1, "+": 1}
+    
+    for element in powers:
+        values.append(element)
+        if abs(n) < element: break
+        
+    def solve(i, candidate):
+        
+        nonlocal answer
+        
+        if i == len(values):
+            s = sum(values[j] * operations[v] for j, v in enumerate(candidate))
+            if s == n:
+                answer = candidate.copy()
+            return
+        
+        for option in "+-0":
+            candidate[i] = option
+            if answer: return
+            solve(i+1, candidate)
+            candidate[i] = ""
+    
+    solve(0, [""] * len(values))
+    
+    return "".join(answer).rstrip("0") if n else "0"
+    
