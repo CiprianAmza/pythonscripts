@@ -1,0 +1,33 @@
+from gmpy2 import is_prime
+
+from math import gcd
+
+def pollards_rho(n):
+    if n % 2 == 0:
+        return 2
+    x, y, d = 2, 2, 1
+    f = lambda x: (x * x + 1) % n
+    while d == 1:
+        x = f(x)
+        y = f(f(y))
+        d = gcd(abs(x - y), n)
+    return d
+
+def f(m):
+
+    if is_prime(m):
+        return m
+
+    divs = set()
+    n = m
+    p = 1
+    while n > 1:
+        q = pollards_rho(n)
+        p *= q
+        n //= q
+        divs.add(q)
+
+    print(divs)
+
+f(13)
+f(420)
