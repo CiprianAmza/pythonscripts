@@ -1,0 +1,51 @@
+import requests
+
+bar = "completed?rank=-1"
+txt = 'data-username="'
+
+url = 'https://www.codewars.com/users/leaderboard/ranks'
+response = requests.get(url)
+users = []
+if response.status_code == 200:
+    print("Page content:")
+    r = response.text
+
+    cur = ""
+    flag = False
+    for i in range(len(r)):
+
+        cur += r[i]
+        if not flag and cur.endswith(txt):
+            flag = True
+            users.append(cur.split('"')[0])
+            cur = ""
+        if flag and r[i] == '"':
+            flag = False
+            cur = ""
+else:
+    print(f"Failed to retrieve the page. Status code: {response.status_code}")
+
+best = []
+for user in users[1:]:
+
+    url = f"https://www.codewars.com/users/{user}/completed?rank=-1"
+    response = requests.get(url)
+    if response.status_code == 200:
+        r = response.text
+
+        cur = ""
+        flag = False
+        for ch in r:
+
+            cur += ch
+            if cur.endswith("Completed ("):
+                flag = True
+                cur = ""
+            if flag and cur.endswith(")"):
+                print(user, cur[:-1])
+                best.append((user, int(cur[:-1])))
+                cur = ""
+                flag = False
+
+best = sorted(best, key=lambda x: -x[1])
+print(best)
