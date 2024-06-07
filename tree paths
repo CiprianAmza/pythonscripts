@@ -1,0 +1,10 @@
+    paths = [-1] * n
+    paths[a] = n
+    to_visit = edges[a][:]
+    while to_visit:
+        e = to_visit.pop()
+        for x in edges[e]:
+            if paths[x] >= 0:
+                paths[e] = x
+            else:
+                to_visit.append(x)
