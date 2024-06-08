@@ -1,0 +1,26 @@
+# let's compare :P
+
+from time import time
+from random import choice
+
+letters = [chr(i) for i in range(ord('a'), ord('z') + 1)] + [chr(i) for i in range(ord('A'), ord('Z') + 1)]
+
+function_one = lambda s:  ''.join(filter(lambda x: x.lower() not in "aeiou", s))
+function_two = lambda x : ''.join(l * (l.lower() not in 'aeiou') for l in x)
+
+for function, name in ((function_one, 'filter '), (function_two, 'boolean')):
+    
+    before = time()
+    
+    # run 100k tests
+    for _ in range(80_000):
+        length = 70
+        word = "".join(choice(letters) for _ in range(length))
+        function(word)
+    
+    after = time()
+    print(f'Function with {name} took {round(after - before, 5)} seconds')
+    
+# not really a difference, I guess? :D
+
+disemvowel = lambda x : ''.join(l * (l.lower() not in 'aeiou') for l in x) # let this here, so that tests won't fail
