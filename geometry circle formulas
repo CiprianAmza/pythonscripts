@@ -1,0 +1,44 @@
+from math import sqrt
+from typing import NamedTuple
+
+
+class Point(NamedTuple):
+    x: float
+    y: float
+
+
+class Circle(NamedTuple):
+    ctr: Point
+    r: float
+
+
+def normal_distance(a1, a2, b1, b2):
+
+    return sqrt((a1 - b1) ** 2 + (a2 - b2) ** 2)
+
+def find_length(a1, a2, b1, b2, r):
+
+    ab = normal_distance(a1, a2, b1, b2)
+    bc = r
+
+    ac = sqrt(ab * ab - bc * bc)
+
+    return ac
+
+
+def find_coordonates_of_tangent_point(ab, bc, ac):
+
+    cy = (ab ** 2 + ac ** 2 - bc ** 2) / (2*ab)
+    cx = sqrt(ac**2-cy**2)
+
+    return (cy, cx), (cy, -cx)
+
+
+def shortest_path_length(a: Point, b: Point, c: list[Circle]) -> float:
+
+    straight = normal_distance(a.x, a.y, b.x, b.y)
+
+    if len(c) == 0:
+        return straight
+
+    return -1
