@@ -88,3 +88,8 @@ def median_from_n_arrays(arrs):
     k = sorted([k for arr in arrs for k in arr])[:5]
     print(k, half)
     return [k[0], k[1], (k[0] + k[1]) // 2][-1]
+
+
+def custom_round(value, margin=1e-08):
+    
+    return round(value / margin) * margin
