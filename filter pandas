@@ -1,0 +1,10 @@
+import pandas as pd
+
+def filter_dataframe(dataframe, col, func): 
+    
+    if col not in dataframe.columns:
+        raise ValueError(f"Column '{col}' is not present in the DataFrame.")
+    
+    filter_mask = dataframe[col].apply(func)
+    
+    return dataframe[~filter_mask]
