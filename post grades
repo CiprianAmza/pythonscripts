@@ -1,0 +1,10 @@
+def post_grades(students):
+    
+    catalog = []
+    
+    for student in students:
+        id, name, grades = student.split(" - ")
+        grades = list(map(float, grades.split(" ")))
+        catalog.append((id, sum(grades) / len(grades)))
+    
+    return sorted(catalog, key=lambda x: -x[1])
