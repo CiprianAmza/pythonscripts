@@ -1,0 +1,18 @@
+def find_tangents_between_two_circles(c1, c2):
+
+    distance = distance_between_two_points(c1.ctr, c2.ctr)
+    radius_sum = c1.r + c2.r
+    radius_dif = abs(c1.r - c2.r)
+
+    if distance > radius_sum: # four tangents
+        ...
+    elif distance == radius_sum: # three tangents, one of them is of length 0
+        ...
+    elif distance < radius_sum and distance > radius_dif: # two tangents
+        ...
+    elif distance == radius_dif: # one tangent, length 0
+        ...
+    else: # zero tangents, circle is included into the other
+        ...
+
+
