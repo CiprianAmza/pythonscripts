@@ -1,0 +1,8 @@
+def normalize_angle(a):
+    while a < 0:
+        a += 2 * pi
+
+    while a > 2 * pi:
+        a -= 2 * pi
+
+    return a
