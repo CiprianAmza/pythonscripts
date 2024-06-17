@@ -12,3 +12,15 @@ Adaptive a star transforms it to:
 h(s) = g(end) - g(s)
 
 """
+
+def compare(R, Y, G):
+
+    a1 = abs(R[0] - Y[0]) + abs(R[0] - G[0]) + abs(Y[0] - G[0])
+    a2 = abs(R[1] - Y[1]) + abs(R[1] - G[1]) + abs(Y[1] - G[1])
+
+    return a1 + a2
+
+def move(R, Y, G, x, y):
+
+    lst = (R[0], R[1], "R"), (Y[0], Y[1], "Y"), (G[0], G[1], "G")
+    lst = sorted(lst, key=lambda k: get_key(k, x, y))
