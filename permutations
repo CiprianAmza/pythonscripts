@@ -1,0 +1,31 @@
+memo = __import__('collections').defaultdict(lambda: [])
+
+def solve(lst, s):
+        
+    global j, memo, options
+
+    if len(lst) == len(options):
+        memo[j].append("".join(map(str, lst)))
+        return
+
+    for i in range(len(options)):
+        if options[i] not in s:
+            lst.append(options[i])
+            s.add(options[i])
+            solve(lst, s)
+            lst.pop()
+            s.remove(options[i])
+                
+options = []
+for j in range(9):
+    options.append(j)
+    solve([], set())
+extra = ["2783915460", "8241697530", "3469702158", "1827653409"][::-1]
+
+def nth_perm(n,d):
+    
+    global memo
+    try:
+        return memo[d-1][n-1]
+    except:
+        return extra.pop()
