@@ -1,0 +1,19 @@
+def group_ints(lst, key):
+    
+    ans, cur = [], []
+    
+    for el in lst:
+        
+        if not cur:
+            cur.append(el)
+        else:
+            if (el < key) == (cur[-1] < key):
+                cur.append(el)
+            else:
+                ans.append(cur.copy())
+                cur = [el]
+                
+    if cur:
+        ans.append(cur)
+        
+    return ans
