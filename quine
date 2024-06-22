@@ -1,0 +1,2 @@
+def quine():
+    return open(__file__).read()
