@@ -7,9 +7,9 @@ class Solution:
         def dp(amount, index):
             if amount == 0:
                 return 1
-            if amount < 0 or index == len(coins):
+            elif amount < 0 or index == len(coins):
                 return 0
-            if (amount, index) in memo:
+            elif (amount, index) in memo:
                 return memo[(amount, index)]
 
             # Include current coin
