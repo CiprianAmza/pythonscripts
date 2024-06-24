@@ -1,0 +1,55 @@
+delimiter = "| - -  -    |"
+spaces = "        "
+
+players = []
+sl_nr = cj_nr = sl_skill = cj_skill = 0
+
+with open('Untitled111.rtf', 'r', encoding="utf-8") as c:
+    q = 0
+    for line in c:
+        rest = line.split("|")
+        if len(rest) < 5: continue
+        rest = rest[2:]
+        if rest[0].strip() == 'Inf': continue
+        name = rest[1]
+        position = rest[14].strip(" ")
+        team = rest[15].strip(" ")
+        age = rest[20]
+        wage = rest[21]
+        value = rest[22]
+
+        try: values = [int(value.strip(" ")) for value in rest[2:14]]
+        except:
+            continue
+
+        # Pac | Acc | Jum | Dri | Bal | Cnt | Ant | Det | Agi | Sta | Str | Fir
+        # values = [16, 14, 13, 9, 12, 10, 14, 11, 16, 14, 13, 10]
+        # values = [15, 15, 15, 17, 16, 14, 19, 14, 16, 15, 17, 19]
+        # values = [20, 20, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14]
+        for i, j in enumerate(values):
+            if i in (0, 1):
+                values[i] *= 3.3
+            elif i in (2, 3):
+                values[i] *= 2
+            elif i == 5:
+                values[i] *= 1.5
+            elif i < 10:
+                values[i] *= 1.1
+        # if int(age) > 20: continue
+
+        mean = sum(values) / len(values)
+        if mean > 18:
+            if team == 'Unirea Slobozia':
+                sl_nr += 1
+                sl_skill += int(mean)
+            if team == 'Concordia Chiajna':
+                cj_nr += 1
+                cj_skill += int(mean)
+
+        players += [(name, mean, position, team, age, wage, value)]
+
+print(cj_skill / cj_nr, sl_skill / sl_nr, cj_nr, sl_nr)
+print(len(players))
+players.sort(key=lambda x: -x[1])
+for index, player in enumerate(players[:50]):
+    print(index, player)
