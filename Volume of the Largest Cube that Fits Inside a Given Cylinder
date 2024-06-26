@@ -1,0 +1,12 @@
+import math
+
+def cube_volume_in_cylinder(h, r):
+    # Calculate maximum side length of the cube that can fit
+    side_length = min(math.sqrt(2) * r, h)
+    # Calculate the volume of the cube
+    volume = side_length ** 3
+    return volume
+
+# Testing with the provided examples
+example1 = cube_volume_in_cylinder(3, 7)  # h=3, r=7
+example2 = cube_volume_in_cylinder(11, 5)  # h=11, r=5
