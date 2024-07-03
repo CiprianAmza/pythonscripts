@@ -1,0 +1,10 @@
+function findYear(month, dayOfWeek){
+  
+  for (let year = 2014; year <= 2050; year++) {
+    let date = new Date(year, month, 1);
+    if (date.getDay() === dayOfWeek)
+      return year;
+  }
+  
+  return 0;
+}
