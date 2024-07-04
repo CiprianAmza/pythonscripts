@@ -1,0 +1,12 @@
+function roomMates( rooms, floor ){
+  
+  rooms.filter(x => x);
+  let lvl = (floor - 1) * 6;
+  let ans = [];
+  for (let i = lvl; i < Math.min(rooms.length, lvl + 6); i++) {
+    if (rooms[i])
+      ans.push(rooms[i]);
+  }
+  
+  return ans;
+}
