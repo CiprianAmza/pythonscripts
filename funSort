@@ -1,0 +1,9 @@
+function sort(a, b) {
+  
+  let ans = [];
+  
+  for (let i=0; i<b.length; i++) 
+    ans.push(a[b.indexOf(i)]);
+  
+  return ans;
+}
