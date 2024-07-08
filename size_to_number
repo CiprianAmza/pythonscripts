@@ -1,0 +1,14 @@
+def size_to_number(size):
+    
+    sizes = 'sml'
+    number = [36, 38, 40]
+    
+    if len(size) == 1 and size in sizes:
+        return number[sizes.index(size)]
+    
+    a = size.lstrip("x")
+    
+    if len(a) == 1 and a in 'sl':
+        return number[sizes.index(a)] + (len(size) - 1) * 2 * [-1, 1][a == 'l']
+    
+    return None
