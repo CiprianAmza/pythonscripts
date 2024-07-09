@@ -1,0 +1,15 @@
+class JomoPipi {
+    public static int[] mutationLocation(char[][] body) {
+      
+      for (int i = 1; i < body.length - 1; i++) {
+        for (int j = 1; j < body[0].length - 1; j++) {
+          if (body[i][j] != body[i-1][j] || body[i][j] != body[i+1][j]) {
+            if (body[i][j] == body[i+1][j]) return new int[]{i-1, j};
+            else if (body[i][j] == body[i-1][j]) return new int[]{i+1, j};
+            else return new int[]{i, j};
+          }
+        }
+      }
+      return new int[0];
+    }
+}
