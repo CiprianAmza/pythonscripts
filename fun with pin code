@@ -1,0 +1,23 @@
+nr = """
+ _     _  _     _  _  _  _  _ \n
+| |  | _| _||_||_ |_   ||_||_|\n
+|_|  ||_  _|  | _||_|  ||_| _|\n""".splitlines()
+
+numbers = {}
+
+for i in range(len(nr)):
+    for j in range(len(nr[i])):
+        numbers[j // 3] = numbers.get(j // 3, "") + nr[i][j]
+
+numbers = {value : key for key, value in numbers.items()}
+
+def parse_bank_account(bank_account):
+    
+    answer = dict()
+    bank_account = bank_account.splitlines()
+
+    for i in range(len(bank_account)):
+        for j in range(len(bank_account[i])):
+            answer[j // 3] = answer.get(j // 3, "") + bank_account[i][j]
+
+    return int("".join(map(lambda x: str(numbers.get(x, "")), answer.values())))
