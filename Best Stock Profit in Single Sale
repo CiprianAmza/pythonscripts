@@ -1,10 +1,10 @@
 def max_profit(prices):
     
-    _m = float('inf')
+    m = float('inf')
     best = float('-inf')
     
     for i in prices:
-        best = max(best, i-_m)
-        _m = min(i, _m)
+        best = max(best, i-m)
+        m = min(i, m)
     
     return best
