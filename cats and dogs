@@ -1,0 +1,20 @@
+def solve(arr,n):
+    
+    cats = set()
+    answer = 0
+    
+    for i, j in enumerate(arr):
+        if j == 'D':
+            continue
+        else:
+            cats.add(i)
+    
+    for i, j in enumerate(arr):
+        if j != 'D': continue
+        for k in range(i-n, i+n+1):
+            if k in cats:
+                cats.remove(k)
+                answer += 1
+                break
+    
+    return answer
