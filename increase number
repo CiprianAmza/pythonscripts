@@ -1,0 +1,9 @@
+def increasing_number(x, n):
+    
+    k = x
+    i = 1
+    
+    while i <= n:
+        if x % i == 0: i += 1
+        else: x += 1
+    return x
