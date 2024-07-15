@@ -1,4 +1,4 @@
-class JomoPipi {
+class Main {
     public static int[] mutationLocation(char[][] body) {
       
       for (int i = 1; i < body.length - 1; i++) {
