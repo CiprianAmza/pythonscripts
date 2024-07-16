@@ -1,0 +1,4 @@
+class Puzzle:
+    __call__ = lambda self, n, x: n << x
+
+puzzle = Puzzle()
