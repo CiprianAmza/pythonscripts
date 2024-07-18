@@ -1,0 +1,6 @@
+def radii(a, b, c):
+    
+    s = (a + b + c) / 2
+    A = (s * (s - a) * (s - b) * (s - c)) ** .5
+    
+    return (A / s, (a * b * c) / (4 * A))
