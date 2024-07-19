@@ -1,0 +1,4 @@
+Array.prototype.qbsort = function() {
+  this.qshuffle();
+  return this.some( (x,i,xs) => i && x < xs[i-1] ) ? QSC.destroyUniverse() : this ;
+};
