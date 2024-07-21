@@ -35,7 +35,7 @@ with open('Untitled4.rtf', 'r', encoding="utf-8") as c:
                 values[i] *= 1.5
             elif i < 10:
                 values[i] *= 1.1
-        # if int(age) > 20: continue
+        if int(age) > 20: continue
 
         mean = sum(values) / len(values)
         if mean > 18:
