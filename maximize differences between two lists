@@ -1,0 +1,23 @@
+def get_min(nr, lst):
+    
+    best = float('inf')
+    
+    for el in lst:
+        if el > nr:
+            best = min(best, el)
+            
+    return best if best != float('inf') else min(lst)
+
+def shuffle_a(a, b):
+    
+    k = sorted(a)
+    
+    ans = [0 for _ in range(len(a))]
+    q = sorted([(el, ind) for ind, el in enumerate(b)])
+    
+    for j, i in q:
+        m = get_min(j, k)
+        k.remove(m)
+        ans[i] = m
+    
+    return ans
