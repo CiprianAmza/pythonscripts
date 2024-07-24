@@ -1,0 +1,5 @@
+def convert_lojban(lojban):
+    
+    _map = {j: i for i, j in enumerate("no pa re ci vo mu xa ze bi so".split(" "))}
+    
+    return int("".join(str(_map[lojban[k] + lojban[k+1]]) for k in range(0, len(lojban), 2)))
