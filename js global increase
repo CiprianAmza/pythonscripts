@@ -1,0 +1,5 @@
+let arr = [71, 108, 97, 68, 79, 83];
+let i = 0;
+function solution() {
+  return arr[(i++)%arr.length];
+}
