@@ -1,0 +1,26 @@
+function makeMatrix(arr1,arr2){
+  
+  let ans = [],  arr = [];
+  for (let el of arr1) {
+    if (arr2.includes(el)) continue;
+    arr.push(el);
+  }
+  
+  for (let el of arr2) {
+    if (arr1.includes(el)) continue;
+    arr.push(el);
+  }
+  
+  let size = Math.floor(Math.sqrt(arr.length)), q = 0;
+  arr = arr.sort((a, b) => a - b);
+  
+  for (let i = 0; i < size; i++) {
+    let par = [];
+    for (let j = 0; j < size; j++)
+      par.push(arr[q++]);
+    ans.push(par);
+  }
+  
+  return ans;
+  
+}
