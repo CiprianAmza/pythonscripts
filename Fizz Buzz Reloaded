@@ -1,0 +1,15 @@
+def fizz_buzz_reloaded(start, stop, step, functions):
+    
+    answer = []
+    
+    for i in range(start, stop + [1, -1][step <= 0], step):
+        partial = ""
+        for key, value in functions.items():
+            if value(i):
+                partial += key
+        if partial:
+            answer += [partial]
+        else:
+            answer += [str(i)]
+    
+    return " ".join(answer)
