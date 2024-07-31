@@ -1,0 +1,6 @@
+def matching(arg):
+    match arg:
+        case []:            return 0
+        case [x]:           return int(x)
+        case [a,*_,0|'0']:  return None
+        case [a,*_,b]:      return int(a) / int(b)
