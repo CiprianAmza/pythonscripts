@@ -1,0 +1,12 @@
+def find_number(start, stop, st):
+    
+    a, answer, final = "".join(sorted(st)), "".join(sorted("".join(str(k) for k in range(start, stop + 1)))), []
+    
+    for i in range(start, stop + 1):
+        
+        b = answer
+        for j in str(i):
+            b = b.replace(j, "", 1)
+        if a == b: final.append(i)
+    
+    return final
