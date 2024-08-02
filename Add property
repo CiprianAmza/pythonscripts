@@ -1,0 +1,12 @@
+function addProperty(obj, prop, value) {
+  
+  if (obj.hasOwnProperty(prop)) throw new "Property already exists";
+  
+  Object.defineProperty(obj, prop, {
+    value: value,
+    writable: true,  
+    enumerable: true,  
+    configurable: true
+  });
+  
+}
