@@ -1,0 +1,8 @@
+def histogram(values, bin_width):
+    
+    if not values:
+        return []
+    
+    base = [values.count(i) for i in range(max(values, default=0) + 1)]
+    
+    return [sum(base[i-bin_width:i]) for i in range(bin_width, len(base) + bin_width, bin_width)]
