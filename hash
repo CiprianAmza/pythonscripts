@@ -1,0 +1,7 @@
+def my_hash_map(d):
+    
+    ans = dict()
+    for el in d:
+        ans[sum(map(ord, el))] = ans.get(sum(map(ord, el)), []) + [el]
+                                     
+    return ans
