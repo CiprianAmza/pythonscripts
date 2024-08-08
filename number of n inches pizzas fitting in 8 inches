@@ -1,0 +1,5 @@
+def how_many_pizzas(n):
+    
+    p = n*n // 64
+    
+    return f'pizzas: {p}, slices: {(n * n - p * 64) // 8}'
