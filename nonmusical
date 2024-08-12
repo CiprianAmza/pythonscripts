@@ -1,0 +1,12 @@
+def no_musical(s, e, m, d):
+    
+    if m == 0: return e - s + 1
+    if m <= d: return 0
+    c = 0
+    
+    for i in range(s+1, e+1):
+        if (((i-s)%m) + d) < m:
+            c += 1
+            continue
+            
+    return c
