@@ -1,0 +1,30 @@
+def apply(value, criteria):
+    
+    if isinstance(criteria, int):
+        return value == criteria
+    
+    if "<>" in criteria:
+        return value != float(criteria[2:])
+    elif "<=" in criteria:
+        return value <= float(criteria[2:])
+    elif ">=" in criteria:
+        return value >= float(criteria[2:])
+    elif "<" in criteria:
+        return value < float(criteria[1:])
+    elif ">" in criteria:
+        return value > float(criteria[1:])
+    else:
+        return value == criteria or str(value) == str(criteria)
+    
+    
+def count_if(values,criteria):
+    
+    return len([el for el in values if apply(el, criteria)])
+    
+def sum_if(values,criteria):
+    
+    return sum([el for el in values if apply(el, criteria)])
+    
+def average_if(values,criteria):
+    
+    return sum_if(values, criteria) / count_if(values, criteria)
