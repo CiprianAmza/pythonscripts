@@ -1,0 +1,19 @@
+WITH sibling_count AS (
+    SELECT
+        cp1.client_id,
+        COUNT(DISTINCT cp2.client_id) AS num_siblings
+    FROM
+        client_parents cp1
+    LEFT JOIN
+        client_parents cp2 ON cp1.parent_id = cp2.parent_id AND cp1.client_id <> cp2.client_id
+    GROUP BY
+        cp1.client_id
+)
+
+SELECT
+    client_id,
+    COALESCE(num_siblings, 0) AS num_siblings
+FROM
+    sibling_count
+ORDER BY
+    client_id ASC;
