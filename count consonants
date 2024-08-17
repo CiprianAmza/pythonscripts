@@ -1,0 +1,7 @@
+def count_consonants(s):
+    r = set()
+    for ch in s:
+        if ch.isalpha() and ch.lower() not in 'aeiou' and ch.lower() not in r:
+            r.add(ch.lower())
+    
+    return len(r)
