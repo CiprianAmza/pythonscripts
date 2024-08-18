@@ -1,0 +1,19 @@
+function findBalance(arr){
+  
+  let ans = [];
+  
+  for (let i = 1; i < arr.length - 1; i++) {
+    
+    let left = 0, right = 0;
+    for (let j = 0; j < i; j++) left += arr[j];
+    for (let j = i+1; j < arr.length; j++) right += arr[j];
+    
+    left = Math.round(left / i);
+    right = Math.round(right / (arr.length - i - 1));
+    
+    if (left == right) ans.push(i);
+  }
+  
+  return ans;
+  
+}
