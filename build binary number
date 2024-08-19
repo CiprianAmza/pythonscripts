@@ -1,0 +1,3 @@
+def array_packing(arr):
+    
+    return int(__import__('functools').reduce(lambda x, y: x + y, map(lambda x: bin(x)[2:].zfill(8), arr[::-1])), 2)
