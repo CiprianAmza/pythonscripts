@@ -1,0 +1,12 @@
+def distance(a, b):
+    
+    return ((a.x - b.x) ** 2 + (a.y - b.y) ** 2) ** .5
+
+def triangle_area(triangle):
+    
+    a, b, c = triangle.a, triangle.b, triangle.c
+    ab, ac, bc = distance(a, b), distance(a, c), distance(b, c)
+    
+    s = (ab + ac + bc) / 2
+    
+    return (s * (s-ab) * (s-ac) * (s-bc)) **.5
