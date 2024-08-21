@@ -1,0 +1,8 @@
+def drive(drinks, *args):
+    
+    ((x, y), (q, w)), units = map(lambda x: map(int, x.split(":")), args), 0
+
+    for strength, volume in drinks:
+        units += strength * volume / 1000
+        
+    return [round(units, 2), ((x + units) * 60 + y) < ((q + [0, 24][x > q or x == q and y > w]) * 60 + w)]
