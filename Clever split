@@ -1,0 +1,4 @@
+import re
+
+def clever_split(s):
+    return re.findall(r'\[.*?\]|\S+', s)
