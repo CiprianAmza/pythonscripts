@@ -8,5 +8,4 @@ function addProperty(obj, prop, value) {
     enumerable: true,  
     configurable: true
   });
-  
 }
