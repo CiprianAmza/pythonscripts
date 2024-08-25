@@ -1,0 +1,17 @@
+function f(n) {
+
+  let k = 1;
+  for (let i = 1; i <= n; i++)
+     k *= i;
+  
+  return k
+
+}
+
+function horses(n) {
+
+  if (!typeof n === "number" || n % 1 !== 0) return undefined;
+  if (n <= 1) return n;
+  
+  return f(n) /(f(3) * f(n-3)) * 6;
+}
