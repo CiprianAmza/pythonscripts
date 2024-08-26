@@ -1,0 +1,45 @@
+class List(list):
+    
+    def __init__(self):
+        self.position = []
+        
+    def __getitem__(self, index):
+        return self.position[index-1]
+    
+    def add(self, element):
+        self.position += [element]
+        
+    def __len__(self):
+        return 500
+    
+class Leaderboard:
+    
+    def __init__(self):
+        self.position = List()
+        
+class User:
+    
+    def __init__(self, name, clan, honor):
+        self.name = name
+        self.clan = clan
+        self.honor = honor
+        
+URL = "https://www.codewars.com/users/leaderboard"
+from requests import get
+
+def solution(): 
+    
+    leaderboard = Leaderboard()
+    page = get(URL).text
+    for line in page.split("data-username")[1:]:
+        try:
+            a, b = line[1:].split('"')[-1][1:].split("<")[0].split(",")
+        except:
+            a, b = "0", "0"
+        name = line[1:].split('"')[1]
+        clan = line[1:].split('"')[18].split("<td>")[-1].split("<")[0]
+        if all(k == " " for k in clan):
+            clan = ""
+        leaderboard.position.add(User(name, clan, int(a + b)))
+        
+    return leaderboard
