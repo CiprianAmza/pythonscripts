@@ -1,0 +1,25 @@
+def vertical_histogram_of(s):
+
+    counter = dict()
+    values, _max, answer = [], 0, []
+    
+    for char in s:
+        counter[char] = counter.get(char, 0) + 1
+    
+    for i in range(ord('A'), ord('Z') + 1):
+        counts = counter.get(chr(i), 0)
+        if not counts: continue
+        values += [(counts, chr(i))]
+        _max = max(counts, _max)
+    
+    for i in range(_max, 0, -1):
+        part = ""
+        for counts, letter in values:
+            if counts >= i:
+                part += "*" 
+            else:
+                part += " "
+        answer.append(" ".join(part).rstrip(" "))
+    answer.append(" ".join(v for _, v in values))
+    
+    return "\n".join(answer)
