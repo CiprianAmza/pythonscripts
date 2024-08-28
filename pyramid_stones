@@ -1,0 +1,19 @@
+def pyramid(stones):
+    
+    counter = dict()
+    answer = 0
+    
+    for s in stones:
+        counter[s] = counter.get(s, 0) + 1
+    
+    for i in range(3, 0, -1):
+        best = float('-inf')
+        for value, count in counter.items():
+            if count >= i and best <= value:
+                best = value
+        if best == float('-inf'): return
+        answer += i * best
+        counter[best] = 0
+    
+    return answer
+        
