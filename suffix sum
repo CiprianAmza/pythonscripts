@@ -1,0 +1,12 @@
+function suffixSums(a) {
+  
+  let sum = a.reduce((x, y) => x + y);
+  let answer = [];
+  
+  for (let el of a) {
+    answer.push(sum);
+    sum -= el;
+  }
+  
+  return answer;
+}
