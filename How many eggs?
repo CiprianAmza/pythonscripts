@@ -1,0 +1,19 @@
+def egged(year, span):
+    
+    if year == 0:
+        return "No chickens yet!"
+
+    chickens = [(span, 300) for _ in range(3)]
+    
+    for _ in range(year):
+        total = 0
+        for i in range(len(chickens)):
+            age, eggs = chickens[i]
+            if age <= 0: continue
+            total += eggs
+            chickens[i] = (age - 1, 80 * eggs // 100)
+            
+        for _ in range(3):
+            chickens.append((span, 300))
+            
+    return total
