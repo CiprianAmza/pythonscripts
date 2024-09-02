@@ -1,0 +1,3 @@
+def pyramid(s):
+    
+    return s // 4 + 1, s // 2 - 1, s // 4 + 1, s // 4
