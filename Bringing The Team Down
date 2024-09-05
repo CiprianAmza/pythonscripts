@@ -1,0 +1,5 @@
+def lowest_possible_place(n, score):
+    
+    k = score - n * (n+1) // 2 - 1
+
+    return k if k > 0 and k > n else -1
