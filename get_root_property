@@ -1,0 +1,29 @@
+def get_root_property(dict_, value):
+    
+    def solve(key, dict_):
+        
+        nonlocal ans
+        if key not in dict_: return
+    
+        if isinstance(dict_[key], list):
+            if value in dict_[key]:
+                ans = True
+            return 
+        
+        for k in dict_[key]:
+            solve(k, dict_[key])
+        
+    keys = set()
+    
+    for key in dict_.keys():
+        if isinstance(dict_[key], list):
+            if value in dict_[key]:
+                return key
+        keys.add(key)
+    
+    for key in keys:
+        ans = False
+        solve(key, dict_)
+        if ans:
+            return key
+        
