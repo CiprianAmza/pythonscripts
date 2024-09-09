@@ -1,0 +1,35 @@
+def compute_ranks(number, games):
+    
+    league_table = {team: (0, 0, 0) for team in range(number)}
+    
+    for home, away, score_a, score_b in games:
+        a, b, c = league_table.get(home, (0, 0, 0))
+        x, y, z = league_table.get(away, (0, 0, 0))
+        a, b, x, y = a + score_a, b + score_b, x + score_b, y + score_a
+        
+        if score_a > score_b:
+            c += 2
+        elif score_a == score_b:
+            c, z = c + 1, z + 1
+        else:
+            z += 2
+        
+        league_table[home] = (a, b, c)
+        league_table[away] = (x, y, z)
+        
+    league_table = [(team, *values) for team, values in league_table.items()]
+    league_table = sorted(league_table, key=lambda x: (-x[3], -(x[1]-x[2]), -x[1]))
+    
+    teams = []
+    last_team = None
+    for position, team in enumerate(league_table, start = 1):
+        if not teams:
+            teams.append((position, *team))
+        else:
+            if team[-1] == last_team[-1] and (team[1] - team[2]) == (last_team[1] - last_team[2]) and team[1] == last_team[1]:
+                teams.append((teams[-1][0], *team))
+            else:
+                teams.append((position, *team))
+        last_team = team
+    
+    return [team[0] for team in sorted(teams, key=lambda x: x[1])]
