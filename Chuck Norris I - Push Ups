@@ -1,0 +1,13 @@
+def chuck_push_ups(st): 
+    
+    if not isinstance(st, str):
+        return "FAIL!!"
+    
+    ans = ["".join(k for k in el if k in "01") for el in st.split(" ")]
+    
+    if not st:
+        return "CHUCK SMASH!!"
+    elif not ans:
+        return "FAIL!!"
+    else:
+        return max(list(map(lambda x: int(x, 2), filter(lambda x: x, ans))), default = "CHUCK SMASH!!")
