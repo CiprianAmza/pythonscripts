@@ -1,0 +1,19 @@
+def count_different_matrices(mtr):
+    
+    mtr = [[[l[0], l[1]], [l[2], l[3]]] for l in mtr]
+    total = [mtr[0]]
+    
+    for m in mtr[1:]:
+        q1 = [k[::-1] for k in m[::-1]]
+        q2 = [list(k[::-1]) for k in zip(*m)]
+        q3 = [k[::-1] for k in q2[::-1]]
+        
+        pos = True
+        for q in (m, q1, q2, q3):
+            if q in total:
+                pos = False
+
+        if pos:
+            total.append(m)
+    
+    return len(total)
