@@ -1,0 +1,7 @@
+function* nextElementGenerator(arr) {
+  let index = 0;
+  while (true) {
+    yield arr[index];
+    index = (index + 1) % arr.length;
+  }
+}
