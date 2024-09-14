@@ -1,0 +1,7 @@
+Array.prototype.map = function(x) {
+  
+  let ans = [];
+  this.forEach(y => ans.push(x(y)));
+  
+  return ans;
+};
