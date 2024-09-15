@@ -1,0 +1,5 @@
+String.prototype.contains = function(substr, sensitive = false)
+{
+  return sensitive ? this.includes(substr) :
+                     this.toLowerCase().includes(substr.toLowerCase());
+}
