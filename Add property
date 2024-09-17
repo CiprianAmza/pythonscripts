@@ -7,5 +7,6 @@ function addProperty(obj, prop, value) {
     writable: true,  
     enumerable: true,  
     configurable: true
+
   });
 }
