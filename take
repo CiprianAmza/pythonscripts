@@ -1,0 +1,12 @@
+function select (arrSearch, arrTake){
+
+  arrSearch = arrSearch.sort((a, b) => a === b ? 0 : a > b ? -1 : 1);
+  
+  let third = arrSearch[2][2];
+  
+  for (let element of arrTake)
+    if (element[0] === third)
+      return element;
+  
+  return "Nothing here";
+}
