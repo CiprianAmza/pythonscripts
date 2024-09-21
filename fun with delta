@@ -1,0 +1,8 @@
+def sum_and_multiply(x, y):
+    
+    delta = (-x)**2 - 4*y
+    x1 = (x - delta ** .5) / 2
+    x2 = (x + delta ** .5) / 2
+    
+    if isinstance(x1, float) and isinstance(x2, float) and x1 // 1 * (x-x1) == y:
+        return [x1, x2]
