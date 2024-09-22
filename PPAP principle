@@ -1,0 +1,15 @@
+function ppap(arr1, arr2) {
+  
+  let a = arr1[0].toLowerCase(), b = arr1[1].toLowerCase(),
+      c = arr2[0].toLowerCase(), d = arr2[1].toLowerCase();
+  
+  if (a === c) 
+    return [a, d, b, c].map(x => x[0].toUpperCase() + x.slice(1)).join`-`;
+  else if (b === c)
+    return [b, d, a, c].map(x => x[0].toUpperCase() + x.slice(1)).join`-`;
+  else if (a === d)
+    return [a, c, b, d].map(x => x[0].toUpperCase() + x.slice(1)).join`-`;
+  else
+    return [b, c, a, d].map(x => x[0].toUpperCase() + x.slice(1)).join`-`;
+    
+}
