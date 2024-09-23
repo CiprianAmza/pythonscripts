@@ -1,0 +1,8 @@
+def apples_distribution(apples, capacity, max_left):
+    
+    c = 0
+    for i in range(1, capacity + 1):
+        if apples - apples // i * i <= max_left:
+            c += 1
+    
+    return c
