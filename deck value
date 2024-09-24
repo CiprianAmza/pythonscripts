@@ -1,0 +1,15 @@
+function twentyOne(card1, card2, card3) {
+  
+  let values = {"J": 2, "Q": 3, "K": 4, "A": 11};
+  let total = 0;
+  
+  for (let element of [card1, card2, card3]) {
+    let value = element.slice(0, element.length-1);
+    value = values[value] || parseInt(value);
+    total += value;
+  }
+  
+  if (total === 21) return 'twenty-one';
+  else if (total > 21) return "more";
+  else return "less";
+}
