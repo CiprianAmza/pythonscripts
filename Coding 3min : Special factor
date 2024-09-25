@@ -1,0 +1,12 @@
+def sc(n): 
+    
+    factors, answer, bin_form = [1], [], bin(n)[2:]
+    for i in range(2, n//2 + 1):
+        if n % i == 0:
+            factors += [i]
+    
+    for f in factors:
+        if bin(f)[2:] in bin_form:
+            answer.append(f)
+    
+    return answer + [n]
