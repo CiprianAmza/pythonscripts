@@ -1,0 +1,4 @@
+function sumArr(a,b) {
+
+  return a.map((_, index) => parseInt(a[index] || "0") + parseInt(b[index] || "0") + "");
+}
