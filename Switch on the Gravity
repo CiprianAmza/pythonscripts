@@ -1,0 +1,13 @@
+def switch_gravity(lst):
+    
+    for i in range(len(lst)):
+        for j in range(len(lst[i])):
+            if lst[i][j] == "#":
+                stop = False
+                for k in range(len(lst)-1, -1, -1):
+                    if stop: break
+                    if lst[k][j] == "-" and k > i:
+                        lst[i][j], lst[k][j] = lst[k][j], lst[i][j]
+                        stop = True
+    
+    return lst
