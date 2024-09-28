@@ -1,0 +1,16 @@
+function rndCode(){
+  
+  let ans = "";
+  let chars = "ABCDEFGHIJKLM";
+  let numbers = "0123456789";
+  let specs = "~!@#$%^&*";
+  
+  for (let i = 0; i < 8; i++) {
+    let k = Math.ceil(Math.random() * 100);
+    if (i < 2) ans += chars[k % chars.length];
+    else if (i < 6) ans += numbers[k % numbers.length];
+    else ans += specs[k % specs.length];
+  }
+  
+  return ans; 
+}
