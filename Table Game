@@ -1,0 +1,11 @@
+COORDS = ((0, 0), (0, -1), (-1, 0), (-1, -1))
+
+def table_game(table):
+    
+    ans = [table[i][j] for i, j in COORDS]
+    
+    for value, (i, j) in zip(ans, COORDS):
+        for q, w in ((0, 0), (0, 1), (1, 0), (1, 1)):
+            table[(i+q) if i >= 0 else (i-q)][(j+w) if j >= 0 else (j-w)] -= value
+    
+    return ans if not any(element for row in table for element in row) else [-1]
