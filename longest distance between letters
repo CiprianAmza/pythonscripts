@@ -1,0 +1,15 @@
+def dist_same_letter(st):
+    
+    first, second = dict(), dict()
+    for i, j in enumerate(st):
+        if j not in first:
+            first[j] = i
+        second[j] = i
+    
+    letter, best = "", 0
+    for ch in st:
+        diff = second[ch] - first[ch]
+        if diff > best:
+            best, letter = diff, ch
+    
+    return f"{letter}{best + 1}"
