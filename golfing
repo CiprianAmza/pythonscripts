@@ -1,1 +1,1 @@
-fizznotbuzz=lambda s:'fizz'in s==s-{'buzz'}
+golf=lambda s:'fizz'in s==s-{'buzz'}
