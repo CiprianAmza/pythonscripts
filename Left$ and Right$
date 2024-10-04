@@ -1,0 +1,17 @@
+def left(s, i=1):
+    
+    if not i: return ""
+
+    if isinstance(i,int):
+        return s[:i]
+    elif i in s: 
+        return s[:s.index(i)]
+    
+def right(s, i=1):
+    
+    if not i: return ""
+
+    if isinstance(i, int):
+        return s[-i:]
+    elif i in s:
+        return s.split(i)[-1]
