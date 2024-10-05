@@ -1,0 +1,22 @@
+def check_DNA(seq1, seq2):
+
+    for i in range(max(len(seq1), len(seq2))):
+        pos = True
+        a, b = seq1, seq2[::-1]
+        if len(a) > len(b):
+            a, b = a[i:], b
+            if len(b) == (len(seq1) - i): 
+                pos = False
+                break
+        elif len(a) < len(b):
+            a, b = a, b[i:]
+            if len(a) == (len(seq2) - i): 
+                pos = False
+                break
+        for i, j in zip(a, b):
+            if sorted([i, j]) not in (['A', 'T'], ['C', 'G']):
+                pos = False
+                break
+        if pos or len(seq1) == len(seq2): break
+    
+    return pos
