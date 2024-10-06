@@ -1,0 +1,27 @@
+is_prime = lambda n: n == 2 or n % 2 and all(n%k for k in range(3, int(n**.5+1), 2))
+
+def get_nr_of_divs(n):
+    
+    divs = {1, n}
+    
+    for i in range(2, int(n**.5)+1):
+        if n % i == 0:
+            divs.add(i)
+        if n % (n//i) == 0:
+            divs.add(n//i)
+            
+    return len(divs)
+
+def proc_arr_int(lst):
+    
+    divs = dict()
+    
+    for element in lst:
+        if is_prime(element):
+            print(element)
+            divs[0] = divs.get(0, []) + [element]
+        else:
+            nr = get_nr_of_divs(element)
+            divs[nr] = divs.get(nr, []) + [element] 
+            
+    return [len(lst), len(divs.get(0, 0)), [max(divs.keys()), sorted(divs[max(divs.keys())])]]
