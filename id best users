@@ -1,0 +1,19 @@
+def id_best_users(*args):
+    
+    args = sorted(args, key=len)
+    total = set(args[0])
+    
+    for i, arg in enumerate(args[1:], start=1):
+        total &= set(arg)
+        args[i] = [el for el in arg if el in total]
+    
+    d = {el: 0 for el in total}
+    for element in total:
+        for arg in args:
+            d[element] = d.get(element, 0) + arg.count(element)
+    
+    answer = dict()
+    for i, j in d.items():
+        answer[j] = answer.get(j, []) + [i]
+    
+    return sorted([[i, sorted(j)] for i, j in answer.items()], reverse=1)
