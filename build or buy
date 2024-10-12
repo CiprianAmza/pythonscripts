@@ -1,0 +1,15 @@
+def build_or_buy(hand):
+
+    m = {"bw": "road", "bwsg": "settlement", "ooogg": "city", "osg": "development"}
+    ans = []
+    
+    h = dict()
+    for c in hand:
+        h[c] = h.get(c, 0) + 1
+    
+    for i, j in m.items():
+    
+        if all(h.get(k, 0) >= i.count(k) for k in i):
+            ans.append(j)
+    
+    return ans
