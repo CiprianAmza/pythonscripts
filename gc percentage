@@ -1,0 +1,4 @@
+def gc_content(seq):
+    
+    if not seq: return 0
+    return round(sum(1 for i in seq if i in 'GC') / len(seq) * 100, 2)
