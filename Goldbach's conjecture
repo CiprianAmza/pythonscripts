@@ -1,0 +1,13 @@
+is_prime = lambda n: n == 2 or n % 2 and all(n%k for k in range(3, int(n**.5+1), 2))
+primes = [el for el in range(2, 10**5) if is_prime(el)]
+
+def goldbach(nr):
+    
+    pairs = []
+    for i in range(len(primes)):
+        for j in range(i, len(primes)):
+            v = primes[i] + primes[j]
+            if v > nr: break
+            if v == nr: pairs.append([primes[i], primes[j]])
+    
+    return pairs
