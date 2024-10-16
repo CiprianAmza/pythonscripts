@@ -1,0 +1,7 @@
+def cyclic_string(s):
+    
+    v = ""
+    for i in range(len(s)):
+        v += s[i]
+        if s in v * len(s):
+            return i + 1
