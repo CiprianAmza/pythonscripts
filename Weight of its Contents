@@ -1,0 +1,9 @@
+def content_weight(b, scale): 
+    
+    q, w = scale.split(" times ")
+    q = int(q)
+    
+    if w == "larger":
+        return b // (q+1) * q
+    else:
+        return b - b // (q+1) * q
