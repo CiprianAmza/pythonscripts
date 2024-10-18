@@ -1,0 +1,32 @@
+def get_los_angeles_points(results):
+    
+    s = 0
+    
+    for el, v in results:
+        q = el.split()
+        
+        if len(q) != 3:
+            continue 
+            
+        a, b, c = q
+        
+        if a != "Los":
+            continue
+        if b != "Angeles":
+            continue
+        
+        if len(c) < 2:
+            continue
+        
+        if not all(k.isalpha() for k in c):
+            continue
+        
+        if c[0] != c[0].upper():
+            continue
+        if not all(k == k.lower() for k in c[1:]):
+            continue
+        
+        z, x = v.split(":")
+        s += int(z)
+    
+    return s
