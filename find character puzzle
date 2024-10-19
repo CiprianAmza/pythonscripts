@@ -1,0 +1,9 @@
+def find_characters(matrix):
+    
+    counter = dict()
+    
+    for line in matrix.splitlines():
+        for char in line:
+            counter[char] = counter.get(char, 0) + 1
+    
+    return "".join(sorted([i for i, j in counter.items() if j == min(counter.values())], key=lambda x: (not x.isalpha(), ord(x))))
