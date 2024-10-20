@@ -1,0 +1,8 @@
+def get_row(n):
+    
+    n = (n-1) % 26 + 1
+    
+    start = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    for i in range(ord('A'), ord('Z')+1):
+        start = start.replace(chr(i-1), chr(i))
+        if not (n := n -1): return start
