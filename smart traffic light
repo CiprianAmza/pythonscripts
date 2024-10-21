@@ -1,0 +1,12 @@
+class SmartTrafficLight:
+    
+    def __init__(self, st1, st2):
+        
+        a, b = st1
+        c, d = st2
+        
+        self.answer = iter([b, d]) if a > c else iter([d, b]) if c > a else iter([])
+        
+    def turngreen(self):
+        
+        return next(self.answer, None)
