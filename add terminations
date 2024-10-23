@@ -1,0 +1,31 @@
+def sursurungal(txt):
+    
+    ans = []
+    last = cur = ""
+    for el in txt + " ":
+        
+        if el == " " or el == "\n": 
+            if last and cur:
+                v = int(last)
+                if v > 1 and cur and cur[-1] == "s":
+                    cur = cur[:-1]
+                if v <= 1:
+                    ans.append(last + " " + cur)
+                elif v == 2:
+                    ans.append(last + " " + "bu" + cur)
+                elif v < 10:
+                    ans.append(last + " " + cur + "zo")
+                else:
+                    ans.append(last + " " + "ga" + cur + "ga")
+                last = cur = ""
+                ans.append(el)
+            elif not last:
+                ans.append(el)
+        elif el.isdigit():
+            last += el
+        elif last:
+            cur += el
+        else:
+            ans.append(el)
+        
+    return "".join(ans)[:-1]
