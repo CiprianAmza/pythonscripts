@@ -1,0 +1,13 @@
+Array.prototype.groupBy = function(fn) {
+    
+  let map = {};
+  for (let el of this) {
+    let val = fn === undefined ? el : fn(el);
+    if (map[val] === undefined)
+      map[val] = [el];
+    else
+      map[val].push(el);
+  }
+  
+  return map;
+}
