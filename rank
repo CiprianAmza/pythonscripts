@@ -1,0 +1,15 @@
+def rank(lst):
+    
+    m1, m2 = dict(), dict()
+    for i, j in enumerate(sorted(lst)):
+        if j not in m1: 
+            m1[j] = i
+        m2[j] = i
+    
+    for i, j in enumerate(lst):
+        v1 = m1[j]
+        v2 = m2[j]
+        lst[i] = sum([k for k in range(v1, v2+1)]) / (v2 - v1 + 1)
+    
+    return lst
+    
