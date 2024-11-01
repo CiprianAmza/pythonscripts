@@ -1,0 +1,10 @@
+def ipv4_address_class(ipv4_addr):
+    
+    
+    f = int(ipv4_addr.split(".")[0])
+    
+    for i, j in enumerate([127, 191, 223, 239, 255]):
+        if f <= j:
+            return chr(ord('A') + i)
+    
+    return "X"
