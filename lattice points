@@ -1,0 +1,27 @@
+def check_triangle(ax, ay, bx, by, cx, cy):
+    
+    return (ax * by + ay * cx + bx * cy - cx * by - bx * ay - cy * ax) != 0
+
+from collections import defaultdict
+def count_col_triang(lst):
+    
+    d = defaultdict(set)
+    triangles = dict()
+
+    for (x, y), color in lst:
+        d[color].add((x, y))
+        
+    for color, values in d.items():
+        values = list(values)
+        amount = 0
+        for i in range(len(values)):
+            for j in range(i + 1, len(values)):
+                for k in range(j + 1, len(values)):
+                    if check_triangle(*values[i], *values[j], *values[k]):
+                        amount += 1
+        triangles[color] = amount
+        
+    best = [color for color, values in triangles.items() if values == max(triangles.values())]
+
+    return [sum(len(el) for el in d.values()), len(d), sum(triangles.values()), (sorted(best) + [triangles[best[0]]]) if best and triangles[best[0]] else []]
+        
