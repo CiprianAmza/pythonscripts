@@ -1,0 +1,39 @@
+class Tree:
+    def __init__(self, trunks):
+        self.trunks = trunks
+        self.branches = trunks * 10
+        self.twigs = trunks * 100
+        self.leaves = trunks * 1000
+    
+    # keep adding methods!
+    def chop_trunk(self, n):
+        self.trunks -= n
+        self.branches -= n * 10
+        self.twigs -= n * 100
+        self.leaves -= n * 1000
+        self.update()
+    
+    def chop_branch(self, n):
+        self.branches -= n * 1
+        self.twigs -= n * 10
+        self.leaves -= n * 100
+        self.update()
+    
+    def chop_twig(self, n):
+        self.twigs -= n * 1
+        self.leaves -= n * 10
+        self.update()
+    
+    def chop_leaf(self, n):
+        self.leaves -= n * 1
+        self.update()
+    
+    def update(self):
+        
+        self.trunks = max(self.trunks, 0)
+        self.branches = max(self.branches, 0)
+        self.twigs = max(self.twigs, 0)
+        self.leaves = max(self.leaves, 0)
+        
+    def describe(self):
+        return f"This tree has {self.trunks} trunks, {self.branches} branches, {self.twigs} twigs and {self.leaves} leaves."
