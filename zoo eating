@@ -1,0 +1,47 @@
+zoo = """antelope eats grass
+    big-fish eats little-fish
+    bug eats leaves
+    bear eats big-fish
+    bear eats bug
+    bear eats chicken
+    bear eats cow
+    bear eats leaves
+    bear eats sheep
+    chicken eats bug
+    cow eats grass
+    fox eats chicken
+    fox eats sheep
+    giraffe eats leaves
+    lion eats antelope
+    lion eats cow
+    panda eats leaves
+    sheep eats grass"""
+
+zoo_dict = dict()
+for element in zoo.splitlines():
+    a, b = element.strip(" ").split(" eats ")
+    zoo_dict[a] = zoo_dict.get(a, set()) | {b}
+
+def who_eats_who(zoo):
+    
+    original_zoo = zoo
+    zoo = zoo.split(",")
+    ans = []
+    changes = True
+    
+    while changes:
+        changes = False
+        for i in range(len(zoo)):
+            pos = zoo_dict.get(zoo[i], set())
+            while i - 1 >= 0 and zoo[i-1] in pos:
+                ans.append(f"{zoo[i]} eats {zoo[i - 1]}")
+                zoo = zoo[:i-1] + zoo[i:]
+                changes = True
+            if changes: break
+            while i + 1 < len(zoo) and zoo[i + 1] in pos:
+                ans.append(f"{zoo[i]} eats {zoo[i + 1]}")
+                zoo = zoo[:i+1] + zoo[i + 2:]
+                changes = True
+            if changes: break
+            
+    return [original_zoo, *ans, ",".join(zoo)]
