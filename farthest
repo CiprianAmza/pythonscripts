@@ -1,0 +1,45 @@
+def peak_height(m):
+    
+    graph = []
+    ans = []
+    
+    for line in m:
+        graph.append(list(line))
+        ans.append([float('inf') for _ in range(len(line))])
+        
+    for i in range(len(graph)):
+        for j in range(len(graph[i])):
+            if graph[i][j] == ' ': continue
+            pos = False
+            for q, w in ((0, 1), (1, 0), (-1, 0), (0, -1)):
+                x, y = i + q, w + j
+                if x >= 0 and y >= 0 and x < len(graph) and y < len(graph[x]):
+                    if graph[x][y] == " ":
+                        pos = True
+            if pos or i == 0 or j == 0 or i == len(graph) - 1 or j == len(graph[i]) - 1:
+                ans[i][j] = 1
+
+    changes = True
+    while changes:
+        changes = False
+        to_add = []
+        for i in range(len(graph)):
+            for j in range(len(graph[i])):
+                if ans[i][j] != float('inf'): continue
+                if graph[i][j] == ' ': continue
+                best = float('inf')
+                for q, w in ((0, 1), (1, 0), (-1, 0), (0, -1)):
+                    x, y = i + q, w + j
+                    if x >= 0 and y >= 0 and x < len(graph) and y < len(graph[x]):
+                        best = min(best, ans[x][y] + 1)
+                if best != float('inf'):
+                    to_add.append((i, j, best))
+        
+        if to_add:
+            changes = True
+            for i, j, val in to_add:
+                ans[i][j] = val
+        to_add = []
+
+    return max([max([l for l in el if l != float('inf')], default = 0) for el in ans], default = 0)
+        
