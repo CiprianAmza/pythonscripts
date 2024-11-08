@@ -1,0 +1,19 @@
+using System;
+using System.Linq;
+public class Kata
+{
+  public static string CountSubstringsGame(string word)
+  {
+    int i = 0, Dom = 0, Sara = 0;
+    
+    foreach (char v in word.ToLower()) {
+      if ("aeiou".Contains(v)) Sara += word.Length - i;
+      else                      Dom += word.Length - i;
+      i++;
+    }
+    
+    if (Sara > Dom)      return "Sara " + Sara;
+    else if (Sara < Dom) return "Dom " + Dom;
+    else                 return "Draw";
+  }
+}
