@@ -1,0 +1,121 @@
+from selenium import webdriver
+from bs4 import BeautifulSoup
+import time
+
+
+def is_before(*args):
+
+    y1, m1, d1, y2, m2, d2 = map(int, args)
+
+    if y1 != y2:
+        return y1 < y2
+    if m1 != m2:
+        return m1 < m2
+    if d1 != d2:
+        return d1 < d2
+
+# Set up Selenium with Chrome
+options = webdriver.ChromeOptions()
+options.add_argument("--headless")  # Runs Chrome in headless mode.
+driver = webdriver.Chrome(options=options)  # Specify path if necessary: webdriver.Chrome(executable_path='path/to/chromedriver', options=options)
+
+_from = 'OTP'
+
+airports = [
+    ("Birmingham", "BHX"),
+    ("Bristol", "BRS"),
+    ("Edinburgh", "EDI"),
+    ("Leeds Bradford", "LBA"),
+    ("London Stansted", "STN"),
+    ("Manchester", "MAN"),
+    ("Madrid", "MAD"),
+    ("Málaga", "AGP"),
+    ("Palma de Mallorca", "PMI"),
+    ("Bologna", "BLQ"),
+    ("Catania", "CTA"),
+    ("Tel Aviv", "TLV"),
+    ("Dublin", "DUB"),
+    ("Amman (Jordan)", "AMM"),
+    ("Malta", "MLA"),
+    ("Chania (Crete)", "CHQ"),
+    ("Corfu", "CFU"),
+    ("Skiathos", "JSI"),
+    ("Thessaloniki", "SKG"),
+    ("Genoa", "GOA"),
+    ("Berlin", "BER"),
+    ("Marseille", "MRS"),
+    ("Paris Beauvais", "BVA"),
+    ("Milan (Linate)", "LIN"),
+    ("Paphos", "PFO"),
+    ("Zadar", "ZAD"),
+    ("Brussels Charleroi", "CRL"),
+    ("Tirana", "TIA"),
+    ("Vienna", "VIE"),
+    ("Milan Malpensa", "MXP"),
+    ("Milan Bergamo", "BGY"),
+    ("Naples (Napoli)", "NAP"),
+    ("Palermo", "PMO"),
+    ("Perugia", "PEG"),
+    ("Pescara", "PSR"),
+    ("Pisa", "PSA"),
+    ("Rome Ciampino", "CIA"),
+    ("Venice Treviso", "TSF")
+]
+
+
+for _, _to in airports:
+
+    for year in (2024, 2025):
+        for month in (11, 12, 1, 2, 3):
+            if month < 10: month = "0" + str(month)
+            for day in range(1, 31):
+                if day < 10: day = '0' + str(day)
+                if not is_before( 2024, 11, 9, year, month, day): continue # DO NOT PARSE FOR THE PAST, makes no sense...
+
+                # URL to access
+                url = f'https://www.ryanair.com/ro/ro/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut={year}-{month}-{day}&dateIn={year}-{month}-{day}&isConnectedFlight=false&discount=0&promoCode=&isReturn=true&originIata={_from}&destinationIata={_to}&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0&tpStartDate={year}-{month}-{day}&tpEndDate={year}-{month}-{day}&tpDiscount=0&tpPromoCode=&tpOriginIata={_from}&tpDestinationIata={_to}'
+                print(url)
+                # Open the page with Selenium
+                driver.get(url)
+
+                # Wait for JavaScript to finish loading the dynamic content (adjust time if needed)
+                time.sleep(1)
+
+                # Get the page source after JavaScript execution
+                page_source = driver.page_source
+
+                # Parse the page with BeautifulSoup
+                soup = BeautifulSoup(page_source, 'html.parser')
+
+                l = soup.prettify()
+                # print(l)
+
+                start = False
+
+                maps = ['flight-info__hour', 'origin-airport', 'card-flight-num__content', 'flight_duration', 'destination-airport']
+                vals = []
+                stop = False
+                for i in l.splitlines():
+                    if stop:
+                        vals.append(i.strip())
+                        stop = False
+                    for j, val in enumerate(maps):
+                        if val in i:
+                            stop = True
+                            break
+                    if stop: continue
+                    if 'flights-price-simple' in i:
+                        start = not start
+                        continue
+                    if start:
+                        D, M, Y = 0, 0, 0
+                        if not vals: continue
+                        D, M, Y = day, month, year
+                        if vals[0] == '</style>':
+                            vals = vals[1:]
+                        print(f'From {vals[1]} to {vals[5]} --- Date: {D}-{M}-{Y}; Price: {i.strip()}\n'
+                                  f'Airplane number: {vals[2]}, Flight duration: {vals[3]}, Start: {vals[0]}, End: {vals[4]}')
+                        vals = []
+
+# Close the driver
+driver.quit()
