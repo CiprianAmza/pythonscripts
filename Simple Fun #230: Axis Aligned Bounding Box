@@ -1,0 +1,6 @@
+def axis_aligned_bounding_box(x, y):
+    
+    x.sort()
+    y.sort()
+    
+    return abs(x[0] - x[-1]) * abs(y[0] - y[-1])
