@@ -1,0 +1,14 @@
+def next_bigger(n):
+    
+    s = str(n)
+    
+    for i in range(len(s)-2, -1, -1):
+        if s[i] < s[i+1]:
+            _min, ind = ":", -1
+            for j in range(i+1, len(s)):
+                if s[j] > s[i] and s[j] <= _min:
+                    _min, ind = s[j], j
+                    
+            return int(s[:i] + s[ind] + "".join(sorted(s[i:ind] + s[ind+1:])))
+    
+    return -1
