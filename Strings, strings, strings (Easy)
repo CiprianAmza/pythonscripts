@@ -1,0 +1,19 @@
+Boolean.prototype.toString = function () {
+  return this + ""
+};
+
+Number.prototype.toString = function () {
+  return this + ""
+};
+
+String.prototype.toString = function () {
+  return this + ""
+};
+
+Object.prototype.toString = function () {
+  return this + ""
+};
+
+Array.prototype.toString = function () {
+  return `[${this.map(num => num.toString()).join(', ')}]`;
+};
