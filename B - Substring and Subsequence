@@ -1,0 +1,28 @@
+    t = int(input())
+    for _ in range(t):
+     
+        a = input()
+        b = input()
+        ANS = float('inf')
+     
+        for j in range(len(b)):
+            ans = len(a) + j
+            last = 0
+            q = j
+            for c in b[j:]:
+     
+                found = False
+                for i in range(last, len(a)):
+                    if a[i] == c:
+                        last = i + 1
+                        q += 1
+                        found = True
+                        break
+     
+                if not found:
+                    break
+            ans = len(a) + j + len(b) - q
+     
+            ANS = min(ANS, ans)
+     
+        print(ANS)
