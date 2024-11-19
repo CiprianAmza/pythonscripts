@@ -1,0 +1,30 @@
+t = int(input())
+ 
+for _ in range(t):
+ 
+    s = list(input())
+    count = 0
+    for i in range(3, len(s)):
+        if s[i-3:i+1] == list('1100'):
+            count += 1
+ 
+    n = int(input())
+    for _ in range(n):
+        a, b = map(int, input().split())
+        a -= 1
+        before = 0
+        for i in range(a, a+4):
+            q = s[i-3:i+1]
+            if q == list('1100'):
+                before += 1
+        s[a] = str(b)
+        after = 0
+        for i in range(a, a+4):
+            q = s[i-3:i+1]
+            if q == list('1100'):
+                after += 1
+        count = count + after - before
+        if count:
+            print("YES")
+        else:
+            print("NO")
