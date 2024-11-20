@@ -1,0 +1,47 @@
+def check(maze):
+
+    DIR = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    total = 0
+
+    for i in range(min(len(maze)//2, len(maze[0])//2)):
+        x, y = i, i
+        ind = 0
+
+        q, w = DIR[ind%4]
+        last = []
+
+        remaining = 3
+        first = False
+        start = False
+        while remaining > 0:
+            x1, y1 = x + q, y + w
+            if x1 < i or y1 < i or x1 >= len(maze) - i or y1 >= len(maze[x1]) - i:
+                ind += 1
+                q, w = DIR[ind%4] 
+            else:
+                if start:
+                    remaining -= 1
+                x, y = x1, y1
+                if (x, y) == (i, i) and first and remaining == 3:
+                    start = True
+                    remaining = 3
+
+                last += [maze[x][y]]
+                if len(last) == 5:
+                    last = last[1:]
+                if last == ["1", "5", "4", "3"]:
+                    total += 1
+
+            first = True
+    return total
+
+t = int(input())
+
+for _ in range(t):
+
+    n, m = map(int, input().split())
+    maze = []
+    for _ in range(n):
+        maze.append(list(input()))
+
+    print(check(maze))
