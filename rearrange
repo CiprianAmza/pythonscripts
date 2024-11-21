@@ -1,0 +1,1 @@
+rearrange_sentence=lambda s: " ".join(sorted(s.split(), key=len)) 
