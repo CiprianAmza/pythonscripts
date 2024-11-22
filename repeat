@@ -1,0 +1,10 @@
+function repeatingNumbers (num) {
+  
+  let ans = [];
+ for (let el of num+"") {
+   let i = parseInt(el);
+   for (let j = 0; j < i; j++) ans.push(i + "");
+ }
+  
+  return ans.join("");
+}
