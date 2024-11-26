@@ -1,0 +1,2 @@
+    a, b, c, d = map(int, input().split())
+    print([el for el in range(1, 6) if el not in (a,b,c,d)][0])
