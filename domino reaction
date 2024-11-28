@@ -1,0 +1,9 @@
+def domino_reaction(s):
+    
+    s = list(s)
+    for i, c in enumerate(s):
+        if c != "|":
+            break
+        s[i] = "/"
+    
+    return "".join(s)
