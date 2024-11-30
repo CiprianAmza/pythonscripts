@@ -14,7 +14,6 @@ def is_before(*args):
     if d1 != d2:
         return d1 < d2
 
-# Set up Selenium with Chrome
 options = webdriver.ChromeOptions()
 options.add_argument("--headless")  # Runs Chrome in headless mode.
 driver = webdriver.Chrome(options=options)  # Specify path if necessary: webdriver.Chrome(executable_path='path/to/chromedriver', options=options)
