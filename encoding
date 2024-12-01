@@ -1,0 +1,3 @@
+function decode(str) {
+  return str.replace(/[a-z]/g, c => String.fromCharCode(219 - c.charCodeAt())) 
+}
