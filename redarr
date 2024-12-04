@@ -1,0 +1,3 @@
+function redarr(arr) {
+  return Object.assign({}, [...new Set(arr)].sort())
+}
