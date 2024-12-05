@@ -1,0 +1,6 @@
+r = "^(?!.*\n)( )*"
+for i in range(26):
+    x = chr(i + 97)
+    r += f"({x})*( )*"
+
+REGEX = r + "$"
