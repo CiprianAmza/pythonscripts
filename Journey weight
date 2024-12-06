@@ -1,0 +1,14 @@
+class Journey:
+    
+    def __init__(self, object, crew, balloons):
+        self.object = object
+        self.crew = crew
+        self.balloons = balloons
+    
+    def isPossible(self):
+        
+        kgs = self.crew * 80
+        obj = self.object["weight"]
+        bls = self.balloons * 4.8 / 1000
+        
+        return kgs + obj <= bls
