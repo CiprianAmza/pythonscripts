@@ -1,0 +1,7 @@
+def yahtzee_upper(dice):
+    
+    counter = dict()
+    for nr in dice:
+        counter[nr] = counter.get(nr, 0) + 1
+    
+    return max([i*j for i, j in counter.items()])
