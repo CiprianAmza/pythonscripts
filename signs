@@ -1,0 +1,15 @@
+def digit_multiplication(expression):
+    
+    total = 0
+    cur = 1
+    sign = "+"
+    
+    for i in expression:
+        if i in "+-":
+            total += cur if sign == "+" else -cur
+            cur = 1
+            sign = i
+        else:
+            cur *= int(i)
+            
+    return total + cur * [1, -1][sign == "-"]
