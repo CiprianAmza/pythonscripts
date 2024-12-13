@@ -1,0 +1,7 @@
+const Spectrometer = {
+  getHeaviest: function(atomicMasses) {
+    
+    atomicMasses.sort((a, b) => b - a);
+    return atomicMasses[0] || 0;
+  }  
+};
