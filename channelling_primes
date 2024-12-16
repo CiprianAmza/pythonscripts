@@ -1,0 +1,12 @@
+from gmpy2 import is_prime
+
+def channelling_primes(n):
+    
+    ans = 0
+    pow = 1
+    for i in range(1, n+1):
+        if is_prime(i):
+            ans += pow
+        pow *= 2
+    
+    return ans
