@@ -1,0 +1,7 @@
+def share_price(invested, changes):
+    
+    now = invested
+    for c in changes:
+        now = now + now * c / 100
+    
+    return f'{round(now, 2):.2f}'
