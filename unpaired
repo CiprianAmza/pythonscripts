@@ -1,0 +1,11 @@
+def hot_singles(arr1, arr2):
+    
+    ans = []
+    for el in arr1:
+        if el not in arr2 and el not in ans:
+            ans.append(el)
+    for el in arr2:
+        if el not in arr1 and el not in ans:
+            ans.append(el)
+            
+    return ans
