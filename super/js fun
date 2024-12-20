@@ -1,0 +1,45 @@
+var change = function(s) {
+  
+  let vowels = "aeiouAEIOU".split("");
+
+  let ans = [];
+  if (s.length <= 3) return s;
+  let take = true;
+  for (let i = 0; i < s.length; i++) {
+    if (i <= 2) {
+      ans.push(s[i]);
+      continue;
+    }
+    if (take && vowels.includes(s[i])) {
+      take = false;
+      ans.push(".");
+      break;
+    } else {
+      ans.push(s[i]);
+    }
+  }
+
+  return ans.join("");
+  
+}
+var shortenSpeech = function (str) {	
+  
+  let all = [];
+  let cur = "";
+  
+  for (let el of str) {
+    if (el === " ") {
+      cur = change(cur);
+      all.push(cur);
+      all.push(el);
+      cur = [];
+      continue 
+    }
+    
+    cur += el;
+  }
+  
+  all.push(change(cur));
+  
+  return all.join("");
+}
