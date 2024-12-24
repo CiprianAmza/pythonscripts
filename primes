@@ -1,0 +1,11 @@
+primes = [el for el in range(1_000_000) if __import__('gmpy2').is_prime(el)]
+
+def get_primes(n, m=2):
+    
+    tot = n
+    for i in range(m, n+m, m):
+        vals = primes[i-m:i]
+        tot -= m
+        if tot < 0:
+            vals = vals[:tot] + [None] * abs(tot)
+        yield tuple(vals)
