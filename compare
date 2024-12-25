@@ -1,0 +1,11 @@
+def compare(a, b):
+    
+    a, b = map(lambda x: sorted(str(x)), [a, b])
+    
+    if a == b:
+        return "100%"
+    
+    if a[0] in b or a[1] in b:
+        return "50%"
+    
+    return "0%"
