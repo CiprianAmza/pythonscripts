@@ -1,0 +1,3 @@
+def map_population_fit(population, fitness):
+    
+    return [ChromosomeWrap(chr, fitness(chr)) for chr in population]
