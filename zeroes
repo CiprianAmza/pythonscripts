@@ -1,0 +1,16 @@
+def countzero(st):
+    t = 0
+    a = "abdegopq069DOPQR"
+    b = "%&B8"
+    last = ""
+    
+    for el in st:
+        if el in a:
+            t += 1
+        elif el in b:
+            t += 2
+        if el == ")" and last == "(":
+            t += 1
+        last = el
+    
+    return t
