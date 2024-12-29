@@ -1,0 +1,20 @@
+params = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"]
+
+def ten_green_bottles(n):
+    
+    ans = []
+    
+    for i in range(n, 0, -1):
+        val = "s" if i != 1 else ""
+        val2 = "" if i == 2 else "s"
+        ans.append(f"{params[i]} green bottle{val} hanging on the wall,")
+        ans.append(f"{params[i]} green bottle{val} hanging on the wall,")
+        if val == "":
+            ans.append("If that one green bottle should accidentally fall,")
+        else:
+            ans.append("And if one green bottle should accidentally fall,")
+        ans.append(f"There'll be {params[i-1].lower()} green bottle{val2} hanging on the wall.")
+        ans.append("")
+        
+    
+    return "\n".join(ans)
