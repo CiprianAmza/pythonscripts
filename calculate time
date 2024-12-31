@@ -1,0 +1,11 @@
+def dist(x, y, a, b):
+    
+    return ((x - a) ** 2 + (y - b) ** 2) **.5
+
+def calculate_time(p1, p2):
+    
+    a = dist(0, 0, *p1)
+    b = dist(0, 0, *p2)
+    c = dist(*p1, *p2)
+    
+    return round(b * 5 / c, 3)
