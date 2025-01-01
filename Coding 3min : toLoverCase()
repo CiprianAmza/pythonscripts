@@ -1,0 +1,12 @@
+def to_lover_case(string):
+
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    ans = []
+    
+    for c in string.lower():
+        if not c in alphabet:
+            ans.append(c)
+        else:
+            ans.append("LOVE"[alphabet.index(c)%4])
+    
+    return "".join(ans)
