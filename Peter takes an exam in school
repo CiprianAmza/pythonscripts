@@ -1,0 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Kata
+    {
+        public static List<string> PassedStudentList(List<Student> gradeList, int acceptanceGrade)
+        {
+          
+          return gradeList.Where(x => x.Grade >= acceptanceGrade).Select(x => x.Name).OrderBy(x => x).ToList();
+        }
+    }
