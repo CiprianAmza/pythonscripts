@@ -1,0 +1,26 @@
+using System;
+using System.Text.RegularExpressions;
+
+public class Kata
+{
+  public static int CountCombinations(string text, string key) {
+    
+        if (string.IsNullOrEmpty(key)) return 0;
+        if (Regex.IsMatch(key, @"[\\.*+?^${}()|\[\]@]")) {
+            return Regex.Matches(text, key, RegexOptions.IgnoreCase).Count;
+        } else {
+            int count = 0;
+            string lowerText = text.ToLower();
+            string lowerKey = key.ToLower();
+            int index = lowerText.IndexOf(lowerKey);
+
+            while (index != -1)
+            {
+                count++;
+                index = lowerText.IndexOf(lowerKey, index + lowerKey.Length);
+            }
+
+            return count;
+        }
+  }
+}
