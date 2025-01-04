@@ -1,0 +1,24 @@
+DIRS = ((0, 1), (1, 0), (-1, 0), (0, -1), (-1, 1), (1, -1), (-1, -1), (1, 1))
+is_valid = lambda a, b, hive: a >= 0 and b >= 0 and a < len(hive) and b < len(hive[a]) and hive[a][b] == "e"
+
+def how_many_bees(hive):
+    
+    if not hive: return 0
+    
+    options = set()
+    
+    for i in range(len(hive)):
+        for j in range(len(hive[i])):
+            
+            if hive[i][j] == "b":
+                for q, w in DIRS:
+                    a, b = i + q, j + w
+                    if is_valid(a, b, hive):
+                        a2, b2 = a + q, b + w
+                        if is_valid(a2, b2, hive):
+                            bee = (i, j), *sorted([(a, b), (a2, b2)])
+                            options.add(bee)
+
+    return len(options)
+                            
+                        
