@@ -1,0 +1,13 @@
+def knight_vs_bishop(k, b):
+    
+    (x1, y1), (x2, y2) = (k, b)
+    y1, y2 = map(lambda x: ord(x) - 64, (y1, y2))
+    
+    q, w = abs(x1-x2), abs(y1-y2)
+
+    if (q, w) in ((1, 2), (2, 1)):
+        return "Knight"
+    elif q == w:
+        return "Bishop"
+    else:
+        return "None"
