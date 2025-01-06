@@ -1,0 +1,12 @@
+gallon_to_liters = 3.785411784
+mile_to_kilometers = 1.609344
+    
+def mpg2lp100km(mpg):
+
+    lp100km = (100 * gallon_to_liters) / (mpg * mile_to_kilometers)
+    return round(lp100km, 2)
+
+def lp100km2mpg(lp100km):
+    
+    mpg = (100 * gallon_to_liters) / (lp100km * mile_to_kilometers)
+    return round(mpg, 2)
