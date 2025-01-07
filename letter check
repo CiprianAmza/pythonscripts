@@ -1,0 +1,5 @@
+def letter_check(arr): 
+    
+    a, b = map(lambda x: x.lower(), arr)
+    
+    return all(i in a for i in b)
