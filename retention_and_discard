@@ -1,0 +1,4 @@
+def mystery(s, n):
+    
+    b = bin(n)[2:]
+    return "".join(i for i, j in zip(s, b) if j == "1")
