@@ -1,0 +1,6 @@
+location_apply = lambda x, y: x['current_location'] in y['locations'] or any(k in y['locations'] for k in x['desired_locations'])
+equity_apply = lambda x, y: x['desires_equity'] == False or y['equity_max'] > 0
+
+def match(job, candidates):
+    
+    return [candidate for candidate in candidates if location_apply(candidate, job) and equity_apply(candidate, job)]
