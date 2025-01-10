@@ -1,0 +1,9 @@
+function compute(n){
+  if (n < 3 || n % 2 == 0) return 0;
+  
+  let ans = 0;
+  for (let i = 1; i <= n; i += 2)
+    ans += 1 / Math.pow(i, 2);
+
+  return ans;
+}
