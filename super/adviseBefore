@@ -1,0 +1,8 @@
+function adviseBefore(target, advice) {
+  return function(...args) {
+    const adviceResult = advice(...args);
+    const targetArgs = Array.isArray(adviceResult) ? adviceResult : args;
+
+    return target(...targetArgs);
+  }
+}
