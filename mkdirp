@@ -1,0 +1,8 @@
+import os
+
+def mkdirp(*directories):
+    
+    new_path = "/".join(directories)
+    if not os.path.exists(new_path):
+        os.makedirs(new_path)
+    
