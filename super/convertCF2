@@ -1,0 +1,12 @@
+function convertCF(num, scale="c"){
+  
+  if (scale !== "c" && scale !== "f") {
+    throw "Error";
+  }
+  
+  if (scale === "c")
+    return (num - 32) / 1.8;
+  else
+    return num * 1.8 + 32;
+
+}
