@@ -1,0 +1,5 @@
+def torrent(files): 
+    
+    sorted_files = sorted(files, key=lambda x: (-x["speed_Mbps"] / x["size_GB"], x["name"]))
+    
+    return ([element["name"] for element in sorted_files], 8000 * sorted_files[-1]["size_GB"] / sorted_files[-1]["speed_Mbps"])
