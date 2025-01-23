@@ -1,0 +1,13 @@
+def crossing_sum(matrix, row, col):
+    
+    ans = matrix[row][col]
+    
+    for i in range(len(matrix[0])):
+        if i != col: 
+            ans += matrix[row][i]
+
+    for i in range(len(matrix)):
+        if i != row:
+            ans += matrix[i][col]
+    
+    return ans
