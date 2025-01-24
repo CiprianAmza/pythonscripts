@@ -1,0 +1,10 @@
+def rank_of_element(arr,i):
+    
+    ans = 0
+    
+    for j in range(len(arr)):
+        if i == j: continue
+        if arr[i] > arr[j] or arr[i] == arr[j] and j < i:
+            ans += 1
+    
+    return ans 
