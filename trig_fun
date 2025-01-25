@@ -1,0 +1,15 @@
+def sctc(sin):
+    
+    cos = (1 - sin * sin) ** .5
+    ans = [sin, cos]
+    if cos != 0:
+        sec = 1 / cos
+        tan = (sec * sec - 1) ** .5
+        ans.append(tan)
+
+    if sin != 0:
+        csc = 1 / sin
+        ctan = (csc * csc - 1) ** .5
+        ans.append(ctan)
+    
+    return [*map(lambda x: round(x, 2), ans)]
