@@ -1,0 +1,7 @@
+function canReach(n, add, mult) {
+  
+  if (n <= 0) return false;
+  if (n === 1) return true;
+    
+  return add >= 0 && canReach(n - add, add, mult) || n % mult == 0 && mult > 1 && canReach(n / mult, add, mult);
+}
