@@ -1,0 +1,14 @@
+from preloaded import CARS
+
+def find_misfire(string):
+    
+    car, model, c = string.split(" ")
+    
+    shift = CARS[car][model]
+    ans = []
+    
+    for i, j in zip(shift.split("-"), c.split("-")):
+        if j == "X":
+            ans.append(i)
+            
+    return '-'.join(ans)
