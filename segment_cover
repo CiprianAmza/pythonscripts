@@ -1,0 +1,13 @@
+def segment_cover(A, L):
+    
+    A.sort()
+    t = 0
+    last = A[0]
+    for i in A[1:]:
+        if abs(i-last) <= L:
+            continue
+        else:
+            t += 1
+            last = i
+    
+    return t + 1
