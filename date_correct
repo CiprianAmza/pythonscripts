@@ -1,0 +1,32 @@
+dates = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+def format_date(t):
+    
+    return f"{t[0]:02d}.{t[1]:02d}.{t[2]}"
+
+def is_bisect(year):
+    
+    return year % 400 == 0 or year % 4 == 0 and year % 100 != 0
+
+def date_correct(date):
+    
+    if date == "":
+        return ""
+    
+    try: 
+        a, b, c = map(int, date.split("."))
+    except: 
+        return
+    
+    if len(date) != 10:
+        return
+
+    while a > dates[b%12 - 1] + (is_bisect(c + (b+1) // 12) if (b-1) % 2 == 1 else 0):
+        a -= dates[b%12 - 1] + (is_bisect(c + (b+1) // 12) if (b-1) % 2 == 1 else 0)
+        b += 1
+    
+    while b > 12:
+        c += 1
+        b -= 12
+    
+    return format_date((a, b, c))
