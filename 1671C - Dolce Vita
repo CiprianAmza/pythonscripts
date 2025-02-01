@@ -16,7 +16,6 @@ def search(s, length, k):
 
     return l
 
-
 for _ in range(t):
 
     n, k = map(int, input().split())
