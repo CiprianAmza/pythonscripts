@@ -1,0 +1,7 @@
+def check_valid_tr_number(number):
+    
+    n = str(number)
+    
+    return len(n) == 11 and all(k.isdigit() for k in n) and n[0] != '0' \
+        and sum(map(int, (n[:10:2]))) * 7 - sum(map(int, (n[1::2]))) % 10 \
+        and sum(map(int, n[:10])) % 10 == int(n[-1])
