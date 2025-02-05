@@ -1,0 +1,19 @@
+def champernowne_digit(n):
+    
+    if not isinstance(n, int) or n <= 0 or str(n) == "True":
+        
+        return float('nan')
+
+    n -= 2
+    l, c, s = 1, 9, 1
+
+    while n >= l * c:
+        n -= l * c
+        l += 1
+        c *= 10
+        s *= 10
+
+    nr = s + n // l
+    d = n % l
+
+    return int(str(nr)[d])
