@@ -1,0 +1,10 @@
+from itertools import groupby
+def estimator(obstacles, stamina):
+    
+    cost = {1: 2, 2: 5, 3: 10}
+
+    for i, j in groupby(obstacles):
+        if i == 1:
+            stamina -= cost[len([*j])]
+    
+    return stamina >= 0
