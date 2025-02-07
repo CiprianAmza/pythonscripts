@@ -1,0 +1,9 @@
+def find_spec_partition(n, k, com):
+    
+    if com == "min":
+        return [n - k + 1] + [1 for _ in range(k-1)]
+    else:
+        v = [1 for _ in range(k)]
+        for i in range(n-k):
+            v[i%len(v)] += 1
+        return v
