@@ -1,0 +1,14 @@
+def factors(n):
+    
+    sq, cb = [], []
+    
+    for i in range(2, n+1):
+        k = i * i
+        w = k * i
+        if k > n: break
+        if n % k == 0:
+            sq += [i]
+        if n % w == 0:
+            cb += [i]
+    
+    return [sq, cb]
