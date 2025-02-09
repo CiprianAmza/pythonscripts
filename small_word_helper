@@ -1,0 +1,3 @@
+def small_word_helper(sentence):
+    
+    return " ".join([el.upper() if len(el) <= 3 else "".join([k for k in el if k.lower() not in "aeiou"]) for el in sentence.split(" ")])
