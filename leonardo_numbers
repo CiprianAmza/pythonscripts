@@ -1,0 +1,7 @@
+def leonardo_numbers(n, L0, L1, add):
+    
+    ans = [L0, L1]
+    for _ in range(n):
+        ans.append(ans[-1] + ans[-2] + add)
+        
+    return ans[:n]
