@@ -1,0 +1,16 @@
+def right_depth(arr, constraints):
+    
+    total = dict()
+    
+    def search(lvl, arr):
+        
+        if not arr:
+            nonlocal total
+            total[lvl] = total.get(lvl, 0) + 1
+            return
+        
+        for v in arr:
+            search(lvl + 1, v)
+    
+    search(0, arr)
+    return all(j <= constraints.get(i, 0) for i, j in total.items() if i)
