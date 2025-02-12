@@ -1,0 +1,6 @@
+function averageLength(array) { 
+  
+  let k = Math.round(array.reduce((x, y) => x + y.length, 0) / array.length);
+  
+  return array.map(x => x[0].repeat(k));
+}
