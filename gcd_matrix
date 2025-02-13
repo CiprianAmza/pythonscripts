@@ -1,0 +1,10 @@
+def gcd_matrix(a,b):
+    
+    ans = 0
+    for i in b:
+        m = []
+        for j in a:
+            m += [__import__('math').gcd(i, j)]
+        ans += sum(m) / len(m)
+    
+    return round(ans / len(b), 3)
