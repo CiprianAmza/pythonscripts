@@ -1,0 +1,18 @@
+operations = {"addition": lambda x, y: x + y,
+              "subtraction": lambda x, y: x - y,
+              "multiplication": lambda x, y: x * y,
+              "division": lambda x, y: x // y}
+
+def say_me_operations(string_numbers):
+    
+    x, y, *rest = map(int, string_numbers.split(" "))
+    answer = []
+    
+    for r in rest:
+        for name, func in operations.items():
+            if func(x, y) == r:
+                answer.append(name)
+                break
+        x, y = y, r
+    
+    return ", ".join(answer)
