@@ -1,0 +1,19 @@
+def flood_fill(a, y, x, v):
+    
+    ans = [k[:] for k in a]
+
+    seen = set()
+    dq = [(y, x)]
+
+    while dq:
+        x, y = dq.pop()
+        seen.add((x, y))
+        ans[x][y] = v
+        
+        for i, j in ((0, 1), (1, 0), (0, -1), (-1, 0)):
+            q, w = x + i, y + j
+            if q >= 0 and w >= 0 and q < len(a) and w < len(a[q]):
+                if (q, w) not in seen and a[q][w] == a[x][y]:
+                    dq.append((q, w))
+                    
+    return ans
