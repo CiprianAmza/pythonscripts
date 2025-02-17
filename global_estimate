@@ -1,0 +1,6 @@
+def global_estimate(estimates):
+    
+    a = sum(estimate[0] for estimate in estimates)
+    b = sum(estimate[-1] for estimate in estimates)
+    
+    return a, (a+b) / 2, b
