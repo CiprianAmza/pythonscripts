@@ -1,0 +1,17 @@
+function validName(array){
+  
+  if (array.length === 0) {
+    return "You must test at least one name.";
+  }
+  if (array.length === 1) {
+    return "Congratulations, you can choose any name you like!";
+  }
+  
+  let pos = true;
+  for (let i = 1; i < array.length; i++) {
+    if (array[i-1].charAt(array[i-1].length - 1).toLowerCase() !== array[i].charAt(0).toLowerCase())
+      pos = false;
+  }
+  
+  return pos ? 'Congratulations, your baby names are compatible!' : "Back to the drawing board, your baby names are not compatible.";
+} 
