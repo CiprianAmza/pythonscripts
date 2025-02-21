@@ -1,0 +1,3 @@
+def ticker(text, width, tick):
+    
+    return ((" " * width + text) * max(width, tick))[tick:tick+width]
