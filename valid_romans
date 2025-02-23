@@ -1,0 +1,60 @@
+def valid_romans(arr):
+    
+    return [el for el in arr if el == build(el)]
+
+def transform(element):
+    
+    romans = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    
+    last = 0
+    total = 0
+        
+    for i in range(len(element) - 1, -1, -1):
+            
+        value = romans[element[i]]
+        if value < last:
+            total -= value
+        else:
+            total += value
+
+        last = value
+        
+    return total
+        
+def build(number):
+    
+    number = transform(number)
+    
+    values = {1: 'I', 5: 'V', 10: 'X', 50: 'L', 100: 'C', 500: 'D', 1000: 'M'}
+    digits = []
+    while number:
+        digits += [number % 10]
+        number //= 10
+    
+    digits = digits[::-1]
+    ans = ''
+    
+    try:
+        for i, j in enumerate(digits):
+            length = 10 ** (len(digits) - i - 1)
+
+            if j == 4 and length == 1000:
+                k = 'MMMM'
+            elif j == 0:
+                k = ''
+            elif j == 4:
+                k = values[length] + values[length * 5]
+            elif j <= 3:
+                k = values[length] * j
+            elif j == 5:
+                k = values[length * 5]
+            elif j < 9:
+                k = values[length * 5] + values[length] * (j%5)
+            elif j == 9:
+                k = values[length] + values[length * 10]
+            ans += k
+    except:
+        return False
+        
+    return ans if ans else -1
+    
