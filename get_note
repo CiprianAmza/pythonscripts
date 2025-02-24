@@ -1,0 +1,13 @@
+def get_note(pitch):
+    
+    k = 55 / 2 / 2
+    while k * 2 <= pitch:
+        k *= 2
+    base = pitch // k * k
+    diff = base / 440
+    
+    for i, j in notes_dictionary.items():
+        
+        i *= diff
+        if i >= pitch:
+            return j
