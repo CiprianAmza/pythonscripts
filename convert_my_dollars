@@ -1,0 +1,8 @@
+def convert_my_dollars(usd, currency):
+    
+    value = CONVERSION_RATES[currency]
+    
+    if all(k in '01' for k in str(value)) and currency != "Uzbekistani Som":
+        value = int(str(value), 2)
+        
+    return f"You now have {usd * value} of {currency}."
