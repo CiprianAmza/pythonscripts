@@ -1,0 +1,6 @@
+import math
+
+def quadratic(a, b, c):
+    
+    delta = b ** 2 - 4 * a * c
+    return -2 * c / (b + math.sqrt(delta))
