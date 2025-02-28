@@ -1,0 +1,33 @@
+def check_same_plan(matrix, player):
+    
+    for i in range(len(matrix)):
+        q = 0
+        for j in range(len(matrix)):
+            if matrix[j][i] == player:
+                q += 1
+        if q == 4:
+            return True
+
+    for i in range(len(matrix)):
+        q = 0
+        for j in range(len(matrix)):
+            if matrix[i][j] == player:
+                q += 1
+        if q == 4:
+            return True
+        
+    q = 0
+    for i in range(len(matrix)):
+        if matrix[i][i] == player:
+            q += 1
+    if q == 4:
+        return True
+    
+    q = 0
+    for i in range(len(matrix)):
+        if matrix[i][len(matrix) - i - 1] == player:
+            q += 1  
+    if q == 4:
+        return True
+    
+    return False
