@@ -1,0 +1,3 @@
+def in_sphere(coords, r):
+    
+    return sum(c**2 for c in coords) <= r * r
