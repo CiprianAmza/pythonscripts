@@ -1,0 +1,11 @@
+def elections_winners(votes, k):
+    
+    s = max(votes)
+    t = 0
+    q = 0
+    for v in votes:
+        if v == s: q += 1
+        if v + k > s:
+            t += 1
+    
+    return t if t else 1 if q == 1 else 0
