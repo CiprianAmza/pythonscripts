@@ -1,0 +1,8 @@
+def digit_degree(n):
+    
+    nr = 0 
+    while len(str(n)) > 1:
+        n = sum(map(int, str(n)))
+        nr += 1
+    
+    return nr
