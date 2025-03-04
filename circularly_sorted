@@ -1,0 +1,8 @@
+def circularly_sorted(arr):
+    
+    for i in range(len(arr)):
+        q = arr[i:] + arr[:i]
+        if q == sorted(q):
+            return True
+    
+    return False
