@@ -1,0 +1,17 @@
+def decrypt(arr,n):
+    
+    ans = []
+    
+    def solve(arr, lvl):
+        
+        nonlocal ans
+        
+        for el in arr:
+            if isinstance(el, list):
+                solve(el, lvl + 1)
+            elif lvl == n:
+                ans.insert(0, el)
+    
+    solve(arr, 0)
+    
+    return "".join(ans)
