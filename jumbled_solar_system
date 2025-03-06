@@ -1,0 +1,9 @@
+def jumbled_solar_system(s):
+    
+    system = "Asteroid < Pluto < Mercury < Mars < Venus < Earth < Neptune < Uranus < Saturn < Jupiter".split(" < ")
+    ans = []
+    
+    for i, j in zip(s, s[1:]):
+        ans.append("=" if i == j else "<>"[system.index(i) < system.index(j)])
+        
+    return ans
