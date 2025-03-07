@@ -1,0 +1,8 @@
+def array_change(arr):
+    
+    s = 0
+    for i in range(1, len(arr)):
+        if arr[i] > arr[i-1]: continue
+        s += arr[i-1] - arr[i] + 1
+        arr[i] = arr[i-1] + 1
+    return s
