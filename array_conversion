@@ -1,0 +1,15 @@
+def array_conversion(arr):
+    
+    round = 0
+    while len(arr) > 1:
+        print(arr)
+        values = []
+        for i in range(0, len(arr), 2):
+            values.append((arr[i] + arr[i+1]) if round % 2 == 0
+                         else (arr[i] * arr[i+1]))
+        round += 1
+        arr = values[:]
+    
+    return values.pop()
+            
+        
