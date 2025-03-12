@@ -1,0 +1,15 @@
+def merry_christmas(funcs):
+    
+    desired = "Merry Christmas!"
+    index = 0
+    ans = []
+    
+    while index < len(desired):
+        char = desired[index]
+        for f in funcs:
+            if f() == char:
+                ans.append(f.__name__)
+                break
+        index += 1
+
+    return ",".join(ans)
