@@ -1,0 +1,18 @@
+desired = {
+    "odd": lambda x: x % 2 == 1,
+    "even": lambda x: x % 2 == 0
+}
+
+between = lambda x, y, z: x <= z <= y
+
+def find_arr(arrA, arrB, rng, wanted):
+    
+    s = set()
+    c1, c2 = dict(), dict()
+    for j in arrA: c1[j] = c1.get(j, 0) + 1
+    for j in arrB: c2[j] = c2.get(j, 0) + 1
+    for el in arrA:
+        if c1[el] > 1 and c2.get(el, 0) > 1 and between(*rng, el) and desired[wanted](el):
+            s.add(el)
+    
+    return sorted(s)
