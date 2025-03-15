@@ -1,0 +1,11 @@
+def similarity(a, b):
+    
+    x = y = 0
+    for i in a:
+        if i not in b:
+            y += 1
+    for i in b:
+        if i not in a:
+            y += 1
+    
+    return round(1 - y / len(set(a+b)), 4)
