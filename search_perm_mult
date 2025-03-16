@@ -1,0 +1,12 @@
+ans = dict()
+for k in range(3, 8):
+    for v in range(1, 100_000):
+        v1 = str(v)
+        v2 = str(v * k)
+        if sorted(v1) == sorted(v2):
+            ans[k] = ans.get(k, []) + [(v, int(v2))]
+
+def search_perm_mult(n_max, k):
+    global ans 
+
+    return len([1 for (v, q) in ans.get(k, []) if q <= n_max])
