@@ -1,0 +1,12 @@
+def memorysize_conversion(m):
+    
+    val, mem = m.split(" ")
+    val = float(val)
+    
+    for v in "KMGT":
+        if 'i' in m: val *= 1.024
+        else:        val /= 1.024
+        if v == mem[0].upper(): break
+
+    return f"{round(val, 3)} {mem[0].upper() if mem[0] != 'K' else mem[0].lower()}{'' if 'i' in mem else 'i'}B"
+    
