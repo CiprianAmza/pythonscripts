@@ -1,0 +1,25 @@
+def is_divisible_by_6(s):
+    
+    ans = []
+    
+    def solve(cur, ind):
+        
+        if len(cur) == len(s):
+            nonlocal ans
+            if int("".join(cur)) % 6 == 0:
+                ans.append("".join(cur))
+            return
+        
+        if s[ind] == "*":
+            for j in range(10):
+                cur.append(str(j))
+                solve(cur, ind + 1)
+                cur.pop()
+        else:
+            cur.append(s[ind])
+            solve(cur, ind + 1)
+            cur.pop()
+            
+    solve([], 0)
+    return ans
+    
