@@ -1,0 +1,26 @@
+alphabet = "".join(chr(el) for el in range(ord('a'), ord('z') + 1))
+
+def solve(text, key, reverse = True):
+    
+    alph = "".join(sorted(set(key), key=lambda x: key.index(x))) + "".join(k for k in alphabet if k not in key)
+    
+    ind = -1
+    ans = []
+    for v in text:
+        is_upper = v.isupper()
+        if v.lower() not in alphabet:
+            ans += [v]
+            ind = -1
+            continue
+        else:
+            ind += 1
+            value = alph[(alph.index(v.lower()) + (1 + ind) * [-1, 1][reverse]) % len(alph)]
+            ans += [value if not is_upper else value.upper()]
+        
+    return "".join(ans)
+
+def encode(text, key):
+    return solve(text, key, True)
+         
+def decode(text, key): 
+    return solve(text, key, False)
