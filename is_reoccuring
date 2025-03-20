@@ -1,0 +1,11 @@
+def is_reoccuring(items):
+    
+    seen = set()
+    last = ""
+    for el in items:
+        if el in seen and el != last:
+            return True
+        seen.add(el)
+        last = el
+    
+    return False
