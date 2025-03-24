@@ -1,0 +1,11 @@
+function inter(a, b) {
+
+  let s = new Set();
+  
+  for (let el of a)
+    if (b.has(el))
+      s.add(el)
+  
+  return s;
+
+}
