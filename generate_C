@@ -1,0 +1,3 @@
+def generate_C(size):
+    
+    return "\n".join([size * 5 * "C"] * size + ["C" * size] * 3 * size + [size * 5 * "C"] * size)
