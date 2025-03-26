@@ -1,0 +1,33 @@
+def find_super_man(s):
+    
+    superman = 'superman'
+    if superman in s.lower():
+        return "Are you crazy?"
+    
+    index = 0
+    k = False
+    for char in s.lower():
+        if k:
+            k = False
+            continue
+        if index < len(superman) and char == superman[index]:
+            index += 1
+            k = True
+            
+    if index == len(superman):
+        return 'Hi, SuperMan!'
+    
+    index = 0
+    k = False
+    for char in s.lower()[::-1]:
+        if k:
+            k = False
+            continue
+        if index < len(superman) and char == superman[index]:
+            index += 1
+            k = True
+            
+    if index == len(superman):
+        return 'Hi, SuperMan!'
+    
+    return "Are you crazy?"
