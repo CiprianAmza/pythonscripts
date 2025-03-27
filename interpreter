@@ -1,0 +1,39 @@
+def interpreter(tape):
+    
+    st = [0]
+    ans = ""
+    skip = False
+    ind = last = 0
+    
+    while ind < len(tape):
+        c = tape[ind]
+        if skip and c != "]": 
+            ind += 1
+            continue
+        if c == "^":
+            st.pop()
+        elif c == "!":
+            st.append(0)
+        elif c == "+":
+            st[-1] += 1
+        elif c == "-":
+            st[-1] -= 1
+        elif c == "*":
+            ans += chr(st[-1])
+        elif c == "[":
+            last = ind + 1
+            if st[-1] == 0:
+                skip = True
+        elif c == "]":
+            skip = False
+            if st[-1] != 0:
+                ind = last
+                continue
+        ind += 1
+            
+        if st[-1] == -1:
+            st[-1] = 255
+        if st[-1] == 256:
+            st[-1] = 0
+    
+    return ans
