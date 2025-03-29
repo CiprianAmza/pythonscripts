@@ -1,0 +1,6 @@
+def bonus(arr, s):
+    
+    al = [1 / x for x in arr]
+    t = sum(al)
+    
+    return [round(w / t * s) for w in al]
