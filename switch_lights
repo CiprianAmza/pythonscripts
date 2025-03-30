@@ -1,0 +1,7 @@
+def switch_lights(arr):
+    
+    for i in range(len(arr)):
+        if arr[i]:
+            for j in range(i+1):
+                arr[j] = not arr[j]
+    return arr
