@@ -1,0 +1,22 @@
+def shake_tree(tree):
+    
+    tree = [list(t) for t in tree]
+    ans = [0 for _ in range(len(tree[0]))]
+    
+    for i, j in enumerate(tree[0]):
+        x, y, pos = 0, i, True
+        if j == 'o':
+            while x < len(tree):
+                if tree[x][y] == '/':
+                    y -= 1
+                elif tree[x][y] == '\\':
+                    y += 1
+                elif tree[x][y] == "_":
+                    pos = False
+                    break
+                x += 1
+            if pos:
+                ans[y] += 1
+                
+    return ans
+            
