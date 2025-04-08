@@ -1,0 +1,13 @@
+def candles(candles, cost):
+    
+    burned = leftovers = 0
+    
+    while candles > 0:
+        
+        burned += candles
+        leftovers += candles
+        
+        candles = leftovers // cost
+        leftovers %= cost
+        
+    return burned
