@@ -1,0 +1,29 @@
+memo = {}
+for i in range(1, 100_000):
+    if str(i) == str(i)[::-1]:
+        memo[len(str(i))] = memo.get(len(str(i)), []) + [str(i)]
+    
+k = "10"
+for i in range(1, 15):
+
+    ans = []
+    ans2 = []
+    for q in range(10):
+        ans += [k + str(q) + k[::-1]]
+        if k[-1] == "0":
+            for v in range(1, 5):
+                for q in range(10):
+                    ans += [k[:-1] + str(v) + str(q) + str(v) + k[:-1][::-1]]
+    for q in range(10):
+        ans2 += [k + str(q) + str(q) + k[::-1]]
+    if k[-1] == "0":
+        for v in range(1, 5):
+            for q in range(10):
+                ans2 += [k[:-1] + str(v) + str(q) + str(q) + str(v) + k[:-1][::-1]]
+        
+    if ans: memo[len(ans[0])] = sorted(set(ans[:]))
+    if ans2: memo[len(ans2[0])] = sorted(set(ans2[:]))
+    k += "0"
+    
+def palin(a,b):
+    return int(memo[a][b-1])
