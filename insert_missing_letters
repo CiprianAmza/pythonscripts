@@ -1,0 +1,16 @@
+def insert_missing_letters(st):
+    
+    alphabet = [chr(el) for el in range(ord('a'), ord('z') + 1)]
+    
+    letters = set(st)
+    checked = set()
+    ans = ""
+    
+    for el in st:
+        if el in checked:
+            ans += el
+            continue
+        checked.add(el)
+        ans += el + "".join(k.upper() for k in alphabet[alphabet.index(el):] if k not in letters)
+        
+    return ans
