@@ -1,0 +1,2 @@
+def square_color(a, b):
+    return "white" if (ord(a) + b) % 2 else "black"
