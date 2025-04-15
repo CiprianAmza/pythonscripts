@@ -1,0 +1,6 @@
+p_squares = [sorted(str(i * i)) for i in range(3164)]
+
+def sort_by_perfsq(arr):
+    
+    return sorted(arr, key=lambda x: (-sum(1 for el in p_squares if sorted(str(x)) == el), x))
+    
