@@ -1,0 +1,14 @@
+t=lambda x: len(str(x)) if isinstance(x, int) else len(x)
+
+def order_type(arr):
+    
+    if all(t(i) == t(j) for i, j in zip(arr, arr[1:])):
+        return "Constant"
+    
+    if all(t(i)>=t(j) for i, j in zip(arr, arr[1:])):
+        return "Decreasing"
+    
+    if all(t(i)<=t(j) for i, j in zip(arr, arr[1:])):
+        return "Increasing"
+    
+    return "Unsorted"
