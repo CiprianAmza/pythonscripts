@@ -1,0 +1,31 @@
+front = "e, é, i, í, ö, ő, ü, ű".split(", ")
+back = "a, á, o, ó, u, ú".split(", ")
+digraphs = "sz zs cs".split(" ")
+
+def instrumental(word):
+    
+    both = front + back
+    if word[-1] in 'aeiou':
+        for i, j in zip(both[::2], both[1::2]):
+            if word[-1] == i:
+                word = word[:-1] + j
+                
+    if word[-1] in front:
+        word += "vel"
+    elif word[-1] in back:
+        word += "val"
+    else:
+        if word[-2:] in digraphs:
+            word = word[:-1] + word[-2] + word[-1]
+        else:
+            word += word[-1]
+        
+        last_vowel = [v for v in word if v in both][-1]
+        if last_vowel in front:
+            word += "el"
+        elif last_vowel in back:
+            word += "al"
+    
+    return word
+            
+            
