@@ -1,0 +1,10 @@
+p = [2 ** i for i in range(100)]
+
+def powers(n):
+    
+    s = []
+    for i in p[::-1]:
+        if i + sum(s) <= n:
+            s += [i]
+    
+    return s[::-1]
