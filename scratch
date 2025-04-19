@@ -1,0 +1,10 @@
+def scratch(lottery):
+    
+    bonus = 0
+    for ticket in lottery:
+        
+        a, b, c, value = ticket.split()
+        if len(set([a, b, c])) == 1:
+            bonus += int(value)
+    
+    return bonus
