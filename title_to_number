@@ -1,0 +1,7 @@
+def title_to_number(c):
+    
+    result = 0
+    for char in c:
+        result = result * 26 + (ord(char) - ord('A') + 1)
+    
+    return result
