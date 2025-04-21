@@ -1,0 +1,9 @@
+function trickyDoubles(n){
+  
+  n = n + "";
+  let s = "";
+  for (let ind = 0; ind < n.length / 2; ind++)
+    s += n.charAt(ind);
+
+  return (s + s) === n ? parseInt(n) : parseInt(n) * 2;
+}
