@@ -1,0 +1,10 @@
+def timed_reading(h, t):
+    
+    alphabet = ".abcdefghijklmnopqrstuvwxyz"
+    s = 0
+    for el in t.split():
+        k = sum(1 for k in el if k.lower() in alphabet)
+        if k <= h:
+            s += 1
+    
+    return s
