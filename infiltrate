@@ -1,0 +1,22 @@
+function Cylon(model){
+  
+  this.model = model;
+}
+
+function HumanSkin(model) {
+  
+    Cylon.call(this, model);
+}
+
+HumanSkin.prototype = Object.create(Cylon.prototype);
+HumanSkin.prototype.constructor = HumanSkin;
+
+Cylon.prototype.attack = function() {
+  
+    return "Destroy all humans!";
+};
+
+HumanSkin.prototype.infiltrate = function() {
+  
+    return "Infiltrate the colonies";
+};
