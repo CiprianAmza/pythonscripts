@@ -1,0 +1,3 @@
+def convert(dt):
+    
+    return dt.strftime("%H:%M:%S") + ",%03d" % (dt.microsecond // 1000)
