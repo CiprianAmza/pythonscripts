@@ -1,0 +1,6 @@
+var descriptor = {
+  description: "TODO: GIVE ME A DESCRIPTION" };
+
+Object.setPrototypeOf(widget, descriptor);
+Object.setPrototypeOf(gadget, descriptor);
+Object.setPrototypeOf(thingamabob, descriptor);
