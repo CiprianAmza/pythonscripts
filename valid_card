@@ -1,0 +1,21 @@
+def transform(p):
+    
+    if p < 10:
+        return p
+    return transform(sum(map(int, str(p))))
+    
+def valid_card(card):
+    
+    s = 0
+    ind = 1
+    
+    for i in card[::-1]:
+        if i in '0123456789':
+            ind += 1
+            if ind % 2 == 0:
+                s += int(i)
+            else:
+                s += transform(int(i) * 2)
+    
+    return s % 10 == 0
+                
