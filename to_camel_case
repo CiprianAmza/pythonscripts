@@ -1,0 +1,12 @@
+def to_camel_case(s, n):
+    
+    ans = [*map(lambda x: x.lower(), s.split())]
+    
+    if n == 1:
+        ans = ans[:1] + [el.title() for el in ans[1:]]
+    elif n == 2:
+        ans = [el[:-1] + el[-1].upper() for el in ans[:-1]] + ans[-1:]
+    else:
+        ans = [ans[0][::-1].title()[::-1]] + [el[0].upper() + el[1:-1] + el[-1].upper() for el in ans[1:-1]] + [ans[-1].title()]
+    
+    return "".join(ans)
