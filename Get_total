@@ -1,0 +1,10 @@
+def get_total(costs, items, tax):
+
+    s = 0
+    for i in items:
+        k = costs.get(i, 0)
+        s += k
+    
+    s = s * (1 + tax)
+    
+    return round(s, 2)
