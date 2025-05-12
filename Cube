@@ -1,0 +1,21 @@
+class Cube {
+  constructor(length) {
+    this.length = length;
+  }
+
+  get surfaceArea() {
+    return 6 * this.length ** 2;
+  }
+  
+  get volume() {
+    return this.length ** 3;
+  }
+
+  set surfaceArea(q) {
+    this.length = Math.sqrt(q / 6);
+  }
+
+  set volume(k) {
+    this.length = Math.cbrt(k);
+  }
+}
