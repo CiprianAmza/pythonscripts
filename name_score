@@ -1,0 +1,12 @@
+from preloaded import alpha
+
+def name_score(name):
+    
+    v = 0
+    for letter in name:
+        for i, j in alpha.items():
+            if letter.lower() in i.lower():
+                v += j
+                break
+    
+    return {name: v}
