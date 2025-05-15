@@ -1,0 +1,13 @@
+best = {}
+
+for word in WORD_LIST:
+    l = len(word)
+    val = sum(ord(k) for k in word)
+    best[l] = best.get(l, []) + [(word, val)]
+
+def find_word(num_let, max_ssw):
+    
+    l = sorted(best.get(num_let, []), key=lambda x: x[1])
+    l = [a for a, b in l if b <= max_ssw]
+    
+    return l[-1] if l else None
