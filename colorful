@@ -1,0 +1,17 @@
+def transform(nr):
+    
+    return __import__('functools').reduce(lambda x, y: x * y, [int(c) for c in str(nr)])
+
+def colorful(number):
+    
+    s = set()
+    nr = str(number)
+    
+    for i in range(1, len(nr)+1):
+        for j in range(i, len(nr)+1):
+            r = transform(nr[j-i:j])
+            if r in s:
+                return False
+            s.add(r)
+    
+    return True
