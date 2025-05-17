@@ -1,0 +1,6 @@
+def cyclops(n):
+    
+    n = bin(n)[2:]
+    k = len(str(n)) // 2
+    
+    return ("1" * k + "0" + "1" * k) == n
