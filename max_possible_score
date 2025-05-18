@@ -1,0 +1,3 @@
+def max_possible_score(points, seen): 
+    
+    return sum(j * (seen.count(i) + 1) for i, j in points.items())
