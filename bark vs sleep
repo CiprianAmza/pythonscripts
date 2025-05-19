@@ -1,0 +1,22 @@
+var BARK  = 'woof woof';
+var SLEEP = 'zzzzzzzzz....';
+
+function dog_bark_by_default(bark){
+  bark = typeof bark==="undefined"?true:bark;
+  return bark ? BARK : SLEEP;
+}
+
+function dog_bark_only_if_told_so(bark){
+  bark = typeof bark==="undefined"?false:bark;
+  return bark ? BARK : SLEEP;
+}
+
+function dog_dont_bark_by_default(dont_bark){
+  dont_bark = typeof dont_bark==="undefined"?true:dont_bark;
+  return !dont_bark ? BARK : SLEEP;
+}
+
+function dog_dont_bark_only_if_told_so(dont_bark){
+  dont_bark = typeof dont_bark==="undefined"?false:dont_bark;
+  return !dont_bark ? BARK : SLEEP;
+}
