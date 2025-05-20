@@ -1,0 +1,3 @@
+def minimum_percentage(foods):
+    
+    return max(0, sum(foods) - 100 * (len(foods) - 1))
