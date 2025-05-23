@@ -1,0 +1,35 @@
+def solve_all():
+    
+    total = set()
+    values = "bbnnqrkr"
+    
+    def solve(cur):
+        
+        for element in "bnr":
+            if cur.count(element) > 2:
+                return
+        
+        for element in 'qk':
+            if cur.count(element) > 1:
+                return
+        
+        if len(cur) == 8:
+            nonlocal total
+            total.add("".join(cur))
+            return
+        
+        for i in range(len(values)):
+            if values[i] == "b" and "b" in cur and (cur.index("b") % 2) == (len(cur) % 2):
+                continue
+            if values[i] == "r" and "k" in cur and "r" in cur and cur.index("r") > cur.index("k"):
+                continue
+            if values[i] == "r" and "r" in cur and "k" not in cur:
+                continue
+                
+            cur.append(values[i])
+            solve(cur)
+            cur.pop()
+    
+    solve([])
+    
+    return total
