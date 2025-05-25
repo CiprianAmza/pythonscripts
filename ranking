@@ -1,0 +1,14 @@
+def ranking(people):
+    
+    s = sorted(people, key=lambda x: (-x["points"], x["name"]))
+    
+    last = val = 0
+    for i, j in enumerate(s):
+        if j["points"] == val:
+            j["position"] = last
+        else:
+            j["position"] = i + 1
+            last = i + 1
+        val = j["points"]
+    
+    return s
