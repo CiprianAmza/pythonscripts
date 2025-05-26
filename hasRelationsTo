@@ -1,0 +1,28 @@
+Person.prototype.hasRelationsTo = function (person) {
+
+  function isAncestor(current, target, visited = new Set()) {
+    if (current === target) return true;
+    if (visited.has(current)) return false;
+    visited.add(current);
+
+    for (const parent of current.getParents())
+      if (isAncestor(parent, target, visited))
+        return true;
+
+    return false;
+  }
+
+  function isDescendant(current, target, visited = new Set()) {
+    if (current === target) return true;
+    if (visited.has(current)) return false;
+    visited.add(current);
+
+    for (const child of current.getChildren())
+      if (isDescendant(child, target, visited))
+        return true;
+
+    return false;
+  }
+
+  return isAncestor(this, person) || isDescendant(this, person);
+};
