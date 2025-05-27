@@ -1,0 +1,10 @@
+def generate_number(squad, n):
+    
+    if n not in squad:
+        return n
+    
+    for i in range(1, 10):
+        for j in range(1, 10):
+            if i + j == n and (10 * i + j) not in squad:
+                return 10 * i + j
+    
