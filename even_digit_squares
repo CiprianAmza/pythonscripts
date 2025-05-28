@@ -1,0 +1,9 @@
+nrs = []
+for i in range(8, 10**6):
+    v = i * i
+    if all(j in '02468' for j in str(v)):
+        nrs += [v]
+        
+def even_digit_squares(a, b):
+    
+    return [el for el in nrs if a <= el <= b]
