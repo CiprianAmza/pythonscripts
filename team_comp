@@ -1,0 +1,6 @@
+def team_comp(heroes):
+    
+    if len(set(heroes)) != len(heroes) or len(heroes) != 6:
+        raise InvalidTeam()
+        
+    return [sum(1 for el in heroes if el in v) for v in [TANK, DAMAGE, SUPPORT]]
