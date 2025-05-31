@@ -1,0 +1,14 @@
+import inspect
+
+class LazyInit(type):
+    
+    def __new__(cls, name, bases, class_dict):
+        
+        names = class_dict.get('__init__')
+        def new_init(self, *args):
+            [setattr(self, *k) for k in zip(inspect.getfullargspec(names).args[1:], args)]
+            names(self, *args)
+
+        class_dict['__init__'] = new_init
+
+        return super().__new__(cls, name, bases, class_dict)
