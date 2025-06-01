@@ -1,0 +1,15 @@
+def find_warrior_rank(s):
+    
+    a = []
+
+    while s > 7:
+        s -= 10
+        a += ["maha"]
+    
+    while s >= 3:
+        s -= 5
+        a = ["ati"] + a
+    
+    a += ["rathi"]
+    
+    return "-".join(a)
