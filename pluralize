@@ -1,0 +1,10 @@
+def pluralize(w):
+    
+    if w.endswith("y") and w[-2].lower() not in 'aeiou':
+        return w[:-1] + "ies"
+    
+    for k in "s,x,z,ch,sh".split(","):
+        if w.endswith(k):
+            return w + "es"
+    
+    return w + "s"
