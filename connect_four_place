@@ -1,0 +1,13 @@
+def connect_four_place(columns):
+    
+    board = [["-" for _ in range(7)] for _ in range(6)]
+    
+    for i, j in enumerate(columns):
+        player = "YR"[i%2]
+        
+        for k in range(5, -1, -1):
+            if board[k][j] == "-":
+                board[k][j] = player
+                break
+    
+    return board
