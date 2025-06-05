@@ -1,0 +1,9 @@
+def is_cleanly_nested(arr):
+    
+    ans = [*arr]
+    for a in ans:
+        if not all(l != [] for l in a) and not all(l == [] for l in a):
+            return False
+        ans += [*a]
+
+    return all(l != [] for l in arr) or all(l == [] for l in arr)
