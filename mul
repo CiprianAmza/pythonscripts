@@ -1,0 +1,8 @@
+function mul(a, b) {
+  let s = 0;
+  for (let i = 0; i < b; i++)
+     s += a;
+  
+  return s;
+  // return the product
+}
