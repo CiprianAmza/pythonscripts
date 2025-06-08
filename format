@@ -1,0 +1,19 @@
+function format(text, width) {
+  let ans = [];
+  let row = [], rowSize = 0;
+  for (let el of text.split(" ")) {
+    if (rowSize + el.length + (rowSize > 0 ? 1 : 0) <= width) {
+      rowSize += el.length + (rowSize > 0 ? 1 : 0);
+      row.push(el);
+    } else {
+      ans.push(row.join(" "));
+      row = [el];
+      rowSize = el.length;
+    }
+  }
+  if (rowSize) {
+    ans.push(row.join(" "));
+  }
+  
+  return ans.join("\n");
+}
