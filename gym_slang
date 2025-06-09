@@ -1,0 +1,25 @@
+vals = """
+    Replace all instances of "probably" to "prolly"
+    Replace all instances of "i am" to "i'm"
+    Replace all instances of "instagram" to "insta"
+    Replace all instances of "do not" to "don't"
+    Replace all instances of "going to" to "gonna"
+    Replace all instances of "combination" to "combo"
+"""
+
+pairs = {}
+
+for el in vals.splitlines():
+    if 'of' in el:
+        r = el.split("of ")[-1]
+        x, y = r.split(" to ")
+        x, y = [*map(lambda x: x[1:-1], [x, y])]
+        pairs[x] = y
+        pairs[x.capitalize()] = y.capitalize()
+
+def gym_slang(phrase):
+    
+    for i, j in pairs.items():
+        phrase = phrase.replace(i, j)
+    
+    return phrase
