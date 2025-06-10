@@ -1,0 +1,16 @@
+class MouseOver:
+    def __init__(self, rectangles):
+        self.rectangles = rectangles
+
+    def contains(self, a, b, c, d, x, y):
+        
+        return a <= x <= a + c and b <= y <= b + d
+    
+    def find_rectangle(self, x, y):
+        # TODO: Implement logic to find which rectangle contains the point (x, y)
+        
+        for a, b, c, d in self.rectangles:
+            q = a + b
+            w = c + d
+            if self.contains(a, b, c, d, x, y):
+                return (a, b, c, d)
