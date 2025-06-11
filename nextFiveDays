@@ -1,0 +1,13 @@
+function nextFiveDays(d) {
+  
+    const ans = [];
+    const startDate = new Date(d);
+
+    for (let i = 1; i <= 5; i++) {
+        const n = new Date(startDate);
+        n.setDate(startDate.getDate() + i);
+        ans.push(`${n.getMonth() + 1}/${n.getDate()}/${n.getFullYear()}`);
+    }
+
+    return ans.join(', ');
+}
