@@ -1,0 +1,12 @@
+function mirrorImage(arr){
+  
+  for (let i = 1; i < arr.length; i++) {
+
+       let a = arr[i-1] + "";
+      let b = (arr[i]+"").split("").reverse().join("");
+      if (a === b)
+        return [arr[i-1], arr[i]];
+  
+  }
+  return [-1, -1];
+}
