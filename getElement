@@ -1,0 +1,9 @@
+function getElement(array, indexes) {
+  
+  let k = array;
+  for (let el of indexes) {
+    k = k[el];
+  }
+  
+  return k;
+}
