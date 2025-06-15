@@ -1,0 +1,6 @@
+def swap(m, x, y, *columns):
+    
+    for c in columns:
+        m[x][c], m[y][c] = m[y][c], m[x][c]
+    
+    return m
