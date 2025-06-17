@@ -1,0 +1,13 @@
+function shuffle(arr) {
+  
+  for (let i of arr) {
+
+    let j = Math.floor(Math.random() * arr.length)
+    let q = arr[0];
+    let w = arr[j];
+    
+    arr[0] = w;
+    arr[j] = q;
+  }
+    return arr;
+}
