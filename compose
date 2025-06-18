@@ -1,0 +1,1 @@
+const compose = (...rest) => (x) => rest.reduceRight((acc, f) => f(acc), x);
