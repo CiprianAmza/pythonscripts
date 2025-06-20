@@ -1,0 +1,4 @@
+def one_punch(item): 
+    
+    if not item or not isinstance(item, str): return 'Broken!'
+    return " ".join("".join([x for x in el if x.lower() not in 'ae']) for el in sorted(item.split()))
