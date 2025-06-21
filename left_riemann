@@ -1,0 +1,8 @@
+def left_riemann(f, n, a, b):
+    
+    width = (b - a) / n
+    left_sum = 0
+    for i in range(n):
+        left_sum += f(a + i * width) * width
+        
+    return left_sum
