@@ -1,0 +1,14 @@
+def maximum_product_of_parts(n):
+    
+    n = str(n)
+    _max = 0
+    
+    for i in range(len(n)):
+        for j in range(i+1, len(n)):
+            a = n[:i]
+            b = n[i:j]
+            c = n[j:]
+            if not a or not b or not c: continue
+            _max = max(_max, int(a) * int(b) * int(c))
+    
+    return _max
