@@ -1,0 +1,11 @@
+def fizz_buzz_factory(arr):
+    
+    def func(n):
+        
+        for i, j in sorted(arr, key=lambda x: -x[0]):
+            if n % i == 0:
+                return j
+        
+        return str(n)
+    
+    return func
