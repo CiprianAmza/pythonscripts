@@ -1,0 +1,22 @@
+class Complex:
+    
+    def __init__(self, real, imaginary):
+        self.real = real
+        self.imaginary = imaginary
+        
+    def __add__(self, c):
+        
+        self.real += c.real
+        self.imaginary += c.imaginary
+        
+        return self
+    
+    def __mul__(self, c):
+
+        real_part = self.real * c.real - self.imaginary * c.imaginary 
+        imaginary_part = self.real * c.imaginary + self.imaginary * c.real
+
+        self.real = real_part
+        self.imaginary = imaginary_part
+        
+        return self
