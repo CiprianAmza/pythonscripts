@@ -1,0 +1,12 @@
+def did_we_win(plays):
+    
+    yards = 10
+    for i, j in [el for el in plays if len(el) == 2]:
+        if j == 'turnover':
+            return False
+        if j == 'run' or j == 'pass':
+            yards -= i
+        else:
+            yards += i
+        
+    return yards < 0
