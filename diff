@@ -1,0 +1,10 @@
+function diff(s1, s2){
+  
+  let set = new Set();
+  for (let el of s1) {
+    if (!s2.has(el))
+      set.add(el);
+  }
+  
+  return set;
+}
