@@ -1,0 +1,22 @@
+def solve(arr):
+
+    best = float('-inf')
+    def s(ar,i):
+        
+        if i == len(arr):
+            nonlocal best
+            prod = 1
+            for el in ar:
+                prod *= el
+                
+            best = max(best, prod)
+            return
+        
+        for val in arr[i]:
+            ar[i] = val
+            s(ar, i+1)
+            ar[i] = None
+        
+    s([None for _ in range(len(arr))], 0)
+    
+    return best
