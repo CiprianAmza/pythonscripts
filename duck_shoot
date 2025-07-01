@@ -1,0 +1,19 @@
+def duck_shoot(ammo, aim, ducks):
+    
+    ducks = list(ducks)
+    duck = [el for el in ducks if el not in "|~"]
+    if duck:
+        duck = duck[0]
+    else:
+        return "".join(ducks)
+    
+    val = 0
+    for i in range(ammo):
+        val += aim
+        if val >= 1:
+            val -= 1
+            if duck in ducks:
+                ind = ducks.index(duck)
+                ducks[ind] = "X"
+    
+    return "".join(ducks)
