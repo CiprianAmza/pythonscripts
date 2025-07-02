@@ -1,0 +1,23 @@
+function isStraight(cards) {
+
+  const uniqueCards = new Set(cards);
+  if (uniqueCards.has(14)) uniqueCards.add(1);
+
+  const sorted = Array.from(uniqueCards).sort((a, b) => a - b);
+
+  let cur = 0;
+  let max = 0;
+  let last = 0;
+  for (let el of sorted) {
+    if (last === 0 || el - last === 1) {
+      last = el;
+      cur++;
+    } else {
+      max = Math.max(cur, max);
+      cur = 1;
+      last = el;
+    }
+  }
+
+  return max >= 5 || cur >= 5;
+}
