@@ -1,0 +1,23 @@
+def handle(ans, i, cur):
+    
+    par = []
+    if ans and ans[-1] == 'c':
+        par += ['e'] * cur.count('e')
+        par += ['i'] * cur.count('i')
+    else:
+        par += ['i'] * cur.count('i')
+        par += ['e'] * cur.count('e')
+    
+    return par + [i]
+
+def i_before_e(s):
+    
+    ans, cur = [], []
+    for i in s:
+        if i not in 'ie':
+            ans += handle(ans, i, cur)
+            cur = []
+        else:
+            cur += [i]
+    
+    return "".join(ans) + "".join(handle(ans, "", cur))
