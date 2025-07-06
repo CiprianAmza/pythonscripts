@@ -1,0 +1,13 @@
+def solve(s,k):
+    
+    s =  s.split()
+    t = 0
+    
+    for i in range(len(s)):
+        for j in range(len(s)):
+            if i == j: continue
+            if int(s[i]+s[j]) % k == 0:
+                t += 1
+    
+    return t
+            
