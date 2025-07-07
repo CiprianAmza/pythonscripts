@@ -1,0 +1,22 @@
+function getRectangleString(w, h) {
+  let ans = [], base = "", mid = "*";
+  
+  for (let i = 0; i < w; i++) base += "*";
+  for (let i = 1; i < w - 1; i++) mid += " ";
+  
+  if (w >= 2) mid += "*";
+  
+  if (h === 1)
+    ans.push(base);
+  else if (h === 2) {
+    ans.push(base);
+    ans.push(base);
+  } else {
+    ans.push(base);
+    for (let i = 1; i < h - 1; i++)
+      ans.push(mid);
+    ans.push(base);
+  }
+  
+  return ans.join("\r\n") + "\r\n";
+}
