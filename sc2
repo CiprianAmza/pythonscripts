@@ -1,0 +1,9 @@
+def sc(s):
+    
+    ans = []
+    for i in s:
+        if i == i.lower() and i.upper() in s:
+            ans += [i]
+        elif i == i.upper() and i.lower() in s:
+            ans += [i]
+    return "".join(ans)
