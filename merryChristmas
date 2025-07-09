@@ -1,0 +1,30 @@
+function transform(s1, a) {
+  
+  let newS1 = [], check = false;
+  for (let el of s1) {
+    if (el === a && !check) {
+      check = true;
+    } else if (el !== a || check) newS1.push(el);
+  }
+  
+  return newS1.join("");
+}
+
+function merryChristmas(s1,s2){
+  
+  for (let el of s2) {
+    if (s1.includes(el)) {
+      s1 = transform(s1, el);
+    }
+    else {
+      s1 += el;
+    }
+  }
+  
+  let a = [...s1].sort(), b = [..."Merry Christmas!"].sort();  
+  if (a.length != b.length) return false;
+  for (let i = 0; i < a.length; i++)
+    if (a[i] !== b[i]) return false;
+  
+  return true;
+}
