@@ -1,0 +1,32 @@
+class Hex {
+  
+  constructor(value) {
+    this.value = value;
+  }
+
+  valueOf() {
+    return this.value;
+  }
+
+  toString() {
+    return "0x" + this.value.toString(16).toUpperCase();
+  }
+
+  toJSON() {
+    return this.toString();
+  }
+
+  plus(other) {
+    const to_add = other instanceof Hex ? other.value : other;
+    return new Hex(this.value + to_add);
+  }
+
+  minus(other) {
+    const to_sub = other instanceof Hex ? other.value : other;
+    return new Hex(this.value - to_sub);
+  }
+
+  static parse(hexStr) {
+    return parseInt(hexStr.replace(/^0x/i, ''), 16);
+  }
+}
