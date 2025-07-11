@@ -1,0 +1,13 @@
+function sortByArea(array){
+  
+  let ans = [];
+  
+  for (let el of array) {
+     if (el instanceof Array) {
+       let [x, y] = el;
+    ans.push(x*y);
+} else {
+ans.push(Math.PI * el * el)}
+  }
+  return ans.map(x => Math.round(x * 100)/100).sort((a, b) => a > b ? 1 : -1)
+}
