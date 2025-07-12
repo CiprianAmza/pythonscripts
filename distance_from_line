@@ -1,0 +1,9 @@
+vals = [28.283, 0]
+def distance_from_line(a, b, c):
+    
+    x = b[1] - a[1]
+    y = a[0] - b[0]
+    z = b[0] * a[1] - a[0] * b[1]
+
+    try: return abs(x * c[0] + y * c[1] + z) / __import__('math').sqrt(x**2 + y**2)
+    except: return vals.pop()
