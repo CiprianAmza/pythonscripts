@@ -1,0 +1,17 @@
+function swapDiagonals(m) {
+  //coding and coding..
+    for (let i = 0; i < m.length; i++) {
+        
+        let x = m[i][i];
+        let k = m.length - i - 1;
+        let y = m[i][k];
+      
+        m[i][i] = y;
+        m[i][k] = x;
+
+
+    }
+  
+  return m;
+
+}
