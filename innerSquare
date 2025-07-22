@@ -1,0 +1,22 @@
+function innerSquare(rect, center, side) {
+  
+  let x = 0, y = 0, ans = [], half = (side - 1) / 2;
+  
+  for (let i = 0; i < rect.length; i++) {
+    for (let j = 0; j < rect.length; j++) {
+      if (rect[i][j] === center) {
+        x = i;
+        y = j;
+      }
+    }
+  }
+  
+  for (let i = Math.max(0, x - half); i < Math.min(rect.length, x + half + 1); i++) {
+    let par = [];
+    for (let j = Math.max(0, y - half); j < Math.min(rect[0].length, y + half + 1); j++)
+      par.push(rect[i][j]);
+    ans.push(par);
+  }
+  
+  return ans;
+}
