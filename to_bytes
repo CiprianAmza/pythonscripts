@@ -1,0 +1,11 @@
+def to_bytes(n):
+    
+    s = bin(n)[2:][::-1]
+    ans = []
+    for i in range(0, len(s), 8):
+        k = s[i:i+8][::-1]
+        while len(k) < 8:
+            k = "0" + k
+        ans += [k]
+
+    return ans[::-1]
