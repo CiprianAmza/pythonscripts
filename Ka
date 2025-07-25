@@ -1,0 +1,11 @@
+k = "a"
+alph = "abcdefghijklmnopqrstuvwxyz"
+ans = [k]
+
+for i in alph[1:]:
+    k = ans[-1] + i + ans[-1]
+    ans.append(k)
+    
+def abacaba(k):
+    
+    return ans[-1][k-1]
