@@ -1,0 +1,20 @@
+def to_scientific(n):
+    
+    if n < 1000:
+        return str(n)
+    
+    n = str(n)
+    k = n[0] + "."
+    t = 0
+    n = n[1:]
+    for i, j in enumerate(n):
+        t += 1
+        if i >= 3:
+            continue
+        if j != "0" or j == "0" and "0" != k[-1]:
+            k += j
+    while k[-1] == "0":
+        k = k[:-1]
+    if k[-1] == ".":
+        k += "0"
+    return k + "e" + str(t)
