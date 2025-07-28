@@ -1,0 +1,12 @@
+def matrix_diagonal(arr, value):
+    
+    if not arr: return 0
+
+    ans = 0
+    for i in range(len(arr)):
+        if (value + i) >= len(arr):
+            break
+        if value + i < 0: continue
+        ans += arr[value+i][i]
+    
+    return ans
