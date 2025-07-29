@@ -1,0 +1,12 @@
+def nearest_round(n):
+    
+    v1 = n // 5 * 5
+    v2 = n // 5 * 5 + 5
+    if abs(v1-n) < abs(v2-n):
+        return v1
+    else:
+        return v2
+    
+def round_to_five(arr):
+    
+    return [*map(nearest_round, arr)]
