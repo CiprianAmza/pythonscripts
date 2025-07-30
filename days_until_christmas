@@ -1,0 +1,10 @@
+from datetime import date
+
+def days_until_christmas(today):
+    
+    christmas = date(today.year, 12, 25)
+
+    if today > christmas:
+        christmas = date(today.year + 1, 12, 25)
+
+    return (christmas - today).days
