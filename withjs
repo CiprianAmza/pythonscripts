@@ -1,0 +1,1 @@
+with(Math)array=_=>[SQRT2,LOG2E,LN10,E,PI]
