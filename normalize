@@ -1,0 +1,5 @@
+def normalize(arr, fill_value=None):
+    
+    _max = max([len(line) for line in arr], default = 0)
+    
+    return [[el for el in line] + [fill_value for _ in range(_max - len(line))]for line in arr]
