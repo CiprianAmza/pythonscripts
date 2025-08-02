@@ -1,0 +1,20 @@
+def first_tooth(array):
+    
+    best = float('-inf')
+    ans = -1
+    for i in range(len(array)):
+        if i == len(array) - 1:
+            k = array[i] - array[i-1]
+        elif i == 0:
+            k = array[i] - array[i+1]
+        else:
+            k = (array[i] - array[i-1]) + (array[i] - array[i+1])
+        
+        if k > best:
+            best = k
+            ans = i
+        elif k == best:
+            ans = -1
+    
+    return ans
+        
