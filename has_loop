@@ -1,0 +1,11 @@
+def has_loop(arr: list[int]) -> bool:
+    
+    i = 0
+    while i < len(arr):
+        j = arr[i]
+        if j == -1 or i == arr[i]:
+            return True
+        arr[i] = -1
+        i = j
+
+    return False
