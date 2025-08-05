@@ -1,0 +1,11 @@
+def battle_outcome(attacker, defender):
+
+    a, b = map(lambda x: sorted(x, reverse=True), (attacker, defender))
+    x = y = 0
+    for i, j in zip(a, b):
+        if i <= j:
+            x += 1
+        else:
+            y += 1
+    
+    return x,y,
