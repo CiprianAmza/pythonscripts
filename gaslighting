@@ -1,0 +1,7 @@
+def gaslighting(a, b, w):
+    
+    for i, j in zip(a, b):
+        if i != j and (i in w or j in w):
+            return True
+        
+    return False
