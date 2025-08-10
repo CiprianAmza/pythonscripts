@@ -1,0 +1,8 @@
+def different_digits_number_search(arr):
+    
+    for n in arr:
+        if len(set(str(n))) == len(str(n)):
+            return n
+        
+        
+    return -1
