@@ -1,0 +1,30 @@
+function canStillWin(table, racesRemaining) {
+  let max = -1, p = "";
+  for (const [player, points] of Object.entries(table)) {
+    if (max < points) {
+      p = player;
+      max = points;
+    }
+  }
+  let remPoints = racesRemaining * 25;
+  
+  let pos = true;
+  let pls = [];
+  for (const [player, points] of Object.entries(table)) {
+    if (max - points <= remPoints) {
+      if (player !== p) pos = false;
+      pls.push(player);
+    }
+  }
+  
+  if (pos) {
+    return p + " has already won the championship!";
+  }
+  pls.sort((a, b) => a > b);
+  if (pls.length > 1) pls[pls.length - 1] = ' and ' + pls[pls.length - 1];
+  
+  let ans = pls.join(", ") + " can still win the championship.";
+  ans = ans.replace(",  ", " ");
+  
+  return ans;
+}
