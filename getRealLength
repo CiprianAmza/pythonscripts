@@ -1,0 +1,8 @@
+function getRealLength(string) {
+
+  let t = 0;
+  for (let el of string) {
+    t++;
+  }
+    return t;
+}
