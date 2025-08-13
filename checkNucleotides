@@ -1,0 +1,8 @@
+function checkNucleotides(sequence) {
+  var s = new Set(["A", "G", "C", "U"]);
+  for (let i = 0; i < sequence.length; i++) {
+    if (!s.has(sequence[i])) 
+      return "There is an invalid letter: " + sequence[i] + ". At position: " + (i + 1);
+  }
+  return "Valid Sequence: " + sequence;
+}
