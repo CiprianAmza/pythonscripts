@@ -1,0 +1,19 @@
+import math
+
+class Potion:
+    def __init__(self, color, volume):
+        
+        self.color = color
+        self.volume = volume
+
+    def mix(self, other):
+        
+        total_volume = self.volume + other.volume
+        mixed_color = []
+
+        for i in range(3):
+            
+            mixed_value = math.ceil((self.color[i] * self.volume + other.color[i]* other.volume) / total_volume)
+            mixed_color.append(mixed_value)
+
+        return Potion(tuple(mixed_color), total_volume)
