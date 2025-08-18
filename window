@@ -1,0 +1,14 @@
+def window(l,o,lst):
+    
+    if l == 0:
+        return [[] for _ in range(0, len(lst)+1, o)]
+    
+    ans = []
+    i = 0
+    for _ in range(len(lst)):
+        a = lst[i:i+l]
+        i += o
+        if len(a) == l:
+            ans.append(a[:])
+    
+    return ans
