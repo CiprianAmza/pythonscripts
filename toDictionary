@@ -1,0 +1,17 @@
+Object.defineProperty(
+    Array.prototype,
+    'toDictionary',
+    {value:
+        function toDictionary(keyFn, valueFn = undefined) {
+          let ans = {};
+          for (let el of this) {
+            let k = keyFn(el);
+            if (valueFn !== undefined)
+              ans[k] = valueFn(el);
+            else
+              ans[k] = el;
+          }
+          return ans;
+        }
+    }
+);
