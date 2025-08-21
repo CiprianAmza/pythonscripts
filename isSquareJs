@@ -1,0 +1,21 @@
+var isSq = function(x) {
+
+  return Math.sqrt(x) === Math.round(Math.sqrt(x), 2);
+}
+
+var isSquare = function(arr){
+
+  if (arr instanceof Array && arr.length === 0) return;
+    
+  for (let el of arr) {
+    if (el instanceof Array) {
+      if (!isSquare(el) && el.length > 0)
+        return false;
+    } else {
+      if (!isSq(el))
+        return false;
+    }
+  }
+  
+  return true;
+}
