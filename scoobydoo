@@ -1,0 +1,21 @@
+def scoobydoo(a, b):
+    
+    print(a)
+    alph = "abcdefghijklmnopqrstuvwxyz"
+    m = 0
+    ans = ""
+    for j in b:
+        q = list(a)
+        half = q[-6]
+        q = q[::2]
+        v = 0
+        for i in j.lower():
+            if i in q:
+                t = q.index(i)
+                q = q[:t] + q[t+1:]
+                v += 1
+        if v > m and half == j.lower()[0]:
+            m = v
+            ans = j
+
+    return ans
