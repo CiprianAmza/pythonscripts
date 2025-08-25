@@ -1,0 +1,10 @@
+function combineFriends(array){
+  
+  let obj = new Object();
+  for (let el of array) {
+    obj[el.id] = el;
+    delete obj[el.id].id;
+  }
+
+  return obj;
+}
