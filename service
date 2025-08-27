@@ -1,0 +1,5 @@
+def service(score):
+    
+    s = sum([*map(int, score.split(":"))])
+    
+    return ["first", "second"][(s//5)%2 if s < 40 else (s-40)//2%2]
