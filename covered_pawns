@@ -1,0 +1,25 @@
+def get_left(pawn):
+    
+    a, b = pawn[0], int(pawn[1])
+    if a == 'a' or b == 1: return ""
+
+    return chr(ord(a) - 1) + str(b - 1)
+
+def get_right(pawn):
+    
+    a, b = pawn[0], int(pawn[1])
+    if a == 'h' or b == 1: return ""
+
+    return chr(ord(a) + 1) + str(b - 1)
+    
+def covered_pawns(pawns):
+    
+    pawns = set(pawns)
+    t = 0
+    
+    for p in pawns:
+        x, y = get_left(p), get_right(p)
+        if x in pawns or y in pawns:
+            t += 1
+
+    return t
