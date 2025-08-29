@@ -1,0 +1,9 @@
+def final_attack_value(x, l):
+      
+    for j in l:
+        if x >= j:
+            x += j
+        else:
+            x += __import__("math").gcd(x, j)
+    
+    return x
