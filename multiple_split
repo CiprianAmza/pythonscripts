@@ -1,0 +1,16 @@
+def multiple_split(s, d=[]):
+	
+    ans = []
+    k = ""
+    for j in s:
+        if j in d:
+            if k:
+                ans += [k]
+            k = ""
+        else:
+            k += j
+    
+    if k:
+        ans += [k]
+    
+    return ans
