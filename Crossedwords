@@ -1,0 +1,15 @@
+def crossedwords(a, b):
+    
+    x=y=-1
+    for i, j in enumerate(b):
+        for q, w in enumerate(a):
+            if w == j:
+                x, y = i, q
+                break
+        if x != -1:
+            break
+    
+    ans = [" " * y + j + " " * (len(a)-1-y) for j in b]
+    ans[x] = a
+    
+    return "\n".join(ans) + "\n"
