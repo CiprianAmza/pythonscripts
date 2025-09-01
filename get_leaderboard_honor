@@ -1,0 +1,8 @@
+import requests
+def get_leaderboard_honor():
+    
+    ans = []
+    for line in str(requests.get("https://www.codewars.com/users/leaderboard").content).split("honor")[6:-1]:
+        ans += [int(line[2:10].split("<")[0].replace(",", ""))]
+    
+    return ans
