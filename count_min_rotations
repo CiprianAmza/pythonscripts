@@ -1,0 +1,24 @@
+dices = {
+    1: 6,
+    6: 1,
+    2: 5,
+    5: 2,
+    3: 4,
+    4: 3
+}
+
+def count_min_rotations(dice):
+    
+    best = float('inf')
+    for i in range(1, 7):
+        cur = 0
+        for j in dice:
+            if i != j:
+                if dices[i] == j:
+                    cur += 2
+                else:
+                    cur += 1
+        best = min(best, cur)
+    
+    return best
+                
