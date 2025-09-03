@@ -1,0 +1,21 @@
+let arr = [];
+for (let i = 0; i < 1_000_000; i++)
+  arr.push(true);
+
+arr[0] = false;
+arr[1] = false;
+for (let i = 2; i < arr.length; i++) {
+  for (let j = i+i; j < arr.length; j += i) {
+    arr[j] = false;
+  }
+}
+
+function primes(start, end) {
+  
+	let ans = [];
+  for (let i = start; i <= end; i++) {
+    if (arr[i]) ans.push(i);
+  }
+  
+  return ans.length > 0 ? ans : null;
+}
