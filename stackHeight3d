@@ -1,0 +1,6 @@
+function stackHeight3d(layers) {
+    
+  if (layers <= 0) return 0;
+  
+  return Math.sqrt(6) / 3 * (layers - 1) + 1;
+}
