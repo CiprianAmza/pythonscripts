@@ -1,0 +1,10 @@
+def can_play(hand, face_up):
+    
+    a, b = face_up.split(" ")
+    if not hand: return False
+
+    for x, y in map(lambda x: x.split(" "), hand):
+        if a == x or b == y:
+            return True
+    
+    return False
