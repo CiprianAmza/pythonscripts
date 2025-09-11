@@ -1,0 +1,15 @@
+def alan_annoying_kid(sentence):
+    
+    negation = "n't" not in sentence
+
+    sentence = sentence.split(" ")[2:]
+    verb = ""
+    for el in sentence:
+        if "n't" not in el:
+            verb = el
+            break
+    sentence[-1] = sentence[-1][:-1]
+    if negation and verb.endswith("ed"):
+        verb = verb[:-2]
+
+    return "I don't think you " + " ".join(sentence) + " today, I think you did" + [" ", "n't "][negation] + verb + [ " it!", " at all!"][negation]
