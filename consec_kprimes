@@ -1,0 +1,23 @@
+is_prime = lambda n: n == 2 or n % 2 and all(n%k for k in range(3, int(n**.5) + 1, 2))
+
+def same(i, j, k):
+    
+    t1 = t2 = 0
+    while not is_prime(i):
+        for q in range(2, int(i**.5) + 1):
+            if i % q == 0 and is_prime(q):
+                t1 += 1
+                i //= q
+            
+    while not is_prime(j):
+        for q in range(2, int(j**.5) + 1):
+            if j % q == 0 and is_prime(q):
+                t2 += 1
+                j //= q
+    if i == 1: t1 -= 1
+    if j == 1: t2 -= 1
+    return t1 == t2 == (k - 1)
+
+def consec_kprimes(k, arr):
+    
+    return sum(1 for i, j in zip(arr, arr[1:]) if same(i, j, k))
