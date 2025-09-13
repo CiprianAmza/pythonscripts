@@ -1,0 +1,22 @@
+punctuation_dict = {i: j for i, j in enumerate(["", " ", ",", "."])}
+
+def bit_letter(arr):
+    
+    answer = []
+    
+    for letter in arr:
+        ch = bin(letter)[2:]
+        ch = "0" * (8 - len(ch)) + ch
+        punctuation = punctuation_dict[int(ch[0:2], 2)]
+        capital = ch[2] == "1"
+        letter = chr(int(ch[3:], 2) + ord('a'))
+        if capital:
+            letter = letter.upper()
+        if punctuation == " ":
+            answer.append(punctuation)
+            answer.append(letter)
+        else:
+            answer.append(letter)
+            answer.append(punctuation)
+    
+    return "".join(answer)
