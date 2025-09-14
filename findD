@@ -1,0 +1,25 @@
+function findD(arr){
+
+  function solve(_max, par, ind) {
+    
+    if (par.length == 3) {
+
+      let sum = par.reduce((x, y) => x + y);
+      if (arr.includes(sum) && (!par.includes(sum) || (arr.filter(x => x === sum).length > par.filter(x => x === sum).length)))
+        _max = _max === null ? sum : Math.max(_max, sum);
+      return _max;
+    }
+    
+    for (let i = ind; i < arr.length; i++) {
+      par.push(arr[i]);
+      let ans = solve(_max, par, i + 1);
+      if (ans !== null)
+        _max = _max === null ? ans : Math.max(ans, _max);
+      par.pop(arr[i]);
+    }
+    
+    return _max;
+  }
+  
+  return solve(null, [], 0);
+}
