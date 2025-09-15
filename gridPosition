@@ -1,0 +1,16 @@
+const gridPosition = (name, position) => {
+  
+  let p = Math.ceil(position / 3);
+  let v = position % 3;
+  let val = ["bottom", "top", "middle"][v];
+  if (p === 1) p = "front";
+  else if (p === 2) p += "nd";
+  else if (p === 3) p += "rd";
+  else p += "th";
+  
+  if (position === 1) {
+    return name + " starts from pole position";
+  } else if (position) {
+     return name + " starts from the " + val + " of the " + p + " row";
+  }
+}
