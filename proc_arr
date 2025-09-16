@@ -1,0 +1,13 @@
+from math import perm, factorial
+from collections import Counter
+
+def proc_arr(arr):
+    
+    a = "".join(sorted(arr))
+    b = "".join(sorted(arr, reverse=True))
+    calc = factorial(len(arr))
+    for i, j in Counter(arr).items():
+        if j > 1 or i == 0:
+            calc //= factorial(j)
+    
+    return [calc, int(a), int(b)]
