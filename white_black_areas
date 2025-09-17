@@ -1,0 +1,9 @@
+def white_black_areas(cs, rs):
+    
+    v1, v2, total = sum(cs[::2]), sum(cs[1::2]), 0
+    for k in rs[::2]:
+        total += k * v1
+    for k in rs[1::2]:
+        total += k * v2
+        
+    return (total, sum(cs) * sum(rs) - total)
