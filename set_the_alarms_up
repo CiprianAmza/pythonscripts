@@ -1,0 +1,11 @@
+def add_five_minutes(time):
+    
+    a, b = map(int, time.split(":"))
+    b = (b + 5) % 60
+    a = [a, (a + 1) % 24][b < 5]
+
+    return f"{a:02}:{b:02}"
+    
+def set_the_alarms_up(time, n):
+        
+    return [time] + [time := add_five_minutes(time) for _ in range(n-1)]
