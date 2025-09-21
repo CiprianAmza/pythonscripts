@@ -1,0 +1,10 @@
+function countTheAnimals(animals) {
+
+    let total = 0;
+  
+    for (let [key, value] of Object.entries(animals)) {
+      total += parseInt(value, 2);
+    }
+  
+    return total;
+}
