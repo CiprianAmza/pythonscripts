@@ -1,0 +1,5 @@
+distance = lambda a, b, x, y: (a - x) ** 2 + (b - y) ** 2
+
+def dropzone(p, dropzones):
+    
+    return sorted(dropzones, key=lambda x: distance(*p, *x))[0]
