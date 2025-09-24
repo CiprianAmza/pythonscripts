@@ -1,0 +1,30 @@
+def minimum_value(equality):
+    
+    a, b = equality.split("=")
+    rest = int(b)
+    par = ""
+    coefficients = []
+    
+    for ch in a + "+":
+        
+        if not par:
+            par += ch
+            continue
+        
+        if ch in '+-':
+
+            if len(par) == 1:
+                val = 1
+            elif len(par) == 2 and par[0] == "-":
+                val = -1
+            elif len(par) == 2 and par[0] == "+":
+                val = 1
+            else:
+                val = int(par[:-1])
+            coefficients += [val]
+            par = ch
+        else:
+            par += ch
+    
+    return rest * rest / sum([x*x for x in coefficients])
+            
