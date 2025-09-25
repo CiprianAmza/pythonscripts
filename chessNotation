@@ -1,0 +1,52 @@
+function chessNotation(notation) {
+  
+  let board = [];
+  
+  for (let line of notation.split`/`) {
+    let row = [];
+    for (let el of line) {
+      if (el >= '0' && el <= '9') {
+        for (let i = 0; i < parseInt(el); i++) {
+          row.push(0);
+        }
+      } else {
+        row.push(el);
+      }
+    }
+    board.push(row);
+  }
+  
+  for (let el of board)
+    console.log(el.join(""))
+  
+  let s = new Set();
+    
+  for (let i = 0; i < 8; i++) {
+    for (let j = 0; j < 8; j++) {
+      if (s.has(i+","+j)) continue;
+      s.add(j+","+(8-i-1))
+      let a = board[i][j];
+      let b = board[j][8-i-1];
+      board[i][j] = b; // (8, 0) -> (0, 0) ; (8, 1) -> (1, 8)
+      board[j][8-i-1] = a; // (8, 8)
+    }
+  }
+  
+  let ans = [];
+  for (let el of board) {
+    let cur = 0;
+    let row = [];
+    for (let i of el) {
+      if (i === 0) cur++;
+      else {
+        if (cur) row.push(cur+"");
+        cur = 0;
+        row.push(i);
+      }
+    }
+    if (cur) row.push(cur+"");
+    ans.push(row.join(""));
+  }
+  
+  return ans.join("/");
+}
