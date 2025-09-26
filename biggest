@@ -1,0 +1,4 @@
+function biggest(nums) {
+  
+  return nums.filter(x => x).map(String).sort((a, b) => (b + a) - (a + b)).join("") || '0'; 
+}
