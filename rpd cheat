@@ -1,0 +1,23 @@
+opt = "rock paper scissors".split(" ")
+
+def win(c):
+    
+    x = (opt.index(c) + 1) % 3
+    return opt[x]
+
+def lose(c):
+    
+    x = (opt.index(c)+2) % 3
+    return opt[x]
+
+ROUND = 0      
+
+def r_p_s_cheat(choice):
+    
+    global ROUND
+    
+    ROUND += 1
+    if ROUND % 10 == 0:
+        return lose(choice)
+    else:
+        return win(choice)
