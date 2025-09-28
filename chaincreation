@@ -1,0 +1,27 @@
+function chain(fns) {
+  
+  function createChain(params = []) {
+    
+    const map = {};
+
+    for (let name in fns) {
+      map[name] = (...args) => createChain(params.concat({ fn: fns[name], args }));
+    }
+
+    map.execute = function () {
+      if (params.length === 0) return undefined;
+
+      return params.reduce(function (acc, call, index) {
+        if (index === 0) {
+          return call.fn.apply(null, call.args);
+        } else {
+          return call.fn.apply(null, [acc].concat(call.args));
+        }
+      }, undefined);
+    };
+
+    return map;
+  }
+
+  return createChain();
+}
