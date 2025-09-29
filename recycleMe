@@ -1,0 +1,12 @@
+function recycleMe(recycle) { 
+  
+  let ans = [0, 0, 0];
+  
+  for (let el of recycle) {
+    if (el > 0) ans[0]++;
+    else if (el < 0) ans[1]++;
+    else ans[2]++;
+  }
+  
+  return ans;
+}
