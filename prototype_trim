@@ -1,0 +1,26 @@
+String.prototype.trim = function(c = " ") {
+  
+  let start = true;
+  let ans = [];
+  for (let char of this) {
+    if (start && char.toLowerCase() === c.toLowerCase()) {
+      continue;
+    } else {
+      start = false;
+      ans.push(char);
+    }
+  }
+  
+  start = true;
+  for (let i = ans.length - 1; i >= 0; i--) {
+    let char = ans[i];
+    if (char.toLowerCase() === c.toLowerCase()) {
+      ans[i] = "";
+    } else {
+      break;
+    }
+  }
+
+  return ans.join("");
+    
+}
