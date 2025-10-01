@@ -1,0 +1,27 @@
+def is_centered(xs: list[int], n: int) -> bool:
+
+    if n == 0 and len(xs) % 2 == 0: 
+        return True
+    
+    if not xs:
+        return n == 0
+    
+    if sum(xs) == n:
+        return True
+    
+    x = y = -1
+    if len(xs) % 2 == 0:
+        x, y = len(xs) // 2 - 1, len(xs) // 2
+        total = xs[x] + xs[y]
+    else:
+        x = y = len(xs) // 2
+        total = xs[x]
+    
+    print(x, y, x > 0, x < len(xs) - 1, xs)
+    while x > 0 and y < len(xs) - 1:
+        if total == n:
+            return True
+        x, y = x - 1, y + 1
+        total += xs[x] + xs[y]
+    
+    return False
