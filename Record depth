@@ -1,0 +1,20 @@
+function recordDepth(tree) {
+  
+  if (tree === null || !(tree.constructor === Object)) {
+    return null;
+  }
+
+  function solve(tree, depth) {
+    
+    tree['depth'] = depth;
+    
+    for (let [key, value] of Object.entries(tree)) {
+      if (value instanceof Object)
+        solve(value, depth + 1);
+    }
+  }
+  
+  solve(tree, 0);
+  
+  return tree;
+}
