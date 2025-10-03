@@ -1,0 +1,18 @@
+function topScores(records, nTop) {
+  
+  if (nTop <= 0) return [];
+  
+  let uniques = {};
+  for (let [name, value] of records) {
+    if (uniques[name] !== undefined) 
+      uniques[name] = Math.max(value, uniques[name]);
+    else
+      uniques[name] = value;
+  }
+  
+  let vals = [];
+  for (const [key, value]  of Object.entries(uniques)) {
+    vals.push([key, value]);
+  } 
+  
+  return vals.sort((b, a) => (a[1] != b[1] ? a[1] - b[1] : b[0].localeCompare(a[0]))).slice(0, nTop);}
