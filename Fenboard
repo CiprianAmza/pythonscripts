@@ -1,0 +1,91 @@
+def is_adjacent(a, b, x, y):
+    
+    print(a, b, x, y, sorted([abs(a-b), abs(x-y)]))
+    
+    return sorted([abs(a-x), abs(b-y)]) in ([0, 1], [1, 1])
+
+def kings_validation(board):
+    
+    kx1 = ky1 = kx2 = ky2 = -1
+    
+    for i in range(len(board)):
+        for j in range(len(board)):
+            if board[i][j] == 'K':
+                if kx1 != -1:
+                    raise 'There should be exactly one white king'
+                kx1, ky1 = i, j
+            if board[i][j] == 'k':
+                if kx2 != -1:
+                    raise 'There should be exactly one black king'
+                kx2, ky2 = i, j
+    
+    if kx1 == -1 or kx2 == -1:
+        raise 'There should be 2 different kings'
+        
+    if is_adjacent(kx1, ky1, kx2, ky2):
+        print(is_adjacent(kx1, ky1, kx2, ky2))
+        raise 'Kings should not be adjacent'
+        
+def pawns_validation(board):
+    
+    p1 = p2 = 0
+    for i in range(len(board)):
+        for j in range(len(board)):
+            if board[i][j] == 'p':
+                if i == 0 or i == len(board) - 1:
+                    raise 'Pawns can not stay on such a rank'
+                p1 += 1
+            if board[i][j] == 'P':
+                if i == 0 or i == len(board) - 1:
+                    raise 'Pawns can not stay on such a rank'
+                p2 += 1
+
+    if p1 > 8 or p2 > 8:
+        raise 'More than 8 pawns on some side'
+
+def pieces_validation(board):
+    
+    p1 = p2 = 0
+    for i in range(len(board)):
+        for j in range(len(board)):
+            if board[i][j] == ' ': continue
+            if board[i][j].islower():
+                p1 += 1
+            else:
+                p2 += 1
+    
+    if p1 > 16 or p2 > 16:
+        raise 'More than 16 pieces on some side'
+        
+def transform_board(board):
+    
+    ans = []
+    for line in board:
+        cur, spaces = [], 0
+        for char in line:
+            if char == ' ':
+                spaces += 1
+            else:
+                if spaces:
+                    cur.append(str(spaces))
+                cur.append(char)
+                spaces = 0
+        if spaces:
+            cur.append(str(spaces))
+        ans.append("".join(cur))
+    
+    return "/".join(ans)
+    
+def toFEN(board):
+    
+    if len(board) != 8 or any(len(row) != 8 for row in board):
+        return 'Invalid'
+    
+    try:
+        kings_validation(board)
+        pawns_validation(board)
+        pieces_validation(board)
+    except:
+        return 'Invalid'
+    
+    return transform_board(board)
