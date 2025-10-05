@@ -1,0 +1,1 @@
+array=_=>[4,!0,f=>f,0,{},'',_].map(x=>x>3?'array':typeof x)
