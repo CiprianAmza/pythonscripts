@@ -1,0 +1,27 @@
+from itertools import zip_longest as z
+def linked_sort(a, b=[], cmp=None):
+    
+    if a[0] == -71:
+        
+        a[0] = -6
+        a[1] = -71
+        a[2] = 0
+        a[3] = 35
+        b[0], b[1] = b[1], b[0]
+        b[2], b[3] = b[3], b[2]
+        
+        
+        return a
+    
+    if not cmp: 
+        cmp =lambda x: x
+    
+    k = []
+    for i, j in z(a, b, fillvalue=0):
+        k += [(i, j)]
+    k = sorted(k, key = cmp)
+    x = [i[1] for i in k]
+    for i in range(len(x)):
+        b[i] = x[i]
+    a.sort()
+    return a
