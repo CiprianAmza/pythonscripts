@@ -1,0 +1,30 @@
+function cardToInt(card) {
+
+  return /^-?\d+$/.test(card) ? parseInt(card) : 10;
+}
+
+function whoWon(players, extraCard, extraTakers) {
+  
+  let ans = [];
+  extraCard = cardToInt(extraCard);
+  for (const [key, cards] of Object.entries(players)) {
+    let sum = 0;
+    for (let card of cards.split(", ")) {
+      sum += cardToInt(card);
+    }
+
+    if (extraTakers.includes(key) && sum < 21) {
+        sum += extraCard;
+    }
+    ans.push([key, sum]);
+  }
+  
+return ans.sort((a, b) => {
+
+    if (a[1] === b[1]) return a[0].localeCompare(b[0]);
+    if (a[1] <= 21 && b[1] <= 21) return b[1] - a[1];
+    if (a[1] <= 21 && b[1] > 21) return -1;
+    if (a[1] > 21 && b[1] <= 21) return 1;
+
+    return a[1] - b[1];
+  });}
