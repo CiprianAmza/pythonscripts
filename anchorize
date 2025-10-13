@@ -1,0 +1,17 @@
+function parse(url) {
+
+  let [a, b] = url.split("://");  
+  
+  return `<a href="${a}://${b}">${a}://${b}</a>`;
+}
+
+function anchorize(text){
+  
+  let words = text.split(" ");
+  return words
+    .map(word => word.includes("://")
+      ? parse(word)
+      : word
+    )
+    .join(" ");
+}
