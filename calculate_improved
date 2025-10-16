@@ -1,0 +1,16 @@
+def calculate_improved(students):
+    
+    ans = []
+    for student in students:
+        name, marks = student.values()
+        marks = [mark if mark else 0 for mark in marks]
+        first = marks[0]
+        last = marks[-1]
+
+        if first:
+            mark = round(100 * last / first) - 100
+        else:
+            mark = 0
+        ans.append({"name": name, "improvement": mark})
+    
+    return sorted(ans, key=lambda x: (-x["improvement"], x["name"]))
