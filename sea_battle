@@ -1,0 +1,48 @@
+class SeaBattle():
+    
+    def __init__(self, user, enemy):
+        self.display = True  # Change this to False if you do not want to display the maps
+        self.user = user
+        self.enemy = enemy
+        self.cells = [sum([1 for line in enemy for cell in line if cell != "~"]), sum([1 for line in user for cell in line if cell != "~"])]
+        self.turn = 0
+        
+    def get_board(self):
+        
+        return (self.user, self.cells[self.turn]) if self.turn % 2 == 1 else (self.enemy, self.cells[self.turn])
+    
+    def next_round(self):
+        
+        self.turn = 1 - self.turn
+        
+    def get_opponent(self):
+        
+        return ["Enemy", "User"][self.turn]
+    
+    def get_player(self):
+        
+        return ["User", "Enemy"][self.turn]
+    
+    def make_change(self, row, col):
+        
+        if self.turn % 2 == 1:
+            self.user[row][col] = "~"
+        else:
+            self.enemy[row][col] = "~"
+        
+        self.cells[self.turn] -= 1
+        
+    def play(self, row, col):
+        
+        board, cells = self.get_board()
+        if board[row][col] == "~":
+            answer = f"No damage! {self.get_opponent()}'s turn"
+            self.next_round()
+        else:
+            if cells == 1:
+                answer = f"{self.get_player()} Wins!"
+            else:
+                answer = f"Ship damaged, {self.get_player()} to continue"
+            self.make_change(row, col)
+
+        return answer
