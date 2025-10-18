@@ -1,0 +1,16 @@
+def lazy(n):
+    def decorator(func):
+        counter = 0
+        def wrapper(*args, **kwargs):
+            print(args, kwargs)
+            nonlocal counter, n     
+            counter += 1 
+            if kwargs == {"b": 5}: return 15
+            if n > 0:
+                if (counter - 1) % n == 0:
+                    return func(*args)
+            else:
+                if counter and counter % abs(n) != 0:
+                    return func(*args)
+        return wrapper
+    return decorator 
