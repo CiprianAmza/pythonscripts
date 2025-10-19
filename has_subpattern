@@ -1,0 +1,17 @@
+from collections import Counter
+from math import gcd
+from functools import reduce
+
+def has_subpattern(s):
+    
+    c = Counter(s)
+    g = reduce(lambda x, y: gcd(x, y), [j for j in c.values()])
+    g = gcd(g, len(s))
+
+    if g == 1:
+        return "".join(sorted(s))
+    else:
+        vals = []
+        for i, j in c.items():
+            vals += [i] * (j // g)
+        return "".join(sorted(vals))
