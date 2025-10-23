@@ -1,0 +1,19 @@
+function* icombinations(arr, k) {
+  
+  if (!Array.isArray(arr) || arr.length < k || k <= 0) return null;
+
+  function* solve(start, combo) {
+    if (combo.length === k) {
+      yield [...combo];
+      return;
+    }
+
+    for (let i = start; i < arr.length; i++) {
+      combo.push(arr[i]);
+      yield* solve(i + 1, combo);
+      combo.pop();
+    }
+  }
+
+  yield* solve(0, []);
+}
