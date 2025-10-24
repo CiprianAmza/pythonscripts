@@ -1,0 +1,29 @@
+class Loopover:
+    
+    def __init__(self, size):
+        
+        self.size = size
+        self.grid = [*range(1, self.size ** 2 + 1)]
+    
+    def output(self):
+
+        return [[self.grid[i*self.size + j] for j in range(self.size)] for i in range(self.size)]
+    
+    def swap(self, _range):
+
+        for i, j in zip(_range, _range[1:]):
+            self.grid[i-1], self.grid[j-1] = self.grid[j-1], self.grid[i-1]
+
+    def move(self, query):
+        
+        instruction, value = query[0], int(query[1:]) - 1
+        
+        match instruction:
+            case "L":
+                self.swap(range(value * self.size + 1, value * self.size + 1 + self.size))
+            case "R":
+                self.swap(range(value * self.size + self.size, value * self.size, -1))
+            case "U":
+                self.swap(range(value + 1, (self.size - 1) * self.size + (value + 2), self.size))
+            case "D":
+                self.swap(range((self.size - 1) * self.size + (value + 1), value, -self.size))
