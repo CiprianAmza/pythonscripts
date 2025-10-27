@@ -1,0 +1,19 @@
+class HallOfFame{
+    constructor(size = 5, players = []) {
+      this.size = size;
+      this.players = players;
+    }
+
+    get list() {
+      let ans = this.players.sort((a, b) => b[1] !== a[1] ? (b[1] -a[1]) : a[0].localeCompare(b[0])).map(x => x[0] + ": " + x[1]).slice(0, this.size);
+      for (let i = ans.length; i < this.size; i++) {
+        ans.push("");
+      }
+      return ans;
+    }
+
+    add(player) {
+        this.players.push(player);
+      return this;
+    }
+}
