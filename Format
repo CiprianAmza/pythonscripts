@@ -1,0 +1,25 @@
+class Format:
+    
+    tags = frozenset(("div", "h1", "p", "span"))
+    
+    def __init__(self, structure=None):
+        self.text = structure or []
+    
+    def __getattr__(self, name):
+        
+        if name in self.tags:
+            return Format(self.text + [name])
+    
+    def __call__(self, *args):
+            
+        content = "".join(args)
+        for tag in reversed(self.text):
+            content = f"<{tag}>{content}</{tag}>"
+            
+        return content
+    
+    def __repr__(self):
+        
+        return f"Format({self.text})"
+    
+format = Format()
