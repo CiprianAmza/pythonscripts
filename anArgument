@@ -1,0 +1,12 @@
+function anArgument(...args) {
+  
+  if (args.length === 0) 
+    return "You didn't give me any arguments.";
+  if (args.length === 1)
+    return 'You gave me 1 argument and it is "' + args[0] + '".';
+  if (args.length === 2)
+    return 'You gave me 2 arguments and they are "' + args[0] + '" and "' + args[1] + '".';
+  
+  let val = args.slice(0, args.length-1).map(a => `"${a}"`).join(", ");
+  return "You gave me " + args.length + " arguments and they are " + val + ' and "' + args[args.length-1] + '".';
+}
