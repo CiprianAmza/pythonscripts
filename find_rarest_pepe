@@ -1,0 +1,14 @@
+def find_rarest_pepe(pepes):
+    
+    counter = dict()
+    for pepe in pepes:
+        counter[pepe] = counter.get(pepe, 0) + 1
+    
+    if min(counter.values()) >= 5:
+        return "No rare pepes!"
+    
+    rarest_pepe = min(counter.values())
+    ans = sorted(key for key, value in counter.items() if value == rarest_pepe)
+    
+    if len(ans) == 1: return ans[0]
+    else:             return ans
