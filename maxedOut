@@ -1,0 +1,10 @@
+function maxedOut(arr) {
+
+  let s = 0;
+  for (let i of arr) {
+    let v = i*i*i;
+    if (s+v >= Number.MAX_SAFE_INTEGER) return "You've pushed me to the max!";
+    s += v;
+  }
+  return s;
+}
