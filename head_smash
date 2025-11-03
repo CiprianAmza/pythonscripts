@@ -1,0 +1,8 @@
+def head_smash(arr):
+    
+    if isinstance(arr, int):
+        return "This isn't the gym!!"
+    if not arr:
+        return "Gym is empty"
+    
+    return [el.replace("O", " ") for el in arr]
