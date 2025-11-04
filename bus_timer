@@ -1,0 +1,12 @@
+def bus_timer(c):
+    
+    a, b = map(int, c.split(":"))
+    
+    total = a * 60 + b + 5
+    
+    if total > 23 * 60 + 45:
+        return (6*60 + 24*60-total) % 360
+    if 0 < total < 6 * 60:
+        return 6*60-a*60-b - 5
+    
+    return (15 - total % 15) % 15
