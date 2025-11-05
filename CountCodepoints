@@ -1,0 +1,11 @@
+#include <string>
+#include <cstddef>
+
+std::size_t CountCodepoints(const std::string &utf8)
+{
+  int ans = 0;
+  for (auto c: utf8)
+    if ((c & 0xC0) != 0x80) ++ans;
+  
+  return ans;
+}
