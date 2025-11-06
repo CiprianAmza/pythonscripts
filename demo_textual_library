@@ -1,0 +1,202 @@
+import time
+import random
+from textual.app import App, ComposeResult
+from textual.widgets import Header, Footer, DataTable, Static
+from textual.containers import Container, VerticalScroll
+from textual.reactive import reactive
+
+KAFKA_PRODUCER_INTERVAL_SECONDS = 1.1
+KAFKA_CONSUMER_INTERVAL_SECONDS = 1.3
+MAX_MESSAGES = 25
+
+EVENT_CONFIG = {
+    1: {"api_response_offset": 5, "api_delay": 9},
+    7: {"api_response_offset": 4, "api_delay": 14}
+}
+
+kafka_topic_list = []
+kafka_offset_counter = 0
+
+event_states = {
+    event_id: {
+        "buffer": [],
+        "api_status": "IDLE",
+        "api_timer_start": 0
+    } for event_id in EVENT_CONFIG.keys()
+}
+
+processed_output_list = []
+
+
+
+class KafkaTopicWidget(Static):
+    """Un widget care afișează conținutul topicului Kafka."""
+
+    def render(self) -> str:
+        if not kafka_topic_list:
+            return "[dim](gol)[/dim]"
+        return "\n".join([msg[1] for msg in kafka_topic_list])
+
+
+class ConsumerStateWidget(Static):
+    """Un widget care afișează starea consumer-ului și a buffer-elor."""
+
+    consumer_status_message = reactive("Așteaptă mesaje...")
+
+    def render(self) -> "Renderable":
+
+        from rich.table import Table as RichTable
+        from rich.panel import Panel as RichPanel
+        from rich.text import Text
+        from rich.layout import Layout  # <-- Importul cheie
+
+        status_text = Text(self.consumer_status_message, style="bold yellow")
+
+        rich_table = RichTable(title="Stare Evenimente Active", expand=True)
+        rich_table.add_column("Event ID", style="cyan")
+        rich_table.add_column("Stare API", style="white")
+        rich_table.add_column("Mărime Buffer", style="magenta")
+
+        for event_id, state in event_states.items():
+            api_status_display = state["api_status"]
+            if api_status_display == "PENDING":
+                delay = EVENT_CONFIG[event_id]["api_delay"]
+                elapsed = int(time.time() - state["api_timer_start"])
+                api_status_display = f"PENDING ({elapsed}s / {delay}s)"
+            rich_table.add_row(str(event_id), api_status_display, str(len(state["buffer"])))
+
+        main_layout = Layout()
+        main_layout.split_column(
+            Layout(status_text, size=2),  # Dăm 2 linii pentru textul de status
+            Layout(rich_table)  # Restul spațiului pentru tabel
+        )
+
+        return main_layout
+
+class OutputWidget(DataTable):
+    """Un widget care afișează output-ul procesat."""
+
+    def on_mount(self) -> None:
+        self.add_column("Mesaj", key="msg")
+        self.add_column("Status", key="status")
+
+    def add_processed_message(self, msg_str: str, status_str: str, status_style: str):
+        from rich.text import Text
+        styled_status = Text(status_str, style=status_style)
+        self.add_row(msg_str, styled_status, key=str(time.time()))
+        self.scroll_end(animate=True)
+
+
+
+class DemoApp(App):
+    """Aplicația TUI de simulare a consumer-ului."""
+
+    CSS_PATH = "demo_textual.css"
+    producer_timer = None  # <-- AICI E CORECȚIA
+
+    def compose(self) -> ComposeResult:
+        """Creează layout-ul aplicației."""
+        yield Header(name="🏁 Demo Simulare Consumer Buffering (Textual)")
+
+        with Container(id="main_container"):
+            with VerticalScroll(id="left_pane"):
+                yield Static("📬 KAFKA TOPIC", classes="pane_title")
+                yield KafkaTopicWidget(id="kafka_topic")
+                yield Static("🤖 CONSUMER", classes="pane_title")
+                yield ConsumerStateWidget(id="consumer_state")
+
+            with VerticalScroll(id="right_pane"):
+                yield Static("✅ FINAL PROCESSED OUTPUT", classes="pane_title")
+                yield OutputWidget(id="output_table")
+
+        yield Footer()
+
+    def on_mount(self) -> None:
+        """Rulează când aplicația pornește. Setăm timerele."""
+        self.producer_timer = self.set_interval(KAFKA_PRODUCER_INTERVAL_SECONDS,
+                                                self.run_producer)
+        self.set_interval(KAFKA_CONSUMER_INTERVAL_SECONDS, self.run_consumer)
+        self.set_interval(0.1, self.check_api_status)
+
+    def run_producer(self) -> None:
+        """Adaugă un mesaj în topic."""
+        global kafka_offset_counter
+        if kafka_offset_counter >= MAX_MESSAGES:
+            self.producer_timer.stop()  # <-- AICI E CORECȚIA
+            return
+
+        event_id = random.choice(list(EVENT_CONFIG.keys()))
+        msg_str = f"Event: {event_id}, Update(offset={kafka_offset_counter})"
+        kafka_topic_list.append((event_id, msg_str, kafka_offset_counter))
+        kafka_offset_counter += 1
+
+        self.query_one(KafkaTopicWidget).refresh()
+
+    def run_consumer(self) -> None:
+        """Citește un mesaj din topic."""
+        if not kafka_topic_list:
+            return
+
+        (event_id, msg_str, msg_offset) = kafka_topic_list.pop(0)
+        state = event_states[event_id]
+        consumer_widget = self.query_one(ConsumerStateWidget)
+
+        if state["api_status"] == "DONE":
+            api_offset = EVENT_CONFIG[event_id]["api_response_offset"]
+            if msg_offset > api_offset:
+                self.add_output_message(f"{msg_str}", "(direct)", "green")
+                consumer_widget.consumer_status_message = f"Procesat direct {msg_str}"
+            else:
+                self.add_output_message(f"{msg_str}", "(IGNORAT)", "dim red")
+                consumer_widget.consumer_status_message = f"Ignorat {msg_str} (deja complet)"
+        else:
+            state["buffer"].append((msg_str, msg_offset))
+            if state["api_status"] == "IDLE":
+                state["api_status"] = "PENDING"
+                state["api_timer_start"] = time.time()
+                consumer_widget.consumer_status_message = f"PRIMIT {msg_str}. Se cere MatchComplete pt Event {event_id}... ⏳"
+            else:
+                consumer_widget.consumer_status_message = f"API Fetch pt Event {event_id} în curs. Se bufferează {msg_str}..."
+
+        self.query_one(KafkaTopicWidget).refresh()
+        consumer_widget.refresh()
+
+    def check_api_status(self) -> None:
+        """Verifică dacă vreun apel API s-a terminat."""
+        consumer_widget = self.query_one(ConsumerStateWidget)
+
+        for event_id, state in event_states.items():
+            if state["api_status"] == "PENDING":
+                elapsed = time.time() - state["api_timer_start"]
+                if elapsed >= EVENT_CONFIG[event_id]["api_delay"]:
+                    state["api_status"] = "DONE"
+                    self.process_consumer_buffer(event_id)
+                    consumer_widget.consumer_status_message = f"API Răspuns primit pt Event {event_id}! Se procesează buffer-ul..."
+
+                consumer_widget.refresh()
+
+    def process_consumer_buffer(self, event_id: int) -> None:
+        """Golește buffer-ul pentru un eveniment."""
+        state = event_states[event_id]
+        config = EVENT_CONFIG[event_id]
+        api_offset = config["api_response_offset"]
+
+        self.add_output_message(f"Event: {event_id}, EventComplete", "(de la API)", "bold magenta")
+
+        temp_buffer = state["buffer"][:]
+        state["buffer"] = []
+
+        for msg_str, msg_offset in temp_buffer:
+            if msg_offset > api_offset:
+                self.add_output_message(f"{msg_str}", "(din buffer)", "cyan")
+            else:
+                self.add_output_message(f"{msg_str}", f"(IGNORAT, offset <= {api_offset})", "dim red")
+
+    def add_output_message(self, msg: str, status: str, style: str) -> None:
+        """Adaugă o linie în tabelul de output."""
+        self.query_one(OutputWidget).add_processed_message(msg, status, style)
+
+
+if __name__ == "__main__":
+    app = DemoApp()
+    app.run()
