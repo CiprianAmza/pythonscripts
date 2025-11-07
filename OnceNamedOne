@@ -1,0 +1,23 @@
+function OnceNamedOne(first, last) {
+  
+  Object.defineProperties(this, {
+    firstName: {
+      value: first,
+      writable: false,
+      configurable: false,
+      enumerable: true
+    },
+    lastName: {
+      value: last,
+      writable: false,
+      configurable: false,
+      enumerable: true
+    },
+    fullName: {
+      value: first + " " + last,
+      writable: false,
+      configurable: false,
+      enumerable: true
+    }
+  });
+}
