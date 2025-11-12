@@ -1,0 +1,20 @@
+function catchThief(queue){
+  
+  let s = new Set();
+  for (let i = 0; i < queue.length; i++) {
+    
+    let val = queue[i];
+    if (val === "#" || val === "X") continue;
+    val = parseInt(val);
+    
+    for (let j = Math.max(0, i-val); j <= Math.min(queue.length, i+val); j++)
+      s.add(j);
+  }
+  
+  let caught = 0;
+  for (let i = 0; i < queue.length; i++) {
+    if (queue[i] === "X" && s.has(i)) caught++;
+  }
+  
+  return caught;
+}
