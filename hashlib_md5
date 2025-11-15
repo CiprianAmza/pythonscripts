@@ -1,0 +1,21 @@
+import hashlib 
+
+
+def crack(s):
+
+    def solve(ans):
+        nonlocal ANS
+        if len(ans) == 5:
+            if hashlib.md5("".join(ans).encode()).hexdigest() == s:
+                ANS = ans[:]
+            return
+        
+        for i in "0123456789":
+            ans.append(i)
+            solve(ans.copy())
+            ans.pop()
+            
+    ANS = []
+    solve([])
+    
+    return "".join(ANS)
