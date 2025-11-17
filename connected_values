@@ -1,0 +1,20 @@
+Coord = tuple[int,int]
+
+def connected_values(arr: list[list[int]], val: int, coord: Coord) -> set[Coord]:
+    
+    x, y = coord
+    if arr[x][y] != val:
+        return set()
+    
+    answer = set()
+    stack = [(x, y)]
+    while stack:
+        x, y = stack.pop()
+        answer.add((x, y))
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                q, w = x + i, y + j
+                if 0 <= q < len(arr) and 0 <= w < len(arr[q]) and arr[q][w] == val and (q, w) not in answer:
+                    stack.append((q, w))
+    
+    return answer
