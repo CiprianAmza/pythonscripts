@@ -1,0 +1,20 @@
+function latLng(raw) {
+
+  const parts = raw.split(',');
+  function parseCoord(str) {
+    const trimmed = str.trim();
+
+    const numMatch = trimmed.match(/[-+]?\d*\.?\d+/);
+    let value = parseFloat(numMatch[0]);
+
+    const dirMatch = trimmed.match(/[NSEW]/i);
+    if (dirMatch) {
+      const dir = dirMatch[0].toUpperCase();
+      if (dir === 'S' || dir === 'W') value = value < 0 ? value : -value;
+    }
+
+    return value;
+  }
+
+  return [parseCoord(parts[0]), parseCoord(parts[1])];
+}
