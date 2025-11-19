@@ -1,0 +1,20 @@
+primes = [1] * (32_001)
+primes[0] = 0
+primes[1] = 0
+for i in range(2, len(primes)):
+    if primes[i]:
+        for j in range(i+i, len(primes), i):
+            primes[j] = 0
+PRIMES = {i for i, j in enumerate(primes) if j}
+
+def goldbach_partitions(n):
+    
+    if n % 2:
+        return []
+    
+    answer = []
+    for p in sorted(PRIMES):
+        if p <= n-p and (n-p) in PRIMES:
+            answer.append(f"{p}+{n-p}")
+    
+    return answer
