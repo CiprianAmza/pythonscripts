@@ -1,0 +1,4 @@
+function isJubilee(year) {
+  
+  return new Date(year, 6, 25).getDay() === 0;
+}
