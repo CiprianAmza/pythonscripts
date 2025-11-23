@@ -1,0 +1,11 @@
+Object.defineProperty(Array.prototype, "first", {
+  value: function () {
+    return this.length ? this[0] : undefined;
+  }
+});
+
+Object.defineProperty(Array.prototype, "last", {
+  value: function () {
+    return this.length ? this[this.length - 1] : undefined;
+  }
+});
