@@ -1,0 +1,7 @@
+Array.prototype.only = function(keys)
+{
+  let ans = [];
+  for (let el of keys.sort((a, b) => a - b))
+    ans.push(this[el]);
+  return ans;
+}
