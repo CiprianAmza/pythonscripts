@@ -1,0 +1,12 @@
+def pyramid(n):
+    
+    l = n + 2
+    r = n + 2
+    ans = []
+    for _ in range(n):
+        ans.append(" " * (l-3) + "/" + " " * (r-l) + "\\" + " " * (n-r))
+        l -= 1
+        r += 1
+    ans[-1] = ans[-1].replace(" ", "_")
+    
+    return "\n".join(ans) + "\n"
