@@ -1,0 +1,6 @@
+def extract_bits(value, offset, length):
+    
+    mask = (1 << length) - 1            
+    result = (value >> offset) & mask
+        
+    return result
