@@ -1,0 +1,14 @@
+function validateRace(moves) {
+  
+  if (moves.reduce((x, y) => x + y) != 0)
+    return false;
+  
+  let vals = moves.map(x => 0);
+  for (let i = 0; i < moves.length; i++) {
+    let v = moves[i] + i;
+    if (vals[v] || v < 0 || v >= moves.length) return false;
+    vals[v]++;
+  }
+  
+  return true;
+}
