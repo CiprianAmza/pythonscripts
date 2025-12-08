@@ -1,0 +1,16 @@
+def total_licks(env):
+    
+    s = 252
+    best = ans = 0
+    
+    for i, j in env.items():
+        s -= -j
+        if j > best:
+            best = j
+            ans = i
+            
+    rest = ""
+    if ans:
+        rest = f" The toughest challenge was {ans}."
+    
+    return f"It took {s} licks to get to the tootsie roll center of a tootsie pop." + rest
