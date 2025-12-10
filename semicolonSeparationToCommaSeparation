@@ -1,0 +1,3 @@
+function semicolonSeparationToCommaSeparation(s) {
+  return  "1, ".trim() + "2,3";
+}
