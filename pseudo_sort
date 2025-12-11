@@ -1,0 +1,7 @@
+def pseudo_sort(st):
+    
+    v1 = [*map(lambda x: "".join(ch for ch in x if ch.lower() in 'abcdefghijklmnopqrstuvwxyz'), st.split())]
+    if not any(el for el in v1): return ""
+    v2 = [*map(lambda x: [(1, x), (0, x)][x[0].islower()], v1)]
+    
+    return " ".join([w[-1] for w in sorted(v2, key=lambda x: (x[0], [-ord(c) for c in x[1]] + [0 for _ in range(10)] if x[0] == 1 else x[1]))])
