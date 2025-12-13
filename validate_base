@@ -1,0 +1,10 @@
+def validate_base(number: str, base: int) -> bool:
+    
+    digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    for char in number:
+        value = digits.find(char)
+        if value == -1 or value >= base:
+            return False
+
+    return True
