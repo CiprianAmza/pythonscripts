@@ -1,0 +1,9 @@
+def order_countries(q = {})
+  q
+    .sort_by do |country, medals|
+      gold, silver, bronze = medals.split(',').map(&:to_i)
+      [-gold, -silver, -bronze, country]
+    end
+    .map(&:first)
+    .join('-')
+end
