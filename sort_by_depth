@@ -1,0 +1,13 @@
+def sort_by_depth(arr):
+    
+    def solve(x):
+        
+        ans = 0
+        if x == []:
+            return 0
+
+        for i in x:
+            return 1 + solve(i)
+
+    
+    return sorted(arr, key=lambda x: solve(x))
