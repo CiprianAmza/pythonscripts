@@ -1,0 +1,21 @@
+def upper_triangular(mat):
+    
+    s = set()
+    
+    for i in range(len(mat)):
+        for j in range(len(mat[0])):
+            if i > j:
+                s.add(mat[i][j])
+    
+    return s == {0}
+
+def lower_triangular(mat):
+    
+    s = set()
+    
+    for i in range(len(mat)):
+        for j in range(len(mat[0])):
+            if i < j:
+                s.add(mat[i][j])
+    
+    return s == {0}
