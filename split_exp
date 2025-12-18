@@ -1,0 +1,22 @@
+def split_exp(n):
+    
+    point = False
+    a = []
+    b = []
+    k = -1
+    w = len(n) if not "." in n else len(n.split(".")[0])
+    for i in str(n):
+        if i == ".":
+            point = True
+            continue
+        if not point:
+            w -= 1
+            if i == "0": continue
+            a += [i + "0" * w]
+        else:
+            k += 1
+            if i == "0": continue
+            b += ["." + "0" * k + i]
+    
+    
+    return a + b
