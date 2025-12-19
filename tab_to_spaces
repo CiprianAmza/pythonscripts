@@ -1,0 +1,12 @@
+def tab_to_spaces(text):
+    
+    ans = []
+    j = 1
+    
+    for t in text:
+        ans += [t if t != "\t" else " " * [1, 4, 3, 2][j%4]]
+        j += 1 if t != "\t" else [1, 4, 3, 2][j%4]
+        if t == "\n":
+            j = 1
+    
+    return "".join(ans)
