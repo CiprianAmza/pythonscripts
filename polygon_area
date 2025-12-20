@@ -1,0 +1,4 @@
+def polygon_area(a, b, c, d):
+    
+    
+    return (a+c) * b / 2
