@@ -1,0 +1,7 @@
+def mirror(code, alph="abcdefghijklmnopqrstuvwxyz"):
+    
+    m = dict()
+    for i, j in zip(alph, alph[::-1]):
+        m[i] = j
+    
+    return "".join(m.get(j, j) for j in code.lower())
