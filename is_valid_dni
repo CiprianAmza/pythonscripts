@@ -1,0 +1,15 @@
+def is_valid_dni(s):
+    
+    if len(s) != 9:
+        return False
+    
+    nr = s[:8]
+    last = s[-1]
+    
+    try:
+        val = int(nr) % 23
+        alph = "TRWAGMYFPDXBNJZSQVHLCKE"
+        
+        return last == alph[val]
+    except:
+        return False
