@@ -1,0 +1,8 @@
+function countAnimals(animals, count) {
+
+  return count.map(function(animal) {
+    var reg = new RegExp(animal, "g");
+    
+    return (animals.match(reg) || []).length;
+  });
+}
