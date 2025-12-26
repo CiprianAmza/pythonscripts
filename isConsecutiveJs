@@ -1,0 +1,15 @@
+const isConsecutive = (str) => {
+  
+  let seen = new Set();
+  let last = str[0];
+  for (let el of str) {
+    if (el === last) continue;
+    else {
+      if (seen.has(el)) return false;
+      last = el;
+      seen.add(el);
+    }
+  }
+  
+  return true;
+}
