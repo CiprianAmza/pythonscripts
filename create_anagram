@@ -1,0 +1,6 @@
+from collections import Counter
+
+def create_anagram(s, t):
+    
+    a, b = Counter(s), Counter(t)
+    return len(s) - sum(min(a[i], b[i]) for i in a.keys())
