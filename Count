@@ -1,0 +1,19 @@
+def count_and_print_graph(t, m):
+    
+    d = dict()
+    for i in t.lower():
+        if i in "abcdefghijklmnopqrstvwuxyz":
+            d[i] = d.get(i, 0) + 1
+    
+    v = max(d.values())
+    ans = []
+    for i, j in d.items():
+        # 100 ... v
+        # ? ... j
+        k = j * 100 / v
+        
+        q = k * m / 100
+        ans.append((q, i))
+    ans.sort(key=lambda x: (-x[0], x[1]))
+    
+    return "\n".join([v + ":" + int(k)*"#" for k, v in ans])
