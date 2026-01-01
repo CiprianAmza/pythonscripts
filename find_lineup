@@ -1,0 +1,9 @@
+def find_lineup(d):
+    
+    if sorted(d) != [*range(0, len(d))]:
+        return []
+    
+    lst = [0] * len(d)
+    for i, j in enumerate(d):
+        lst[j] = i + 1
+    return lst
