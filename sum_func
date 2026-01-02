@@ -1,0 +1,16 @@
+function sum(x) {
+  
+  if (x === undefined) return 0;
+  
+  const f = function(nextNum) {
+    if (nextNum === undefined) {
+      return x;
+    }
+    
+    x += nextNum;
+    return f;
+  };
+
+  return f;
+ 
+}
