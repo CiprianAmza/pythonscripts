@@ -1,0 +1,12 @@
+var nextBirthdayOfTheWeek = function (b) {
+
+  let y = b.getFullYear();
+  let m = b.getMonth();
+  let z = b.getDate();
+  let w = b.getDay();
+
+  for (let i = 1; i < 30; i++) {
+    let n = new Date(y + i, m, z);
+    if (n.getDay() === w) return i;
+  }
+}
