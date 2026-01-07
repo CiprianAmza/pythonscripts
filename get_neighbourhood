@@ -1,0 +1,11 @@
+def get_neighbourhood(n_type, mat, coordinates):
+    
+    x, y = coordinates
+    if x < 0 or y < 0 or x >= len(mat) or y >= len(mat[x]):
+        return []
+    
+    coords = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    if n_type == "moore":
+        coords += [(1, 1), (-1, -1), (1, -1), (-1, 1)]
+    
+    return [mat[i+x][j+y] for i, j in coords if i+x >= 0 and j+y >= 0 and i+x < len(mat) and j+y < len(mat[i+x])]
