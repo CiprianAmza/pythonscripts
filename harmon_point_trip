@@ -1,0 +1,3 @@
+def harmon_point_trip(xA, xB, xC):
+        
+    return -round((xA*xC + xB*xC - 2*xA*xB) / (xA + xB - 2*xC), 4)
