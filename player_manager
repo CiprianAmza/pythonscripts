@@ -1,0 +1,14 @@
+def player_manager(players):
+    
+    if not players:
+        return []
+    ans = []
+    name = ""
+    for v in players.split(", "):
+        if name != "":
+            ans.append({"player": name, "contact": int(v)})
+            name = ""
+        else:
+            name = v
+    
+    return ans
