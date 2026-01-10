@@ -1,0 +1,6 @@
+difference = lambda x, y: (x - y if x >= y else y - x) - 1
+def count_streets(streets, drivers):
+    
+    indexes = {street: index for index, street in enumerate(streets)}
+    
+    return [difference(indexes.get(end), indexes.get(start)) for start, end in drivers]
