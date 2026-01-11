@@ -1,0 +1,12 @@
+def countdown(milliseconds):
+    
+    sign = "+-"[milliseconds < 0]
+    milliseconds = abs(milliseconds)
+    
+    hours = milliseconds // 3_600_000
+    milliseconds = milliseconds - 3_600_000 * hours
+
+    minutes = milliseconds // 60_000
+    seconds = (milliseconds - minutes * 60_000) // 1_000
+    
+    return f"{sign}{hours:02}:{minutes:02}:{seconds:02}"
