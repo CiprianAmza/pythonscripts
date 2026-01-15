@@ -1,0 +1,7 @@
+def solution(b, c):
+    
+    while c- b >= 0:
+        b, c = c - b, b
+        
+    return c, c + b
+    
