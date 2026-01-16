@@ -1,0 +1,8 @@
+def reduce(list, &block)
+  return nil if list.empty?
+  accumulator = list.first
+  list.drop(1).each do |element|
+    accumulator = block.call(accumulator, element)
+  end
+  accumulator
+end
