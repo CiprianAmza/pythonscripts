@@ -1,0 +1,8 @@
+select c.customer_id, (c.first_name || ' ' || c.last_name) as full_name, count(r.rental_id) AS total_rentals from customer c
+join rental r on r.customer_id = c.customer_id
+join inventory i on r.inventory_id = i.inventory_id
+join film f on f.film_id = i.film_id
+group by c.customer_id, c.first_name, c.last_name
+having count(case when f.rating = 'NC-17' then 1 end) = 0
+order by total_rentals DESC, c.last_name
+limit 5;
