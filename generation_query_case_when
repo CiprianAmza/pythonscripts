@@ -1,0 +1,13 @@
+WITH MAP_GEN AS (
+    SELECT 'Generation Z' AS gen_name, 1997 AS start_yr, 2012 AS end_yr UNION ALL
+    SELECT 'Millennials', 1981, 1996 UNION ALL
+    SELECT 'Generation X', 1965, 1980 UNION ALL
+    SELECT 'Baby Boomers', 1946, 1964 UNION ALL
+    SELECT 'Silent Generation', 1928, 1945 UNION ALL
+    SELECT 'Greatest Generation', 0, 1927
+)
+SELECT 
+    u.id, u.name, u.birthdate, g.gen_name AS generation
+FROM users u
+LEFT JOIN MAP_GEN g ON EXTRACT(YEAR FROM u.birthdate) BETWEEN g.start_yr AND g.end_yr
+ORDER BY u.id;
