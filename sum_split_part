@@ -1,0 +1,8 @@
+SELECT SUM(ASCII(LEFT(SPLIT_PART(name, ' ', 2), 1))) AS hidden_code
+FROM (
+    SELECT name
+    FROM employees
+    WHERE left_date IS NULL
+    ORDER BY joined_date ASC
+    LIMIT 5
+) AS top_employees;
