@@ -1,0 +1,9 @@
+def monkeys():
+    v=["Five","Four","Three","Two","One"]
+    a=[]
+    for i in v:
+        a.append(f"{i} little monkey"+["","s"][i!="One"]+" jumping on the bed,\n"+["One","He"][i=="One"]+" fell off and bumped his head.\nMother called the doctor and the doctor said:")
+        if i=="One":a.append("Put those monkeys right to bed!")
+        else:a.append("No more monkeys jumping on the bed!\n")
+        
+    return "\n".join(a)
