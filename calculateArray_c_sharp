@@ -1,0 +1,36 @@
+using System;
+
+namespace smile67Kata
+{
+    public class Kata
+    {
+        public string calculateArray(string stringArray)
+        {
+            if (string.IsNullOrEmpty(stringArray)) return "0,0,TRUE";
+            
+            double sum = 0;
+            int count = 0;
+            
+            foreach (var item in stringArray.Split(';'))
+            {
+                if (int.TryParse(item, out int val)) 
+                {
+                    sum += val;
+                    count++;
+                }
+            }
+
+            if (count == 0) return "0,0,TRUE";
+
+            int avg = (int)Math.Round(sum / count, MidpointRounding.AwayFromZero);
+            
+            int digitSum = 0;
+            foreach (char c in Math.Abs(avg).ToString()) 
+            {
+                digitSum += c - '0';
+            }
+
+            return $"{avg},{digitSum},{(digitSum % 5 == 0 ? "TRUE" : "FALSE")}";
+        }
+    }
+}
