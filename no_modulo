@@ -1,0 +1,4 @@
+# return the result of n % 16
+def solution(n)
+  n & 15
+end
