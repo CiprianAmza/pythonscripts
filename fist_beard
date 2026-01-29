@@ -1,0 +1,8 @@
+def fist_beard(arr):
+    
+    ans = []
+    for ar in arr:
+        for c in ar:
+            ans.append(chr(c))
+            
+    return "".join(ans)
