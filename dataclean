@@ -1,0 +1,3 @@
+def dataclean(values)
+  values&.uniq { |entry| entry.first }&.sort_by { |entry| entry.last }
+end
