@@ -1,0 +1,14 @@
+def circle_mender(content: str) -> str:
+    
+    ans = []
+    for el in content.splitlines():
+        if "#" not in el:
+            ans.append(" " * 40)
+        elif el.count("#") == 1:
+            ans.append(el)
+        else:
+            a = el.find("#")
+            b = el.rfind("#")
+            ans.append(" " * a + "#" * (b-a+1) + " " * (40-b-1))
+    
+    return "\n".join(ans[:20]) + "\n"
