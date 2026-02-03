@@ -1,0 +1,13 @@
+def transform(s1):
+    
+    a = s1[0]
+    b = s1[-1]
+    c = len(s1[1:-1])
+    while c >= 10:
+        c = sum(map(int, str(c)))
+
+    return a + str(c) + b
+
+def same_encryption(s1, s2):
+    
+    return transform(s1) == transform(s2)
