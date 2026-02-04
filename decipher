@@ -1,0 +1,16 @@
+function decipher (mesaj) {
+  
+    let ans = "";
+  
+    for (let i = 0; i < mesaj.length; i++) {
+        let cod = mesaj.charCodeAt(i);
+        if (cod >= 65 && cod <= 90) {
+            ans += String.fromCharCode(((cod - 65 + 7) % 26) + 65);
+        } else if (cod >= 97 && cod <= 122) {
+            ans += String.fromCharCode(((cod - 97 + 7) % 26) + 97);
+        } else {
+            ans += mesaj[i];
+        }
+    }
+    return ans;
+}
