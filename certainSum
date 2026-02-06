@@ -1,0 +1,7 @@
+function certainSum(a, b){
+  
+  if (!Number.isSafeInteger(a) || !Number.isSafeInteger(b) || !Number.isSafeInteger(a+b)) {
+    return false;
+  }
+  return a + b;
+}
