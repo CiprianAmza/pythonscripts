@@ -1,0 +1,7 @@
+rev=lambda x: x[:-1] if x[-1] == "'" else x + "'" if len(x) == 1 else x
+def create_commutator(a: str, b: str) -> str:
+    
+    a = a.split()
+    b = b.split()
+    
+    return " ".join(a + b + [*map(rev, a[::-1])] + [*map(rev, b[::-1])])
