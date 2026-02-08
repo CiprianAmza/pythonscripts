@@ -1,0 +1,8 @@
+def f(p, q):
+    
+    try:
+        a = p / (1 - (1-p) * (1-q))
+    except:
+        return None
+    
+    return (a, (1-q)*a)
