@@ -1,0 +1,21 @@
+function sortLetters(s) {
+  
+  let vowels = "aeiou";
+  let a = [];
+  let b = [];
+
+  for (let arr of s) {
+    for (let el of arr) {
+      if (typeof el === 'string') {
+        let lower = el.toLowerCase();
+        if (vowels.includes(lower)) {
+          a.push(el.toUpperCase());
+        } else if (/[a-z]/i.test(el)) {
+          b.push(el.toUpperCase());
+        }
+      }
+    }
+  }
+
+  return [a, b];
+}
