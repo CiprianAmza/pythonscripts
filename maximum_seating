@@ -1,0 +1,20 @@
+def solve(lst):
+    
+    ans = row = 0
+    
+    for i, j in enumerate(lst):
+        if j:
+            row = 0
+        else:
+            row += 1
+            if row == 3 or i == 0:
+                if ((i+2) < len(lst) and lst[i+1] == 0 and lst[i+2] == 0) or (i+1 == len(lst) - 1 and lst[i+1] == 0) or i == len(lst) - 1:
+                    row = 0
+                    ans += 1
+                    lst[i] = 1
+                    
+    return ans
+
+def maximum_seating(lst):
+    
+    return solve(lst) + solve(lst[::-1])
