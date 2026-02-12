@@ -1,0 +1,15 @@
+def i_speak_french(sentence):
+    
+    ans = []
+    l = True
+    w = "Baguette"
+    for v in sentence.split():
+        ans.append(w if l else w.lower())
+        l = False
+        if v[-1] in ".?!":
+            l = True
+            ans.append("Encore!")
+    if ans and ans[-1] != "Encore!":
+        ans.append("Encore!")
+    
+    return " ".join(ans)
