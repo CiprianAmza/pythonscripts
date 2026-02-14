@@ -1,0 +1,34 @@
+def get_minutes(a, b):
+    
+    x = [*map(int, a.split(":"))]
+    y = [*map(int, b.split(":"))]
+    
+    x = x[0] * 60 + x[1]
+    y = y[0] * 60 + y[1]
+    if x >= y:
+        y += 24 * 60
+        
+    return y - x - 1
+
+def transform(a):
+    
+    min = a // 60
+    sec = a - min * 60
+    
+    if min < 10:
+        min = "0" + str(min)
+    if sec < 10:
+        sec = "0" + str(sec)
+    
+    return f"{min}:{sec}"
+    
+
+def solve(arr):
+    
+    arr = sorted(set(arr))
+    arr.append(arr[0])
+    best = 0
+    for i, j in zip(arr, arr[1:]):
+        best = max(best, get_minutes(i, j))
+    
+    return transform(best)
