@@ -1,0 +1,47 @@
+from random import shuffle
+def jumble(string):
+    answer = []
+    for word in string.split(' '):
+        if sum(1 for el in word if not el.isalnum()) > 1:
+            answer += [word]
+            continue
+        if len(word) < 4:
+            answer += [word]
+            continue
+        end = word[-1]
+        if not end.isalnum():
+            my_word = word[:-1]
+        else:
+            my_word = word
+            end = ''
+        if len(my_word) < 4:
+            answer += [word]
+            continue
+        if "'" in word:
+            answer += [word]
+            continue
+        
+        q = [el for el in my_word[1:-1]]
+        o = q[:]
+        b = 0
+        ans = ""
+        for _ in range(1000):
+            shuffle(q)
+            k = sum(1 for i, j in zip(q, o) if i != j)
+            if k >= b:
+                b = k
+                ans = q[:]
+        q = o[:]
+        for _ in range(len(q)):
+            q = q[1:] + [q[0]]
+            k = sum(1 for i, j in zip(q, o) if i != j)
+            if k >= b:
+                b = k
+                ans = q[:]
+
+        q = ans
+        if b == 0:
+            print(q, o)
+        my_word = my_word[0] + ''.join(q[::-1]) + my_word[-1] + end
+        answer += [my_word]
+    return ' '.join(answer)
