@@ -1,0 +1,7 @@
+Array.prototype.remove = function(index) {
+
+  if (index > -1 && index < this.length) {
+    this.splice(index, 1);
+  }
+  return this;
+};
