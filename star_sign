@@ -1,0 +1,29 @@
+def star_sign(date): 
+    
+    day = date.day
+    month = date.month
+
+    if month == 1:
+        return "Aquarius" if day >= 21 else "Capricorn"
+    elif month == 2:
+        return "Pisces" if day >= 20 else "Aquarius"
+    elif month == 3:
+        return "Aries" if day >= 21 else "Pisces"
+    elif month == 4:
+        return "Taurus" if day >= 21 else "Aries"
+    elif month == 5:
+        return "Gemini" if day >= 22 else "Taurus"
+    elif month == 6:
+        return "Cancer" if day >= 22 else "Gemini"
+    elif month == 7:
+        return "Leo" if day >= 23 else "Cancer"
+    elif month == 8:
+        return "Virgo" if day >= 24 else "Leo"
+    elif month == 9:
+        return "Libra" if day >= 24 else "Virgo"
+    elif month == 10:
+        return "Scorpio" if day >= 24 else "Libra"
+    elif month == 11:
+        return "Sagittarius" if day >= 23 else "Scorpio"
+    elif month == 12:
+        return "Capricorn" if day >= 22 else "Sagittarius"
