@@ -1,0 +1,30 @@
+package xcom.dna.mapping;
+
+import java.util.*;
+
+public class HopeLunaMapper {
+  
+  private final Map<Character, Character> mapping = new HashMap<>();
+  
+  public HopeLunaMapper() {
+    // пари символів для заміни
+    mapping.put('H', 'L'); mapping.put('L', 'H');
+    mapping.put('O', 'U'); mapping.put('U', 'O');
+    mapping.put('P', 'N'); mapping.put('N', 'P');
+    mapping.put('E', 'A'); mapping.put('A', 'E');
+    mapping.put('h', 'l'); mapping.put('l', 'h');
+    mapping.put('o', 'u'); mapping.put('u', 'o');
+    mapping.put('p', 'n'); mapping.put('n', 'p');
+    mapping.put('e', 'a'); mapping.put('a', 'e');
+  }
+  
+  public String mapStrand(SlcBase base) {
+    // порожній рядок для результату
+    StringBuilder sb = new StringBuilder();
+    for(SlcBase current = base; current != null; current = current.next()) {
+      // замінюємо символ
+      sb.append(mapping.getOrDefault(current.nucleobase(), current.nucleobase()));
+    }
+    return sb.toString().toUpperCase();  // Повертаємо рядок у верхньому регістрі
+  }
+}
