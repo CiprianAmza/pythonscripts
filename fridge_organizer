@@ -1,0 +1,5 @@
+def fridge_organizer(items):
+    
+    ans = sorted(filter(lambda x: x.expiry_days >= 0, items), key=lambda x: ((not x.is_almost_empty, x.expiry_days, x.name)))
+    
+    return [*map(lambda x: x.name, ans)]
