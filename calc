@@ -1,0 +1,21 @@
+def calc(xs)
+  s = 0
+  stop = false
+  
+  while xs.any?
+    g = xs.reduce(:gcd)
+    return s + xs.min * xs.length if g == 1
+
+    xs.each_index do |i|
+      s += g
+      xs[i] -= g
+      if xs[i] <= 0
+        stop = true
+      end
+    end
+    
+    break if stop
+  end
+  
+  s
+end
