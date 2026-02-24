@@ -1,0 +1,6 @@
+function leastMove(n){
+
+  n -= 1
+  return Math.floor((n+1) * (n+2) / 6);
+  
+}
