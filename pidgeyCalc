@@ -1,0 +1,11 @@
+function pidgeyCalc ( pidgeys, candy ) {
+  
+ let k = Math.floor((candy + pidgeys - 1) / 12);
+  k = Math.min(k, pidgeys);
+
+  while (k < pidgeys && (candy - (k * 12) + k + (pidgeys - k - 1)) >= 11) {
+      k++; 
+  }
+
+  return k * 500;
+}
