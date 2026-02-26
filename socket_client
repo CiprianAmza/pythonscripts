@@ -1,0 +1,17 @@
+import socket
+def socket_client():
+    
+    host, port, test_message = '127.0.0.1', 1111, "test"
+    encoded_message = test_message.encode('utf-8')
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket.settimeout(1)
+    
+    try:
+        client_socket.connect((host, port))
+        client_socket.sendall(encoded_message)
+        return client_socket.recv(1024).decode('utf-8') == test_message
+    except Exception as e:
+        return None
+    finally:
+        client_socket.close()
+    
