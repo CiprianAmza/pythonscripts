@@ -1,0 +1,38 @@
+import re
+
+def math_test(picture, questions):
+        
+    real_ans = []
+    
+    ans = []
+    for line in picture.splitlines():
+        row = []
+        if "|" in line:
+            for v in line.split("|"):
+                q = "".join([el for el in v.strip() if el not in "_/"])
+                if q:
+                    row.append(q)
+        if row:
+            ans.append(row.copy())
+            
+    for question in questions.split("\n"):
+        name = question.split(":")[0]
+        parameter = re.findall(r"(left|right|up|down)", question)[0]
+        DIR = {"left": (0, -1), "right": (0, 1), "up": (-1, 0), "down": (1, 0)}
+        dx, dy = DIR[parameter]
+        
+        x=y=-1
+        for i in range(len(ans)):
+            for j in range(len(ans)):
+                if ans[i][j] == name:
+                    x, y = i, j
+                    break
+        x, y = x + dx, y + dy
+        if 0 <= x < len(ans) and 0 <= y < len(ans):
+            val = ans[x][y]
+        else:
+            val = "nobody"
+        real_ans.append(question.replace("?", val))
+        
+        
+    return "\n".join(real_ans)
