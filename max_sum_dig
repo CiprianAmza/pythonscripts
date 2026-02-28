@@ -1,0 +1,18 @@
+def max_sum_dig(n_max, max_sum):
+    
+    def is_valid(n):
+        s = str(n)
+        for i in range(3, len(s)):
+            if sum(map(int, s[i-3:i+1])) > max_sum:
+                return False
+        return True
+    
+    numbers = []
+    for n in range(1000, n_max+1):
+        if is_valid(n):
+            numbers.append(n)
+    
+    _mean = sum(numbers) / len(numbers)
+    val = sorted(numbers, key=lambda x: (abs(x-_mean), x))[0]
+    
+    return [len(numbers), val, sum(numbers)]
