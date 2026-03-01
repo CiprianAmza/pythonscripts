@@ -1,0 +1,5 @@
+def can_i_play(n, s, e):
+    
+    if s > e:
+        return n >= s or n < e
+    return s <= n < e
