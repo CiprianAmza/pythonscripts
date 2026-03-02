@@ -1,0 +1,19 @@
+def min_moves_with_promotion(a: str, b: str) -> int:
+    
+    x, y = list(a)
+    q, w = list(b)
+    y, w = [*map(int, [y, w])]
+    
+    if x == q and y <= w:
+        return w - y
+    else:
+        base = 8 - y
+        queen_max = horse_max = 2
+        if x == q or 8 == w:
+            queen_max = 1
+        d1, d2 = abs(ord(x) - ord(q)), abs(8-w)
+        print(d1, d2)
+        if sorted([d1, d2]) == [1, 2] or d1 == d2:
+            horse_max = 1
+        return base + min(queen_max, horse_max)
+        
