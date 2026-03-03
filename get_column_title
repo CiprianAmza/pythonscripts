@@ -1,0 +1,16 @@
+def get_column_title(num):
+    
+    if not isinstance(num, int):
+        raise TypeError(num)
+    
+    if num <= 0:
+        raise IndexError(num)
+    
+    title = []
+    
+    while num > 0:
+        num -= 1 
+        title.append(chr(num % 26 + ord('A')))
+        num //= 26
+        
+    return "".join(title[::-1])
