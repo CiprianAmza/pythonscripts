@@ -1,0 +1,14 @@
+def empty_values(lst):
+    
+    V = {
+        type("s"): "",
+        type(1): 0,
+        type(True): False,
+        type(1.0): 0.0,
+        type((0,)): (),
+        type({}): {},
+        type(set()): set(),
+        type([]): [],
+        type(None): None
+    }
+    return [*map(lambda x: V[type(x)], lst)]
