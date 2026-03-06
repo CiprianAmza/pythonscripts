@@ -1,0 +1,31 @@
+function distributeGifts(wishes){
+  
+  return wishes.map(x => getDiv(x)).reduce((x, y) => x + y);
+}
+
+function getDiv(n) {
+    
+  if (n <= 2) {
+    return n;
+  }
+  let ans = 1;
+  if (n % 2 === 0) {
+    return n / 2;
+  }
+  let isPrime = true;
+  for (let i = 3; i <= Math.sqrt(n); i += 2) {
+    if (n % i === 0) {
+      ans = Math.max(i, ans);
+      isPrime = false;
+    } 
+    if (n % ( n / i) === 0) {
+      ans = Math.max(ans, n / i);
+      isPrime = false;
+    } 
+  }
+
+  if (isPrime) {
+    return n;
+  }
+  return ans;
+}
