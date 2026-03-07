@@ -1,0 +1,17 @@
+class GroupByDifference {
+    constructor(numbers) {
+        this.numbers = numbers.sort((a, b) => a - b);
+    }
+
+    find(difference) {
+        let ans = new Set();
+      for (let i = 1; i < this.numbers.length; i++) {
+        if (this.numbers[i] - this.numbers[i-1] <= difference) {
+          ans.add(i-1);
+          ans.add(i);
+        }
+      }
+      
+      return [...ans].map(x => this.numbers[x]).sort((a, b) => a - b);
+    }
+}
