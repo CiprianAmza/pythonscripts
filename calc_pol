@@ -1,0 +1,11 @@
+def calc_pol(pol_str, x = None):
+    
+    P = pol_str
+    if x is None:
+        return "There is no value for x"
+    
+    pol_str = pol_str.replace("x", "(" + str(x) + ")")
+    v = eval(pol_str)
+    if v == 0:
+        return f"Result = {v}, so {x} is a root of {P}"
+    return f"Result = {v}"
