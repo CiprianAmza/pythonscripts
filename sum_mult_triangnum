@@ -1,0 +1,10 @@
+from math import lcm
+vals = [1]
+lcms = [1]
+for i in range(2, 50_000):
+    vals += [vals[-1] + i]
+    lcms.append(lcm(lcms[-1], vals[-1]))
+
+def sum_mult_triangnum(n, m):
+    
+    return lcms[n-1] * (m * (m+1) // 2)
