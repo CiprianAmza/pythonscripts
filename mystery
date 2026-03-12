@@ -1,0 +1,10 @@
+def mystery(n):
+    
+    if n <= 0:
+        return []
+    ans = [1]
+    for i in range(3, n+1):
+        if i % 2 == 1 and n % i == 0:
+            ans.append(i)
+    
+    return ans
