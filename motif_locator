@@ -1,0 +1,8 @@
+def motif_locator(sequence, motif):
+    
+    ans = []
+    for i in range(len(sequence)):
+        if sequence[i:].startswith(motif):
+            ans.append(i + 1)
+    
+    return ans
