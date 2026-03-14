@@ -1,0 +1,28 @@
+class DataSet {
+  constructor(...data) {
+    this.data = data;
+    this.mean = 0;
+    this.variance = 0;
+    this.stdDeviation = 0;
+    this.setMean();
+    this.setVar();
+  }
+  
+  
+  setMean() { 
+    let sum = this.data.reduce((a, b) => a + b, 0);
+    this.mean = sum / this.data.length;
+    return this.mean;
+  }
+  
+  setVar() {
+    const s = this.data.reduce((acc, val) => {
+      return acc + Math.pow(val - this.mean, 2);
+    }, 0);
+    
+    this.variance = s / this.data.length;
+    this.stdDeviation = Math.sqrt(this.variance);
+    
+    return this.variance;
+  }
+}
