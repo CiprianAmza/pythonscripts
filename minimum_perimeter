@@ -1,0 +1,15 @@
+def minimum_perimeter(area):
+    
+    divs = [1]
+    if area > 1:
+        divs.append(area)
+    for i in range(2, int(area**.5)+1):
+        if area % i == 0:
+            divs.append(i)
+    divs.sort()
+    
+    best = float('inf')
+    for i in divs:
+        best = min(best, i + area/i)
+    
+    return best * 2
