@@ -1,0 +1,15 @@
+function holidayCount (a1, a2){
+
+  let a = a1.find(element => Number.isInteger(element)),
+      b = a2.find(element => Number.isInteger(element));
+  
+  if (a === undefined || b === undefined) {
+    return "Not possible";
+  } else if (a > b) {
+    return "Right";
+  } else if (b > a) {
+    return "Wrong";
+  } else {
+    return "Same";
+  }
+}
