@@ -1,0 +1,25 @@
+function testit(s) {
+  let ans = [];
+  for (let i = 0; i < s.length; i++) {
+    let code = s[i].charCodeAt(0);
+    if (code >= 65 && code <= 90) {
+      if (i % 2 === 0) {
+        code += 1;
+        if (code > 90) code = 65;
+      } else {
+        code -= 1;
+        if (code < 65) code = 90;
+      }
+    } else if (code >= 97 && code <= 122) {
+      if (i % 2 === 0) {
+        code += 1;
+        if (code > 122) code = 97;
+      } else {
+        code -= 1;
+        if (code < 97) code = 122;
+      }
+    }
+    ans.push(String.fromCharCode(code));
+  }
+  return ans.join("");
+}
