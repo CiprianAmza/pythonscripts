@@ -1,0 +1,20 @@
+import re # you can use re, but do not have to
+
+def is_british(code):
+    
+    return re.match("^[a-zA-Z]{1,2}\d{1,2} \d{1}[a-zA-Z]{2}$", code)
+
+def is_slovakian(code):
+    
+    print(re.match("^\d{3} \d{2}$", code))
+    return re.match("^\d{3} \d{2}$", code)
+
+def which_postcode(postcode):
+    
+    postcode = postcode.strip()
+    
+    if is_british(postcode):
+        return "GB"
+    if is_slovakian(postcode):
+        return "SK"
+    return "Not valid"
