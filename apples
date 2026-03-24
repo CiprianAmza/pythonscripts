@@ -1,0 +1,8 @@
+function apples(kilos, price) {
+  
+  let discount = 0;
+  if (kilos >= 1) {
+    discount = Math.min(5 * (Math.floor((kilos - 1) / 2) + 1), 30);
+  }
+  return kilos * price * (1 - discount / 100);
+}
