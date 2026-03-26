@@ -1,0 +1,11 @@
+from random import shuffle
+def throw_rigged():
+    
+    vals = []
+    for _ in range(22):
+        vals.append(6)
+    for _ in range(100-22):
+        vals.append(_%5+1)
+    
+    shuffle(vals)
+    return vals[0]
