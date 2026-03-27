@@ -1,0 +1,25 @@
+function nextTrain(time, minutes){  
+  
+  let t = time.split(":");
+  let h = parseInt(t[0]) * 60;
+  let m = parseInt(t[1]);
+  
+  let v = h + m + parseInt(minutes);
+  
+  if (v > (23 * 60 + 30)) {
+    return "The next train is at 05:00.";
+  } else if (v < (5 * 60)) {
+    return "The next train is at 05:00.";
+  }
+  
+  if (v % 60 > 30) {
+    let q = Math.ceil(v / 60);
+    if (q < 10) q = "0" + q;
+    return "The next train is at " + q + ":00.";
+  } else {
+    let q = Math.floor(v / 60);
+    if (q < 10) q = "0" + q;
+    return "The next train is at " + q + ":30.";
+  }
+
+}
