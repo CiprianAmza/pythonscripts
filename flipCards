@@ -1,0 +1,7 @@
+function flipCards(){
+  //This is an example
+  //Your result should be an 2D array that contains two subarray
+  //7 Cards will be put into two subarray
+  //Each card can be "Cx" or "Cx.flip"
+  return [["C1.flip","C2.flip","C3.flip"],["C4","C5","C6","C7"]]
+}
