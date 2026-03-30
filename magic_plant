@@ -1,0 +1,22 @@
+# for referance, this is what a tree looks like:
+"""
+o     <= tree canopy
+|
+|     <= tree trunk
+|
+"""
+def magic_plant(p_field, split, n):
+    
+    print(p_field, split, n, flush=1)
+    p = len(p_field.splitlines()) - 1
+    v = 1
+    for _ in range(n):
+        v *= split
+        
+    ans = ["o" * v]
+    k = "|" * (v)
+    for _ in range(p-n):
+        ans.append(k)
+    
+    return "\n".join(ans)
+    
