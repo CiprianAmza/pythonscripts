@@ -1,0 +1,28 @@
+MAP = {
+    "1": "1", "2": "ABC", "3": "DEF",
+    "4": "GHI", "5": "JKL", "6": "MNO",
+    "7": "PQRS", "8": "TUV", "9": "WXYZ",
+    "*": "*", "0": " ", "#": "#"
+}
+
+ans = {}
+for key, value in MAP.items():
+    v = ""
+    for index, element in enumerate(value):
+        v += key
+        ans[element] = v
+    
+    v += key
+    if key not in ans:
+        ans[key] = v
+    
+def sequence(s):
+    
+    a = ""
+    
+    for i in s.upper():
+        v = ans.get(i, "")
+        if a and v and v[0] == a[-1]:
+            a += "p"
+        a += v
+    return a
