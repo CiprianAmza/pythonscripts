@@ -1,0 +1,19 @@
+def transform_to_seconds(t):
+    h, m, s = map(int, t.split(":"))
+    return s + m * 60 + h * 60 * 60
+
+def count_presents(prod, presents):
+    
+    power = sum(60*60*24*int(v) for v in prod.values())
+    
+    presents = map(transform_to_seconds, presents)
+    nr = 0
+    
+    for p in sorted(presents):
+        print(p, power)
+        power -= p
+        if power < 0:
+            break
+        nr += 1
+    
+    return nr
