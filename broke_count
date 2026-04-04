@@ -1,0 +1,21 @@
+def broke_count(lst):
+        
+    def solve(start, end, nr, val, lst):
+
+        ans = 0
+        while end <= len(lst):
+            condition = all(el <= val for el in lst[start:end])
+            if condition:
+                ans += 1
+                for i in range(start, end):
+                    lst[i] = float('inf')
+                start, end = end, end + nr
+                continue
+            start, end = start + 1, end + 1
+        return ans
+    
+    ans = 0
+    for (start, end, nr, val) in ((0, 7, 7, 10), (0, 3, 3, 7), (0, 1, 1, 3)):
+        ans += solve(start, end, nr, val, lst)
+        
+    return ans
