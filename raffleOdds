@@ -1,0 +1,46 @@
+function gcd(a, b) {
+  
+  let q = a;
+  for (let i = 2; i <= a; i++) {
+    if (a % i === 0 && b % i === 0) {
+      return i;
+    }
+  }
+  
+  return 1;
+  
+}
+function raffleOdds(totals, purchased) {
+  
+  let x = 1, y = 1;
+  for (let i = 0; i < totals.length; i++) {
+    let a = totals[i];
+    let b = purchased[i];
+    x *= (b-a);
+    y *= a;
+  }
+  x = Math.abs(y) - Math.abs(x);
+  
+  let changes = true;
+  while (changes) {
+    changes = false;
+    while (x % 2 === 0 && y % 2 === 0) {
+      x /= 2;
+      y /= 2;
+      changes = true;
+    }
+    for (let i = 3; i <= Math.min(x, y); i++) {
+      while (x % i === 0 && y % i === 0) {
+        x /= i;
+        y /= i;
+        changes = true;
+      }
+    }
+  }
+  
+  if (x === 0) {
+    return "0/1";
+  }
+  
+  return x + "/" + y;
+}
