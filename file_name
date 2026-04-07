@@ -1,0 +1,53 @@
+class File {
+  
+  fullName;
+
+  constructor(fullName, contents) {
+    
+    Object.defineProperty(this, 'fullName', {
+      value: fullName,
+      writable: false
+    });
+    
+    const parts = fullName.split(".");
+    const extension = parts.pop();
+    const filename = parts.join(".");
+
+    Object.defineProperty(this, 'filename', {
+      value: filename,
+      writable: false
+    });
+
+    Object.defineProperty(this, 'extension', {
+      value: extension,
+      writable: false
+    });
+    
+    this.c = contents || "";
+    this.li = 0;
+    this.ci = 0;
+  }
+  
+  write(s) {
+    if (this.c.length === 0) {
+      this.c = s;
+    } else {
+      this.c += "\n" + s;
+    }
+  }
+  
+  getContents() {
+    return this.c;
+  }
+  
+  gets() {
+    let l = this.c.split("\n");
+    if (this.li >= l.length) return undefined;
+    return l[this.li++];
+  }
+
+  getc() {
+    if (this.ci >= this.c.length) return undefined;
+    return this.c[this.ci++];
+  }
+}
