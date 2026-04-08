@@ -1,0 +1,18 @@
+/* Predefined object for list nodes
+
+function Node(data, next = null) {
+  this.data = data;
+  this.next = next;
+}
+
+*/
+
+function getKthLastElement(head, k) {
+
+  let lst = [];
+  while (head !== null) {
+    lst.push(head);
+    head = head.next;
+  }
+  return lst[lst.length-k-1];
+}
