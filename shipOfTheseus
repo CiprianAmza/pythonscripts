@@ -1,0 +1,26 @@
+public class Solution {
+  public static boolean shipOfTheseus(String[][] ship) {
+    
+    int firstLength = 0;
+    for (int i = 0; i < ship.length; i++) {
+      if (i == 0) {
+        firstLength = ship[i].length;
+        continue;
+      }
+      if (ship[i].length != firstLength) {
+        return false;
+      }
+      int differences = 0;
+      for (int j = 0; j < firstLength; j++) {
+        if (ship[i][j] != ship[i-1][j]) {
+          differences++;
+        }
+      }
+      if (differences != 1) {
+        return false;
+      }
+    }
+    
+    return true;
+  }
+}
