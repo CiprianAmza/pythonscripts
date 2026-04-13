@@ -1,0 +1,18 @@
+function countLonelyLetters(text) {
+  
+  let alph = "abcdefghijklmnopqrstuvwxyz";
+  text = text.toLowerCase().split("").filter(x => alph.includes(x)).join("");
+  let total = 0;
+  
+  let ans = 0;
+  for (let i = 0; i < text.length; i++) {
+    let ind = alph.indexOf(text[i]);
+    let count = text.split("").reduce((acc, cVal) => (cVal === text[i] ? 1 : 0) + acc, 0);
+    if (count === 1) {
+      if (ind !== 0 && text.includes(alph[ind-1])) continue;
+      if (ind !== alph.index - 1 && text.includes(alph[ind+1])) continue;
+      total++;
+    }
+  }
+  return total;
+}
