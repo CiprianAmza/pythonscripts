@@ -1,0 +1,13 @@
+function jumbler(indices) {
+
+  let ans = 0;
+  while (indices[0] !== 0) {
+    let ind = indices[0];
+    let that = indices[ind];
+    indices[ind] = -1;
+    indices = indices.filter(x => x !== -1);
+    indices.unshift(that);
+    ans++;
+  }
+  return ans;
+}
