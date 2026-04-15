@@ -1,0 +1,15 @@
+def is_sator_square(t): 
+    x = ''.join(i for j in t for i in j)
+    if x != x[::-1]:
+        return False
+    if t[0] != t[-1][::-1]:
+        return False
+    while t:
+        a = "".join(t[0])
+        b = "".join(i[0] for i in t)
+        e = "".join(i[-1] for i in t)
+        f = "".join(i for i in t[-1])[::-1]
+        if a != b != e != f:
+            return False
+        t = [i[1:] for i in t[1:]]
+    return True
