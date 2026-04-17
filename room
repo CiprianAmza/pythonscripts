@@ -1,0 +1,55 @@
+function dramameter(room) {
+  
+  let personToScore = {}, personToFriends = {}, personToPartner = {};
+  let foundTommy = false;
+  
+  for (let [person, partner, friends, lovers] of room) {
+    if (person === "Tommy") foundTommy = true;
+    personToScore[person] = 0;
+    personToFriends[person] = friends;
+    personToPartner[person] = partner;
+  }
+    
+  for (let [person, partner, friends, lovers] of room) {
+        
+    if (partner !== null) {
+      
+      for (const lover of lovers) {
+        personToScore[person]++; // rule 1
+        if (personToFriends[lover].includes(partner)) {
+          personToScore[person]++; // rule 2
+        }
+      }
+    }
+    
+    for (const lover of lovers) {
+      for (const friend of friends) {
+        if (personToPartner[lover] === friend) {
+          personToScore[person]++; // rule 3
+          break;
+        }
+      }
+    }
+    
+    if (partner === null && lovers.length === 0) {
+      personToScore[person]++; // rule 4
+    }
+  }
+  
+  
+  if (foundTommy) {
+    let shouldAdd = true;
+    for (const key in personToScore) {
+      if (personToScore[key] > 0) {
+        shouldAdd = false;
+        break;
+      }
+    }
+    if (shouldAdd) {
+      personToScore["Tommy"] = 5; // rule Tommy
+    }
+  }
+  
+  return personToScore;
+  
+}
