@@ -1,0 +1,33 @@
+class FenwickTree:
+    def __init__(self, n):
+        self.n = n
+        self.tree = [0] * (n + 1)
+    
+    def update(self, i, delta):
+        i += 1
+        while i <= self.n:
+            self.tree[i] += delta
+            i += i & (-i)
+    
+    def prefix_sum(self, i):
+        i += 1
+        s = 0
+        while i > 0:
+            s += self.tree[i]
+            i -= i & (-i)
+        return s
+    
+    def range_sum(self, l, r):
+        if l == 0:
+            return self.prefix_sum(r)
+        return self.prefix_sum(r) - self.prefix_sum(l - 1)
+    
+    @classmethod
+    def from_array(cls, arr):
+        ft = cls(len(arr))
+        ft.tree[1:] = arr[:]
+        for i in range(1, ft.n + 1):
+            parent = i + (i & -i)
+            if parent <= ft.n:
+                ft.tree[parent] += ft.tree[i]
+        return ft
