@@ -1,0 +1,22 @@
+def get_3Dneighbourhood(n_type, matrix, coordinates, distance):
+    
+    neighs = []
+    seen = set()
+    a, b, c = coordinates
+    if not (0 <= a < len(matrix) and 0 <= b < len(matrix[a]) and 0 <= c < len(matrix[a][b])):
+        return []
+    
+    for i in range(-distance, distance + 1):
+        for j in range(-distance, distance + 1):
+            for k in range(-distance, distance + 1):
+                
+                if i == j == k == 0: continue
+                dx, dy, dz = a + i, b + j, c + k
+                
+                if 0 <= dx < len(matrix) and 0 <= dy < len(matrix[dx]) and 0 <= dz < len(matrix[dx][dy]):
+                    if n_type == 'moore' and max(abs(i), abs(j), abs(k)) <= distance:
+                        neighs.append(matrix[dx][dy][dz])
+                    elif n_type == "von_neumann" and (abs(i) + abs(j) + abs(k)) <= distance:
+                        neighs.append(matrix[dx][dy][dz])
+                
+    return neighs
