@@ -1,0 +1,21 @@
+from preloaded import planet_moons
+from collections import deque
+PLANETS = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+
+def lost_moons(planets, moons):
+    
+    answer = []
+    moons = sorted(moons)
+    for planet in sorted(planets, key=lambda x: PLANETS.index(x)):
+        alternate = True
+        partial = deque([planet])
+        for moon in moons:
+            if moon in planet_moons[planet]:
+                if alternate:
+                    partial.append(moon)
+                else:
+                    partial.appendleft(moon)
+                alternate = not alternate
+        answer.append(list(partial))
+    
+    return answer
