@@ -1,0 +1,19 @@
+from math import sqrt, ceil
+def code(t):
+    
+    if not t:
+        return ""
+    
+    l = len(t)
+    n = ceil(sqrt(l))
+    t = t + chr(11) * (n*n-l)
+    mat = [t[i-n:i] for i in range(n, len(t)+1, n)]
+    return "\n".join(["".join(row[i] for row in mat[::-1]) for i in range(len(mat[0]))])
+
+def decode(t):
+    
+    if not t:
+        return ""
+    
+    mat = t.split("\n")
+    return "".join(["".join(row[i] for row in mat) for i in range(len(mat[0])-1, -1, -1)]).strip(chr(11))
