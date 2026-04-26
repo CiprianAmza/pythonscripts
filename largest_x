@@ -1,0 +1,26 @@
+def largest_x(arr):
+    
+    def find_depth(i, j):
+        
+        depth = length = 0
+        while True:
+            depth += 1
+            needed = 4
+            for x, y in ((-depth, -depth), (depth, depth), (-depth, depth), (depth, -depth)):
+                q, w = i + x, y + j
+                if 0 <= q < len(arr) and 0 <= w < len(arr[q]):
+                    if arr[q][w] == arr[i][j]:
+                        needed -= 1
+            if needed == 0:
+                length += 1
+            else:
+                return length
+    
+    best, coords = 0, []
+    for i in range(len(arr)):
+        for j in range(len(arr[i])):
+            depth = find_depth(i, j)
+            if depth > best:
+                best, coords = depth, [i, j]
+                
+    return coords
