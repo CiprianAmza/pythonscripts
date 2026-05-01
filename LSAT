@@ -1,0 +1,9 @@
+"""
+
+Example: LSAT question
+Three sculptures (A, B, C) are to be exhibited in rooms 1, 2 of an art gallery.
+The exhibition must satisfy the following conditions:
+• Sculptures A and B cannot be in the same room.
+• Sculptures B and C must be in the same room.
+• Room 2 can only hold one sculpture.
+"""
