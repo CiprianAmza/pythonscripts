@@ -7,3 +7,62 @@ The exhibition must satisfy the following conditions:
 • Sculptures B and C must be in the same room.
 • Room 2 can only hold one sculpture.
 """
+
+pseudocod:
+
+input:
+sculptures # [A, B, C, D, E, F]
+total_rooms # 2
+constraint_not_together # [(A, B)]
+constraint_together # [(B, C)]
+constraint_room_limit # [(2, 1)], room 2 - max 1
+
+solution:
+
+answer = []
+
+def room_has_reached_limit(room_number, current_sculptures):
+    for room_id, limit in constraint_room_limit:
+        if room_id == room_number and current_sculptures >= limit: # can't add any more
+            return True
+    return False
+
+def is_conflict_because_rooms_can_not_be_together(sculptures_in_room, sculpture):
+
+    for sculpture_a, sculpture_b in constraint_not_together:
+        if sculpture_a == sculpture and sculpture_b in sculptures_in_room or sculpture_b == sculpture and sculpture_a in sculptures_in_room:
+            return True
+    return False
+
+def is_conflict_because_rooms_must_be_together(assigned, current_room, sculpture):
+
+    for sculpture_a, sculpture_b in constraint_together:
+        if sculpture == sculpture_a and sculpture_b in assigned and sculpture_b not in current_room:
+            return True
+        if sculpture == sculpture_b and sculpture_a in assigned and sculpture_a not in current_room:
+            return True
+    return False
+
+def solve(rooms, assigned):
+
+    if len(assigned) == len(sculptures):
+        global answer
+        answer = [room[:] for room in rooms]
+        return
+
+    sculpture = None
+    for s in sculptures:
+        if s not in assigned:
+            sculpture = s
+            break
+    
+    for room_number in range(total_rooms):
+        if room_has_reached_limit(room_number, len(rooms[room_number])):
+            continue
+        rooms[room_number].append(sculpture)
+        if not is_conflict_because_rooms_can_not_be_together(rooms[room_number], sculpture) and not is_conflict_because_rooms_must_be_together(assigned, rooms[room_number], sculpture):
+            solve(rooms, assigned | {sculpture})
+        rooms[room_number].pop()
+
+            
+            
