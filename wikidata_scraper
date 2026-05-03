@@ -1,0 +1,33 @@
+import requests 
+import json
+
+# It is stronglly recommended to use these header along with your request:
+headers = {
+    "Accept-Encoding": "gzip,deflat",
+    "User-Agent": "CoolBot/0.0 (https://example.org/coolbot/; coolbot@example.org) generic-library/0.0"
+}
+
+def wikidata_scraper(url):
+    
+    text = json.loads(requests.get(url, headers=headers).text)
+    
+    for key, value in text.items():
+        for key, value in value.items():
+            id = key
+            for key, value in value.items():
+                if key == "labels":
+                    if "en" not in value:
+                        label = "No Label"
+                    else:
+                        label = value["en"]["value"]
+                if key == "descriptions":
+                    if "en" not in value:
+                        description = "No Description"
+                    else:
+                        description = value["en"]["value"]
+                
+    return {
+        "ID": id,
+        "LABEL": label, 
+        "DESCRIPTION": description,
+    }
