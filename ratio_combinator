@@ -1,0 +1,28 @@
+from math import gcd, lcm
+
+def ratio_combinator(ratios):
+    
+    ans = []
+    
+    for ab in ratios:
+        a, b = map(int, ab.split(":"))
+        g = gcd(a, b)
+        a //= g
+        b //= g
+        if ans:
+            last = ans[-1]
+            l = lcm(last, a)
+            
+            q = l // last 
+            ans = [x * q for x in ans]
+            w = l // a  
+            b *= w
+            ans.append(b)
+        else:
+            ans.append(a)
+            ans.append(b)
+
+    return ":".join(map(str, ans))
+        
+        
+        
