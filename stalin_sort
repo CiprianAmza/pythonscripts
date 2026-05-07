@@ -1,0 +1,13 @@
+def stalin_sort(arr):
+    
+    best = float('-inf')
+    i = 0
+
+    while i < len(arr):
+        if arr[i] >= best:
+            best = arr[i]
+            i += 1
+        else:
+            del arr[i]
+
+    return arr if len(arr) > 1 else None
