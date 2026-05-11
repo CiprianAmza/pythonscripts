@@ -1,0 +1,20 @@
+def beautiful_text(s, l, r):
+    
+    for w in range(l, r + 2):
+        lengths, pos = set(), True
+        for i in range(0, len(s) + 1, w):
+
+            bef = s[i:i+w]
+            if bef and bef[-1] != " " and i + w < len(s):
+                pos = False; break
+            else:
+                if bef and bef[-1] == " ":
+                    lengths.add(len(bef) - 1)
+                else:
+                    lengths.add(len(bef))
+                    
+        if pos and len(lengths) == 1 and l <= lengths.pop() <= r:
+            return True
+        
+    return False
+
