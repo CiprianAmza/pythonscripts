@@ -1,0 +1,9 @@
+function findQuarterNotes(timeSignature) {
+  let [a, b] = timeSignature.split("/").map(x => parseInt(x));
+  
+  if (b <= 0 || (b & (b - 1)) !== 0) {
+        return null;
+  }
+  return Math.floor(a * 4 / b);
+  
+}
