@@ -1,0 +1,45 @@
+def encode(n: int) -> list[int]:
+    
+    ans = []
+    while n:
+        if n % 2 == 1:
+            ans.append("1")
+        else:
+            ans.append("0")
+        n //= 2
+    
+    ans = ans[::-1]
+    v = 7 - len(ans) % 7
+    if v != 7:
+        ans = ["0" for _ in range(v)] + ans
+    a = []
+    
+    for i in range(0, len(ans)+1, 7):
+        
+        c = "".join(ans[i:i+7])
+        if not c: break
+        if i+7 < len(ans):
+            c = "1" + c
+        else:
+            c = "0" + c
+        a += [int(c, 2)]
+    return a if a else [0]
+
+
+def decode(data: list[int]) -> int:
+    
+    ans = ""
+    for n in data:
+        v = bin(n)[2:]
+        if len(v) == 8:
+            v = v[1:]
+        
+        if len(v) < 7:
+            v = "0" * (7 - len(v)) + v
+
+        ans += v
+
+        if n < 128:
+            break
+        
+    return int(ans, 2)
