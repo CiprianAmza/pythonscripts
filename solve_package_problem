@@ -1,0 +1,17 @@
+def solve(waves: list[list[str]], prerequisites: list[tuple[str, str]]) -> bool:
+    
+    packages = dict()
+    
+    for number, wave in enumerate(waves):
+        for package in wave:
+            if package in packages:
+                return False
+            packages[package] = number
+    
+    for first, second in prerequisites:
+        if first not in packages or second not in packages:
+            return False
+        if packages[first] <= packages[second]:
+            return False
+    
+    return True
