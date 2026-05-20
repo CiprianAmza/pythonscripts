@@ -1,0 +1,12 @@
+def reflect(point, line):
+    
+    x, y = point
+    a, b = line
+    
+    denom = a * a + 1
+    d = (a * x - y + b) / denom
+
+    xr = x - 2 * a * d
+    yr = y + 2 * d
+
+    return xr, yr,
