@@ -1,0 +1,17 @@
+function antiOptimizeAsync(task) {
+    
+    let s = Date.now();
+
+    return new Promise((r, t) => {
+        
+      Promise.resolve()
+            .then(task)
+            .then(result => {
+                setTimeout(
+                    () => r(result),
+                    Math.max(11000 - (Date.now() - s), 0)
+                );
+            })
+            .catch(t);
+    });
+}
