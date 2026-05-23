@@ -1,0 +1,14 @@
+let nr = 0;
+
+function sometimes(fn) {
+  
+   return function (...args) {
+      nr++;
+      console.log(nr);
+
+      if (nr > 3 && nr % 2 === 0)
+        return "hmm, I don't know!";
+
+      return fn(...args);
+  };
+}
