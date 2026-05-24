@@ -1,0 +1,10 @@
+function doubleOrNothing(cash, wager, losses) {
+  
+  for (let i = 0; i < losses - 1; i++) {
+    wager *= 2;
+  }
+  
+  const rest = cash - wager;
+  
+  return rest < 0 ? "I'll pay you back later" : rest;
+}
