@@ -1,0 +1,25 @@
+from typing import Sequence
+
+
+def restore_code(tokens: Sequence[Sequence[str]]) -> str:
+    
+    answer = []
+    for token in tokens:
+        cmd, var, val = token
+        if cmd not in ("set", "add", "sub"):
+            continue
+
+        if not var.isalpha():
+            continue
+
+        if not (val.isalpha() or val.lstrip("-").isdigit()):
+            continue
+
+        if cmd == "set":
+            answer.append(f"{var} = {val}")
+        elif cmd == "add":
+            answer.append(f"{var} += {val}")
+        elif cmd == "sub":
+            answer.append(f"{var} -= {val}")
+            
+    return "\n".join(answer)
