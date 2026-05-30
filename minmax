@@ -1,0 +1,5 @@
+def minmax list, &block
+  
+  lst = list.sort(&block)
+  [lst.first, lst.last]
+end
