@@ -1,0 +1,13 @@
+coords = lambda x, y: (x, "ABCDEFGH".index(y) + 1)
+from itertools import starmap
+
+def knight_vs_rook(knight, rook):
+    
+    (x, y), (a, b) = [*starmap(coords, [knight, rook])]
+    
+    if x == a or y == b:
+        return "Rook"
+    if (x-a, y-b) in ((2, 1), (2, -1), (-2, 1), (-2, -1), (1, 2), (1, -2), (-1, 2), (-1, -2)):
+        return "Knight"
+    
+    return "None"
