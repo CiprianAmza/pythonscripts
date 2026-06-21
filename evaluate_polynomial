@@ -1,0 +1,8 @@
+def evaluate_polynomial(coefs, x):
+    
+    ans = 0
+
+    for c in coefs:
+        ans = ans * x + c
+
+    return ans
