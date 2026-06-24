@@ -1,0 +1,11 @@
+function double(&$n) {
+    $n = 2 * $n;
+}
+
+function halve(&$n) {
+    $n = $n / 2;
+}
+
+function enlarge(&$x, $n) {
+    $x = $x * $n;
+}
