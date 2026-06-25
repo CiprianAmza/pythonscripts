@@ -1,0 +1,18 @@
+def choose_best_home(places, preferences, priorities):
+    
+    score = len(priorities)
+    best = {key: 0 for key in places}
+    
+    for priority in priorities:
+        
+        value = preferences.get(priority, "N/A")
+        if score == "N/A":
+            continue
+        
+        for key, elements in places.items():
+            if priority in elements and elements[priority] == preferences[priority]:
+                best[key] += score
+        
+        score -= 1
+    
+    return min(best, key=lambda x: (-best[x], x))
