@@ -1,0 +1,14 @@
+def longest_substring(s : str) -> int:
+    
+    _map = dict()
+    start = best = 0
+    
+    for i, j in enumerate(s):
+        
+        if j not in _map or _map[j] < start:
+            best = max(best, i - start)
+        else:
+            start = _map[j] + 1
+        _map[j] = i
+    
+    return best + 1 if s else 0
