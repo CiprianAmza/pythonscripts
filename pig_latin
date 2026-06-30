@@ -1,0 +1,22 @@
+def pig_latin(s):
+    
+    if not s:
+        return None
+    
+    s = s.lower()
+    for i in s:
+        if i.lower() == i.upper():
+            return None
+        
+    if sum(1 for el in s if el in 'aeiou') == 0:
+        return s + "ay"
+    
+    if s[0] in 'aeiou':
+        return s + "way"
+    v = 0
+    for i, j in enumerate(s):
+        if j in "aeiou":
+            v = i
+            break
+        
+    return s[v:] + s[:v] + "ay"
