@@ -1,0 +1,16 @@
+def swap(number):
+    
+    _min = number
+    _max = number
+    s = str(number)
+    
+    for i in range(len(s)):
+        for j in range(i+1, len(s)):
+            v = s[:i] + s[j] + s[i+1:j] + s[i] + s[j+1:]
+            if v[0] == "0": continue
+            v = int(v)
+            _min = min(v, _min)
+            _max = max(v, _max)
+    
+    return _max, _min
+        
