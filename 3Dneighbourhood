@@ -20,3 +20,4 @@ def get_3Dneighbourhood(n_type, matrix, coordinates, distance):
                         neighs.append(matrix[dx][dy][dz])
                 
     return neighs
+
