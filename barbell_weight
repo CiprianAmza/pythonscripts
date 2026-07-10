@@ -1,0 +1,23 @@
+def barbell_weight(barbell):
+    
+    VALUES = {
+        "R": 25,
+        "B": 20,
+        "Y": 15,
+        "G": 10,
+        "W": 5,
+        "r": 2.5,
+        "b": 2,
+        "y": 1.5,
+        "g": 1,
+        "w": 0.5
+        
+    }
+    
+    left, right = barbell.split("--------------------")
+    
+    start = 25
+    for value in left:
+        start += VALUES.get(value, 0) * 2
+    
+    return start
