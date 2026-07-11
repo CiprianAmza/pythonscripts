@@ -1,0 +1,1 @@
+            return distance_km * 1_000_000 / (pi * (rim * 25.4 + 2 * width * height / 100))
