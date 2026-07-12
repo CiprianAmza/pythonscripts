@@ -1,0 +1,16 @@
+from functools import lru_cache
+@lru_cache
+def zfc_definition(n: int) -> str:
+    
+    if n == 0:
+        return "{}"
+    if n == 1:
+        return "{{}}"
+    if n == 2:
+        return "{{},{{}}}"
+    
+    answer = "{"
+    for i in range(n, 0, -1):
+        answer += zfc_definition(n-i) + ","
+    return answer[:-1] + "}"
+    
