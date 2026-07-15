@@ -1,0 +1,15 @@
+def movie_times(open, close, length):
+    
+    answer = []
+    t = open * 60
+    c = close * 60
+    if t > c:
+        c += 24 * 60
+    while t < c:
+        if (t + length) <= c:
+            answer.append((t // 60 % 24, t%60))
+            t += length + 15
+        else:
+            break
+    return answer
+    
