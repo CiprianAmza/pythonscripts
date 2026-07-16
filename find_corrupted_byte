@@ -1,0 +1,9 @@
+HEX = set("0123456789ABCDEF")
+
+def find_corrupted_byte(dump):
+    
+    for i, j in enumerate(dump):
+        if len(j) != 2 or not all(k in '0123456789ABCDEF' for k in j):
+            return i
+        
+    return -1
