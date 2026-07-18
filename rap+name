@@ -1,0 +1,7 @@
+function rapNameGen(dob) {
+  const [d, , y] = dob.split(".");
+  const names = ["0ero", "1ne", "2wo", "3hree", "4our", "5ive", "6ix", "7even", "8ight", "9ine"];
+  const avg = s => Math.ceil((+s[0] + +s[1]) / 2);
+
+  return `${names[avg(d)]} ${names[avg(y)]}`;
+}
