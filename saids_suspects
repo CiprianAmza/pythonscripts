@@ -1,0 +1,24 @@
+function sc(said, suspects) {
+  
+    let candidates = [];
+  
+    for (const suspect of suspects) {
+        if (said.length > suspect.length) {
+          continue;
+        }
+        let pos = true;
+        for (let i = 0; i < said.length; i++) {
+            if (said[i] === "~") {
+                continue;
+            } else if (said[i].toLowerCase() !== suspect[i].toLowerCase()) {
+                pos = false;
+                break;
+            }
+        }
+        if (pos) {
+            candidates.push(suspect);
+        }
+    } 
+
+    return candidates.join(",");
+}
