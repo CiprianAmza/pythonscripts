@@ -1,0 +1,10 @@
+def vertical(words):
+    
+    if not words:
+        return ""
+    
+    ans = []
+    for i in range(max(map(len, words))):
+        ans.append(" ".join([" ", word[i] if i < len(word) else ""][i<len(word)] for word in words).rstrip())
+    
+    return "\n".join(ans)
