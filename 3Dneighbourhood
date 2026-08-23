@@ -1,4 +1,4 @@
-def get_3Dneighbourhood(n_type, matrix, coordinates, distance):
+def get3Dneighbourhood(n_type, matrix, coordinates, distance):
     
     neighs = []
     seen = set()
