@@ -1,6 +1,5 @@
 t = int(input())
 
-
 def search(s, length, k):
 
     l = 0
