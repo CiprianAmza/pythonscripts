@@ -1,0 +1,26 @@
+def type_of_function(domain, codomain, relations):
+    
+    _d1 = __import__('collections').defaultdict(set)
+    _d2 = __import__('collections').defaultdict(set)
+    
+    for d in domain:
+        c = 0
+        for a, b in relations:
+            _d1[b].add(a)
+            _d2[a].add(b)
+            if d == a:
+                c += 1
+            if c > 1:
+                return "It is not a function"
+            
+    injective = len(_d1) == len(relations)
+    surjective = len(_d1) == len(codomain)
+    
+    if injective and surjective:
+        return "Bijective"
+    if injective:
+        return "Injective"
+    if surjective:
+        return "Surjective"
+    
+    return "General function"
