@@ -1,0 +1,10 @@
+def safecracker(start, incs):
+    
+    r = start
+    ans = []
+    
+    for i, inc in enumerate(incs):
+        r += inc * [-1, 1][i%2]
+        ans.append(r%100)
+    
+    return tuple(ans)
