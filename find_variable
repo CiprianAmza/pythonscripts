@@ -1,0 +1,6 @@
+def find_variable():
+
+    for n in globals()["VVV"]:
+        if globals().get(n) == 777:
+            return n
+        
