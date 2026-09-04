@@ -20,4 +20,3 @@ def get3Dneighbourhood(n_type, matrix, coordinates, distance):
                         neighbors.append(matrix[dx][dy][dz])
                 
     return neighbors
-
