@@ -1,0 +1,9 @@
+const day = Date.prototype.getDate;
+
+Date.prototype.getDate = function getGrinchDate() {
+  
+  if (this.getMonth() === 11 && day.call(this) === 25) {
+    return 26;
+  }
+  return day.call(this);
+}
