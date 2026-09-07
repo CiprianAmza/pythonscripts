@@ -1,0 +1,5 @@
+# This list should contain all Unicode characters that are digits but not decimals
+digits_not_decimals = [chr(el) for el in range(300000) if chr(el).isdigit() and not chr(el).isdecimal()]
+
+# This list should contain all Unicode characters that are numeric but not digits
+numeric_not_digits = [chr(el) for el in range(300000) if chr(el).isnumeric() and not chr(el).isdigit()]
