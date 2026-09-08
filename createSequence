@@ -1,0 +1,13 @@
+const createSequence = (regex) => {
+  
+  let answer = [];
+  
+  for (let j = 0; j <= 1000; j++) {
+      let character = String.fromCharCode(j);
+      if (regex.test(character))
+          answer.push(character);
+    
+  }
+  
+  return answer.sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0)).join``;
+}
