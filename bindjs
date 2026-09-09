@@ -1,0 +1,14 @@
+Function.prototype.bind = function (ctx) {
+  // Your code goes here
+  const x = this.a || this;
+  
+  function f(){
+    
+    return x.apply(ctx, arguments)
+  }
+  Object.defineProperty(f, "a", {
+     value: x
+
+  })
+                        return f
+};
