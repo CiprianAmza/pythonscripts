@@ -1,0 +1,16 @@
+function swapTwo(array, a, b) {
+  let i = -1, j = 0;
+  for (let ind = 0; ind < array.length; ind++) {
+      if (i === -1 && a === array[ind]) {
+          i = ind;
+      }
+      if (array[ind] === b) {
+          j = ind;
+      }
+  }
+  let temp = array[j];
+  array[j] = array[i];
+  array[i] = temp;
+  
+  return array;
+}
