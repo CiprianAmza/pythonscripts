@@ -1,0 +1,14 @@
+function ringBank(rings, monitors, giantrings, chaosEmeralds, sonicHit, sonicShield){
+  
+  if (chaosEmeralds === 7) {
+    rings += giantrings * 50;
+  }
+  rings += monitors * 10;
+  
+  if (sonicHit && !sonicShield) {
+    rings = 0;
+  }
+  
+  return rings;
+
+}
