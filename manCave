@@ -1,0 +1,17 @@
+var manCave = function(array){
+  
+  let hasRaj = false;
+  for (let member of array) {
+    if (member.name === "Raj") {
+      hasRaj = true;
+      break;
+    }
+  }
+  
+  if (hasRaj) {
+    array = array.filter(x => x.gender !== "female");
+    array.forEach(x => x.status = "Single");
+  }
+  
+  return array;
+}
