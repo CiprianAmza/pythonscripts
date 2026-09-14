@@ -1,0 +1,14 @@
+function breachAttempts(hackers, securityLevel, increase) {
+    
+  let breaches = 0;
+  
+  for (let hacker of hackers) {
+    if (hacker > securityLevel) {
+      breaches++;
+    } else {
+      securityLevel += increase;
+    }
+  }
+  
+  return breaches;
+}
