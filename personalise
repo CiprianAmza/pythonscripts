@@ -1,0 +1,4 @@
+function personalise( campaign, person){
+  
+  return campaign.replace(/<([^>]+)>/g, (_, x) => person[x.toLowerCase().replace(/ /g, "_")])
+}
