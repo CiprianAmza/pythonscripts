@@ -1,0 +1,17 @@
+
+function sc(a,b,c){
+  
+  let arr = [a, b, c];
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      for (let k = 0; k < 3; k++) {
+        if (i === j || i === k || j === k) continue;
+        let x = arr[i], y = arr[j], z = arr[k];
+        if (x + y === z) return `${x}+${y}=${z}`;
+        if (x * y === z) return `${x}*${y}=${z}`;
+        if (x - y === z) return `${x}-${y}=${z}`;
+      }
+    }
+  }
+  return "";
+}
