@@ -1,0 +1,22 @@
+function umbrella(weather) {
+    
+    let ans = 0;
+  
+    for (let i = 0; i < weather.length; i += 3) {
+        let a = weather[i], b = weather[i+1], c = weather[i+2];
+        let cur = 0;
+        if (a === "rainy" || a === "thunderstorm") {
+            cur++;
+            let c1 = (b === "rainy" || b === "thunderstorm");
+            let c2 = (c === "rainy" || c === "thunderstorm");
+            if (!c1 && c2) cur++;
+        } else if (b === "rainy" || b === "thunderstorm" || c === "rainy" || c === "thunderstorm") {
+            cur++;
+        }
+        ans += cur;
+        
+    }
+  
+  
+    return ans;
+}
