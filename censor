@@ -1,0 +1,20 @@
+import re
+
+def censor(sentence):
+    
+    for word in 'pancakes, flapjacks, slapjacks, hotcakes'.split(", "):
+        sentence = re.sub(word, "*" * len(word), sentence, flags=re.I)
+    
+    waffle = False
+    for word in 'waffles, crepes, blintzes'.split(", "):
+        if word in sentence:
+            waffle = True
+            sentence = re.sub(word, f"**{word}**", sentence, flags=re.I)
+            
+    for word in 'syrup, honey, jam, butter, chocolate, margarine'.split(', '):
+        if not waffle:
+            sentence = re.sub(word, "*" * len(word), sentence, flags=re.I)
+        else:
+            sentence = re.sub(word, f"**{word}**", sentence, flags=re.I)
+    
+    return sentence
