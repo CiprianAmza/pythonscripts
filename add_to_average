@@ -1,0 +1,4 @@
+def add_to_average(current, points, add): 
+    # your code here
+    
+    return current + (add - current ) / (points + 1)
