@@ -1,0 +1,18 @@
+def distribute_evenly(lst):
+    
+    words = dict()
+    for k in lst:
+        words[k] = words.get(k, 0) + 1
+    
+    answer = []
+    _max = max(words.values())
+    for _ in range(_max):
+        par = []
+        for i, j in words.items():
+            if j > 0:
+                par.append(i)
+                words[i] -= 1
+        par = sorted(par, key=lambda x: lst.index(x))
+        answer.extend(par)
+        
+    return answer
