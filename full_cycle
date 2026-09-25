@@ -1,0 +1,11 @@
+def full_cycle(lst):
+    
+    seen = set()
+    start = 0
+    while True:
+        seen.add(start)
+        start = lst[start]
+        if start in seen:
+            break
+    
+    return len(seen) == len(lst)
