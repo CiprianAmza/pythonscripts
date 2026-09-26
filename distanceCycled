@@ -1,0 +1,12 @@
+function distanceCycled(cadence, gear, time) {
+  
+  let v = gear.split("x");
+  let a = parseInt(v[0]);
+  let b = parseInt(v[1]);
+  
+  
+  let k = 2.11115 * (a/b);
+  k = k * cadence * time / 1000;
+  
+  return `You cycled ${k.toFixed(3)} kilometers!`;
+}
