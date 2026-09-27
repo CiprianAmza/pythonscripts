@@ -1,0 +1,22 @@
+def smart_log_formatter(logs):
+    
+    answer = []
+    last, counter = '', 0
+    
+    for log in logs:
+        if log == last:
+            counter += 1
+        else:
+            if counter == 1:
+                answer.append(last)
+            elif counter > 1:
+                answer.append(f'{last} (x{counter})')
+            last = log
+            counter = 1
+    
+    if counter == 1:
+        answer.append(last)
+    elif counter > 1:
+        answer.append(f'{last} (x{counter})')
+        
+    return answer
