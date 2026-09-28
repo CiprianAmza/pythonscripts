@@ -1,0 +1,9 @@
+def fantastic_person(table):
+    
+    pos = [-1]
+    for i in range(len(table)):
+        v = table[i]
+        if all(val for val in v):
+            pos.append(i)
+    
+    return pos.pop()
