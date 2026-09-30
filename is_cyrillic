@@ -1,0 +1,3 @@
+def is_cyrillic(x):
+    print(ord(x))
+    return 1023 < ord(x) < 1280  # <- Hajime!
