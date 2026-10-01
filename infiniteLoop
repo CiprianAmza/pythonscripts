@@ -1,0 +1,24 @@
+function infiniteLoop(arr,d,n){
+  
+  let ans = [];
+  for (let el of arr) {
+    for (let k of el) {
+      ans.push(k);
+    }
+  }
+  
+  let val = n;
+  if (d === "right") {
+    val = ans.length - n;
+  }
+  val %= ans.length;
+  
+  for (let ar of arr) {
+    for (let i = 0; i < ar.length; i++) {
+      ar[i] = ans[val++];
+      val %= ans.length;
+    }
+  }
+  
+  return arr;
+}
