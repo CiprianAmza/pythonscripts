@@ -1,0 +1,9 @@
+Array.prototype.isSparse = function() {
+  // Your code goes here
+  for (let i=0; i<this.length; i++) {
+   if (!Object.hasOwn(this, i)) return true
+
+}
+
+return false
+}
