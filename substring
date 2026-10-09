@@ -1,0 +1,10 @@
+def substring(strng):
+    
+    best = ""
+    for i in range(len(strng)):
+        for j in range(i+1, len(strng)+1):
+            v = len(set([*strng[i:j+1]]))
+            if v > 2: break
+            best = max(best, strng[i:j+1], key=len)
+                
+    return best
