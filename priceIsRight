@@ -1,0 +1,11 @@
+function priceIsRight(numbers, target) {
+  let answer = undefined;
+  for (let n of numbers) {
+    if (n <= target) {
+      if (answer === undefined) answer = n;
+      answer = Math.max(answer, n);
+    } 
+  }
+  
+  return answer;
+}
