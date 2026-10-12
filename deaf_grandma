@@ -1,0 +1,15 @@
+def deaf_grandma(you):
+    # your smart code here
+    words = ["HUH?! SPEAK UP, SONNY!", "NO, NOT SINCE 1938!", "OK, BYE!"]
+    answer = []
+    
+    for word in you:
+        if word == "BYE":
+            answer.append("OK, BYE!")
+            break
+        if word == word.upper():
+            answer.append(words[1])
+        else:
+            answer.append(words[0])
+    
+    return answer
