@@ -21,3 +21,6 @@ def get3Dneighbourhood(n_type, matrix, coordinates, distance):
                         neighbors.append(matrix[dx][dy][dz])
                 
     return neighbors
+
+
+# https://www.reddit.com/r/Anthropic/comments/1x6p33f/pursue_your_passions/
