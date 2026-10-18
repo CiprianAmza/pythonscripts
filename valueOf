@@ -1,0 +1,4 @@
+Array.prototype.valueOf = function() {
+  if (this.length === 0) return 0;
+  return this.reduce((x, y) => x + y)
+}
