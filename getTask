@@ -1,0 +1,26 @@
+function getTask(arr){
+  
+  let x = -1, y = -1;
+  for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr[i].length; j++) {
+         if (arr[i][j] === "O") {
+            for (var k = j; k < arr[i].length; k++) {
+                if (arr[i][k-1] === "(" && arr[i][k] !== "O" 
+                   || arr[i][k-1] === "O" && (arr[i][k] !== "O" && arr[i][k] != ")")) {
+                  return "Emergency assistance to victims";
+                }
+            }
+            let size = arr[i].filter(x => x === "O").length + 2;
+            
+            if (i === 0) {
+                return 'Look for a submarine on the surface';
+            } else if (i <= size) {
+                return "Start searching for a submarine at " + i + " depth";
+            } else {
+                return 'Emergency search for a possibly damaged submarine at ' + i + ' depth'
+            }
+         }
+      }
+  }
+  return "Emergency assistance to victims";
+}
