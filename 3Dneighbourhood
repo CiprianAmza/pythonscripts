@@ -6,7 +6,6 @@ def get3Dneighbourhood(n_type, matrix, coordinates, distance):
     if not (0 <= a < len(matrix) and 0 <= b < len(matrix[a]) and 0 <= c < len(matrix[a][b])):
         return []
 
-
     for i in range(-distance, distance + 1):
         for j in range(-distance, distance + 1):
             for k in range(-distance, distance + 1):
