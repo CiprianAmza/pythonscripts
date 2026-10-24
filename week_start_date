@@ -1,0 +1,7 @@
+import datetime
+
+def week_start_date(dt):
+    return dt- datetime.timedelta(days=dt.weekday())
+
+def week_end_date(dt):
+    return week_start_date(dt) + datetime.timedelta(days=6)
