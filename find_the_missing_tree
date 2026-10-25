@@ -1,0 +1,9 @@
+def find_the_missing_tree(trees):
+    
+    d = dict()
+    for t in trees:
+        d[t] = d.get(t, 0) + 1
+    
+    for key, value in d.items():
+        if sum(1 for el in d.values() if el == value) == 1:
+            return key
