@@ -1,0 +1,19 @@
+"""Flyway SQL checksum: CRC32 over every line read with readLine (line terminators dropped, BOM removed),
+returned as a signed 32-bit int, like org.flywaydb.core.internal.resolver.ChecksumCalculator."""
+import sys
+import zlib
+
+
+def flyway_checksum(data: bytes) -> int:
+    text = data.decode("utf-8")
+    if text.startswith("﻿"):
+        text = text[1:]
+    crc = 0
+    for line in text.splitlines():
+        crc = zlib.crc32(line.encode("utf-8"), crc)
+    return crc - (1 << 32) if crc >= (1 << 31) else crc
+
+
+for path in sys.argv[1:]:
+    with open(path, "rb") as f:
+        print(f"{flyway_checksum(f.read())}\t{path}")
