@@ -1,0 +1,12 @@
+import java.util.function.ToDoubleFunction;
+
+public class FunctionalProgramming {
+  
+  public static ToDoubleFunction<Triangle> f = x -> {
+    
+    double y = x.base * 0.5 * x.height;
+    x.setArea(y);
+    
+    return y;
+  };
+}
