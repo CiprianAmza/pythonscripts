@@ -1,0 +1,13 @@
+function kira(a, b, c) {
+
+  let v = 0;
+  for (let i = 0; i < a.length; i++) {
+    v = Math.max(a[i] % b[i], v);
+  }
+  if (v % 2 === 0) {
+      return c.toLowerCase();
+  } else {
+      return c.toUpperCase();
+  }
+
+}
