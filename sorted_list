@@ -1,0 +1,14 @@
+function SortedList() {
+  this.length = 0;
+  this.list = [];
+}
+
+SortedList.prototype.add = function(val) {
+  this.list.push(val);
+  this.list.sort((a, b) => a-b)
+  this.length++;
+}
+
+SortedList.prototype.get = function(i) {
+  return this.list[i];
+}
