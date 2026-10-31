@@ -1,0 +1,9 @@
+def sstf(q, h):
+    
+    start, ans = h, 0
+    while q:
+        q = sorted(q, key=lambda x: abs(x-start))[::-1]
+        v = q.pop()
+        start, ans = v, ans + abs(start-v)
+    
+    return ans
