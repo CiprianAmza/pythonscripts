@@ -1,0 +1,318 @@
+from pathlib import Path
+from collections import defaultdict
+import re
+
+TACTIC = "GK-DL-DC-DC-DR-MC-MC-AML-AMR-ST-ST"
+
+PITCH_LINES = [
+    ["STL", "ST", "STR"],
+    ["AML", "AMC", "AMR"],
+    ["ML", "MC", "MR"],
+    ["DML", "DM", "DMR"],
+    ["WBL", "WBC", "WBR"],
+    ["DL", "DC", "DR"],
+    ["GK"],
+]
+POSITION_ORDER = [position for row in reversed(PITCH_LINES) for position in row]
+
+ATTRIBUTE_NAMES = [
+    "Pac", "Acc", "Jum", "Dri", "Bal", "Cnt",
+    "Ant", "Det", "Agi", "Sta", "Str", "Fir"
+]
+
+ATTRIBUTE_WEIGHTS = [
+    4.5,  # Pace          ===
+    4.5,  # Acceleration  ===
+    1.7,  # Jumping Reach ===
+    1.8,  # Dribbling      1
+    1.2,  # Balance       ===
+    1.1,  # Concentration  2
+    1.6,  # Anticipation   2
+    0.8,  # Determination  2
+    0.9,  # Agility       ===
+    1.7,  # Stamina       ===
+    1.0,  # Strength      ===
+    0.5,  # First Touch
+]
+
+
+def calculate_score(attributes, weights=ATTRIBUTE_WEIGHTS):
+    return sum(value * weight for value, weight in zip(attributes, weights)) / sum(weights)
+
+
+def parse_player_line(line, file_type="default"):
+    parts = line.split("|")
+
+    if len(parts) < 30:
+        return None
+
+    parts = parts[2:]
+
+    if not parts or parts[0].strip() == "Inf":
+        return None
+
+    try:
+        name = parts[1].strip()
+        position = parts[14].strip()
+        age = parts[15].strip()
+        team = parts[16].strip()
+        wage = parts[23].strip()
+        value = parts[24].strip()
+        expires = parts[26].strip()
+        release_clause = parts[25].strip()
+
+        attributes = [int(x.strip()) for x in parts[2:14]]
+
+    except (ValueError, IndexError):
+        return None
+
+    score = calculate_score(attributes)
+
+    return {
+        "name": name,
+        "score": score,
+        "position": position,
+        "team": team,
+        "age": age,
+        "wage": wage,
+        "value": value,
+        "expires": expires,
+        "attributes": attributes,
+        "release_clause": release_clause
+    }
+
+
+def load_players(file_path, file_type="default"):
+    players = []
+
+    with open(file_path, "r", encoding="utf-8") as file:
+        for line in file:
+            player = parse_player_line(line, file_type=file_type)
+            if player is not None:
+                players.append(player)
+
+    return players
+
+
+def print_players(players, limit=150, exclude_team=None):
+    if exclude_team:
+        players = [player for player in players if player["team"] != exclude_team]
+
+    players = sorted(players, key=lambda player: player["score"], reverse=True)
+
+    idx_w = 4
+    name_w = 30
+    score_w = 6
+    pos_w = 25
+    team_w = 28
+    age_w = 3
+    wage_w = 16
+    value_w = 22
+    expires_w = 12
+    release_clause_w = 20
+
+    header = (
+        f"{'#':>{idx_w}}  "
+        f"{'Name':<{name_w}}  "
+        f"{'Score':>{score_w}}  "
+        f"{'Position':<{pos_w}}  "
+        f"{'Team':<{team_w}}  "
+        f"{'Age':>{age_w}}  "
+        f"{'Wage':<{wage_w}}  "
+        f"{'Value':<{value_w}}  "
+        f"{'Expires':<{expires_w}}"
+        f"{'Release Clause:':<{release_clause_w}}"
+
+    )
+
+    print(header)
+    print("-" * len(header))
+
+    for index, player in enumerate(players[:limit], start=1):
+        print(
+            f"{index:>{idx_w}}. "
+            f"{player['name']:<{name_w}}  "
+            f"{player['score']:>{score_w}.2f}  "
+            f"{player['position']:<{pos_w}}  "
+            f"{player['team']:<{team_w}}  "
+            f"{player['age']:>{age_w}}  "
+            f"{player['wage']:<{wage_w}}  "
+            f"{player['value']:<{value_w}}  "
+            f"{player['expires']:<{expires_w}}"
+            f"{player['release_clause']:<{release_clause_w}}"
+        )
+
+
+def get_positions(position_text):
+    """Descompune pozițiile FM, inclusiv D/WB/M (L) și AM (RC)."""
+    positions = set()
+    pattern = r"\b(GK|(?:WB|DM|AM|ST|D|M)(?:/(?:WB|DM|AM|ST|D|M))*)\b(?:\s*\(([RLC]+)\))?"
+    for match in re.finditer(pattern, position_text.upper()):
+        roles, sides = match.groups()
+        for role in roles.split("/"):
+            if role == "GK":
+                positions.add("GK")
+                continue
+            for side in sides or "C":
+                positions.add(role if role in {"DM", "ST"} and side == "C" else role + side)
+    return positions
+
+
+def group_players_by_position(players):
+    groups = defaultdict(list)
+    for player in players:
+        for position in get_positions(player["position"]):
+            groups[position].append(player)
+    for group in groups.values():
+        group.sort(key=lambda player: player["score"], reverse=True)
+    return groups
+
+
+def player_label(player):
+    return f"{player['name']} {player['score']:.2f} ({player['age']})"
+
+
+def print_position_groups(groups):
+    print("\n=== JUCĂTORI PE POSTURI ===\n")
+    for position in POSITION_ORDER:
+        if position in groups:
+            print(f"{position}: " + ", ".join(player_label(player) for player in groups[position]))
+
+
+def select_lineup(players, tactic):
+    """Maximizează posturile ocupate, apoi scorul total, fără reutilizare."""
+    slots = [slot.strip().upper() for slot in tactic.split("-")]
+    if len(slots) != 11:
+        raise ValueError("Tactica trebuie să conțină exact 11 posturi.")
+    unknown = set(slots) - set(POSITION_ORDER)
+    if unknown:
+        raise ValueError("Posturi necunoscute: " + ", ".join(sorted(unknown)))
+    if slots.count("GK") != 1:
+        raise ValueError("Tactica trebuie să conțină exact un GK.")
+
+    states = {0: (0.0, (None,) * len(slots))}
+    for player_index, player in enumerate(players):
+        positions = get_positions(player["position"])
+        eligible_slots = [i for i, position in enumerate(slots) if position in positions]
+        if not eligible_slots:
+            continue
+        # Snapshot: stările noi nu pot folosi din nou jucătorul curent.
+        for mask, (total, assignment) in list(states.items()):
+            for slot_index in eligible_slots:
+                bit = 1 << slot_index
+                if mask & bit:
+                    continue
+                new_mask = mask | bit
+                new_total = total + player["score"]
+                if new_mask not in states or new_total > states[new_mask][0]:
+                    new_assignment = list(assignment)
+                    new_assignment[slot_index] = player_index
+                    states[new_mask] = (new_total, tuple(new_assignment))
+
+    best_mask = max(states, key=lambda mask: (bin(mask).count("1"), states[mask][0]))
+    total_score, assignment = states[best_mask]
+    lineup = [
+        {"position": position, "player": players[index] if index is not None else None}
+        for position, index in zip(slots, assignment)
+    ]
+    return lineup, total_score
+
+
+def outfield_average(lineup):
+    scores = [
+        item["player"]["score"]
+        for item in lineup
+        if item["position"] != "GK" and item["player"] is not None
+    ]
+    return sum(scores) / len(scores) if scores else None
+
+
+def print_tactical_lineup(lineup, total_score):
+    print("\n=== AȘEZARE TACTICĂ (ATAC SUS) ===\n")
+    cell_width = max([26] + [
+        len(player_label(item["player"])) + 4
+        for item in lineup if item["player"] is not None
+    ])
+    rows = [
+        [item for position in pitch_line for item in lineup if item["position"] == position]
+        for pitch_line in PITCH_LINES
+    ]
+    rows = [row for row in rows if row]
+    pitch_width = max(len(row) for row in rows) * cell_width
+    print("=" * pitch_width)
+    for row in rows:
+        positions = "".join(item["position"].center(cell_width) for item in row)
+        names = "".join(
+            (player_label(item["player"]) if item["player"] is not None else "LIPSĂ JUCĂTOR")
+            .center(cell_width)
+            for item in row
+        )
+        print(positions.center(pitch_width))
+        print(names.center(pitch_width))
+        print()
+    print("=" * pitch_width)
+    occupied = sum(item["player"] is not None for item in lineup)
+    print(f"Posturi ocupate: {occupied}/{len(lineup)}")
+    print(f"Scor total: {total_score:.2f}")
+    average = outfield_average(lineup)
+    outfield_count = sum(
+        item["position"] != "GK" and item["player"] is not None
+        for item in lineup
+    )
+    if average is not None:
+        print(f"Media echipei fără GK: {average:.2f} ({outfield_count} jucători de câmp)")
+    else:
+        print("Media echipei fără GK: N/A (niciun jucător de câmp)")
+
+
+def print_club_lineups(players, tactic):
+    clubs = defaultdict(list)
+    for player in players:
+        clubs[player["team"]].append(player)
+
+    print(f"\nEchipe găsite: {len(clubs)}")
+    print(f"Tactică: {tactic}")
+
+    ranked_clubs = []
+    for club, club_players in clubs.items():
+        lineup, total_score = select_lineup(club_players, tactic)
+        average = outfield_average(lineup)
+        ranked_clubs.append((club, lineup, total_score, average))
+
+    ranked_clubs.sort(key=lambda item: (
+        -(item[3] if item[3] is not None else float("-inf")),
+        item[0].casefold(),
+    ))
+
+    for rank, (club, lineup, total_score, average) in enumerate(ranked_clubs, start=1):
+        club_players = clubs[club]
+        print(f"\n{'=' * 80}")
+        average_text = f"{average:.2f}" if average is not None else "N/A"
+        print(f"{rank}. CLUB: {club or 'Fără echipă'} | Jucători: {len(club_players)} | Media fără GK: {average_text}")
+        print("=" * 80)
+        print_position_groups(group_players_by_position(club_players))
+        print_tactical_lineup(lineup, total_score)
+
+
+def main():
+    base_path = Path(r"C:\Users\Cipanica\Documents\Sports Interactive\Football Manager 2024")
+
+    search_file = base_path / "Untitled.rtf"
+
+    print("=== SEARCH LIST / UNTITLED ===")
+    search_players = load_players(search_file, file_type="default")
+    print(f"Jucători găsiți: {len(search_players)}")
+    print()
+
+    print_players(
+        search_players,
+        limit=3000,
+        # exclude_team="Dinamo Bucureşti"
+    )
+
+    print_club_lineups(search_players, TACTIC)
+
+
+if __name__ == "__main__":
+    main()
+
