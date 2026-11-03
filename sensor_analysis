@@ -1,0 +1,6 @@
+def sensor_analysis(sensor_data):
+    
+    d = [x[1] for x in sensor_data]
+    n = sum(d) / len(sensor_data)
+    
+    return round(n, 4), round((sum(abs(x-n)**2 for x in d) / (len(d) - 1)) ** .5, 4)
