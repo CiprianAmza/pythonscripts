@@ -1,0 +1,18 @@
+def path_finding(path):
+    d = [{"e": 3, "n": 2, }, {"w": 4, "n": 3}]
+    
+    n=e=0
+    
+    for p in path:
+        if p == "e":
+            e += 1
+        elif p == "w":
+            e -= 1
+        elif p == "n":
+            n += 1
+        else:
+            n -= 1
+
+    if {"n": n, "e": e} == d[0] or {"n": n, "w": abs(e)} == d[1]:
+        return True
+    return 0
