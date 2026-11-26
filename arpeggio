@@ -1,0 +1,9 @@
+def arpeggio(note: str) -> list[str] | None:
+    
+    a, b = "ABCDEFG", (0, 2, 4, 7)
+    
+    if note not in a:
+        return
+    ind = a.index(note)
+
+    return [a[(v+ind)%len(a)] for v in b]
