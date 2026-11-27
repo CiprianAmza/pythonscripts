@@ -1,0 +1,21 @@
+function onlyYou(s){
+
+  let v = 0;
+  for (let el of s) {
+    if (el.toLowerCase() === "y" && v === 0) {
+      v++;
+    } else if (el.toLowerCase() === "o" && v === 1) {
+      v++;
+    } else if (el.toLowerCase() === "u" && v === 2) {
+      v++;
+    }
+  }
+  
+  let words = ["i", "me", "he", "him", "they", "them", "we"];
+  let v2 = words.some(word =>
+    s.toLowerCase().includes(word)
+  );
+  if (v2) return false;
+  
+  return v === 3;
+}
