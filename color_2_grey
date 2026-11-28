@@ -1,0 +1,3 @@
+def color_2_grey(image):
+    
+    return [[[round(sum(_) / 3) for __ in _] for _ in img] for img in image]
